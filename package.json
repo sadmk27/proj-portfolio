@@ -9,7 +9,8 @@
         "test": "turbo run test",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "db:push": "npm run db:push -w @portfolio/database",
-        "db:studio": "npm run db:studio -w @portfolio/database"
+        "db:studio": "npm run db:studio -w @portfolio/database",
+        "db:seed": "npm run db:seed -w @portfolio/database"
     },
     "devDependencies": {
         "@types/pg": "^8.16.0",

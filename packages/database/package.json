@@ -8,6 +8,7 @@
         "db:push": "drizzle-kit push",
         "db:studio": "drizzle-kit studio",
         "generate": "drizzle-kit generate",
+        "db:seed": "tsx src/seed.ts",
         "lint": "eslint .",
         "build": "echo 'No build step for database'"
     },
