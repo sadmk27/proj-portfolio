@@ -1,0 +1,27 @@
+{
+    "name": "@portfolio/database",
+    "version": "0.1.0",
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "scripts": {
+        "db:push": "drizzle-kit push",
+        "db:studio": "drizzle-kit studio",
+        "generate": "drizzle-kit generate",
+        "lint": "eslint .",
+        "build": "echo 'No build step for database'"
+    },
+    "devDependencies": {
+        "eslint": "^9.0.0",
+        "@eslint/js": "^9.0.0",
+        "typescript-eslint": "^8.0.0",
+        "globals": "^15.0.0"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.0",
+        "drizzle-orm": "^0.45.1",
+        "drizzle-zod": "^0.5.1",
+        "pg": "^8.18.0",
+        "zod": "^3.22.0"
+    }
+}
