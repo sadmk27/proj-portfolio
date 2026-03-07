@@ -10,7 +10,9 @@
         "lint": "eslint ."
     },
     "dependencies": {
+        "@portfolio/database": "*",
         "@portfolio/tsconfig": "*",
+        "@portfolio/validation": "*",
         "@tanstack/react-cross-context": "^1.99.0",
         "@tanstack/react-query": "^5.90.21",
         "@tanstack/react-router": "^1.166.2",
