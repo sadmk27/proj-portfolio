@@ -14,6 +14,7 @@ export default defineConfig({
         tanstackStart({
             srcDirectory: 'src',
         }),
-        tailwindcss() as any,
+        // @ts-ignore - Type mismatch between Tailwind CSS v4 and current Vite plugin types in monorepo
+        tailwindcss(),
     ],
 })

@@ -20,9 +20,9 @@ This document outlines the tasks required to build the full portfolio applicatio
 - [x] Create a `db:seed` script in `packages/database` to populate initial data
 
 ### API Endpoints
-- [ ] Implement `GET /api/portfolio` (aggregated data: project, skills, experience, about)
-- [ ] Implement `POST /api/contact` (vaildated by shared Zod schema)
-- [ ] Add global error handling and request logging to Hono
+- [x] Implement `GET /api/portfolio` (aggregated data: project, skills, experience, about)
+- [x] Implement `POST /api/contact` (vaildated by shared Zod schema)
+- [x] Add global error handling and request logging to Hono
 
 ---
 

@@ -1,13 +1,20 @@
 import { pgTable, text, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
+export const about = pgTable("about", {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    title: text("title").notNull(),
+    bio: text("bio").notNull(),
+});
+
 export const projects = pgTable("projects", {
-  id: serial("id").primaryKey(),
-  title: varchar("title", { length: 256 }).notNull(),
-  description: text("description"),
-  url: varchar("url", { length: 512 }),
-  imageUrl: varchar("image_url", { length: 512 }),
-  createdAt: timestamp("created_at").defaultNow(),
+    id: serial("id").primaryKey(),
+    title: varchar("title", { length: 256 }).notNull(),
+    description: text("description"),
+    url: varchar("url", { length: 512 }),
+    imageUrl: varchar("image_url", { length: 512 }),
+    createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const skills = pgTable("skills", {
@@ -35,6 +42,8 @@ export const social_links = pgTable("social_links", {
 })
 
 // Zod Schemas for Validation
+export const insertAboutSchema = createInsertSchema(about);
+export const selectAboutSchema = createSelectSchema(about);
 export const insertProjectSchema = createInsertSchema(projects);
 export const selectProjectSchema = createSelectSchema(projects);
 export const insertSkillSchema = createInsertSchema(skills);
