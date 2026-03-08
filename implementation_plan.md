@@ -14,15 +14,15 @@ This document outlines the tasks required to build the full portfolio applicatio
 
 ## 🚀 Phase 1: Data & API (The Engine)
 ### Database Schema Expansion
-- [ ] Add `skills` table (name, category, icon_name, proficiency)
-- [ ] Add `experience` table (company, role, description, start_date, end_date)
-- [ ] Add `social_links` table (platform, url, icon)
-- [ ] Create a `db:seed` script in `packages/database` to populate initial data
+- [x] Add `skills` table (name, category, icon_name, proficiency)
+- [x] Add `experience` table (company, role, description, start_date, end_date)
+- [x] Add `social_links` table (platform, url, icon)
+- [x] Create a `db:seed` script in `packages/database` to populate initial data
 
 ### API Endpoints
-- [ ] Implement `GET /api/portfolio` (aggregated data: project, skills, experience, about)
-- [ ] Implement `POST /api/contact` (vaildated by shared Zod schema)
-- [ ] Add global error handling and request logging to Hono
+- [x] Implement `GET /api/portfolio` (aggregated data: project, skills, experience, about)
+- [x] Implement `POST /api/contact` (vaildated by shared Zod schema)
+- [x] Add global error handling and request logging to Hono
 
 ---
 

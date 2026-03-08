@@ -1,8 +1,15 @@
 import { db } from "./index";
-import { projects, skills, experiences, social_links } from "./schema";
+import { about, projects, skills, experiences, social_links } from "./schema";
 
 async function seed() {
     console.log("🌱 Seeding database...");
+
+    console.log("  - Seeding about...");
+    await db.insert(about).values([{
+        name: "Your Name",
+        title: "Fullstack Developer",
+        bio: "A passionate developer building high-performance web applications.",
+    }]);
 
     // 1. Seed Skills
     console.log("  - Seeding skills...");

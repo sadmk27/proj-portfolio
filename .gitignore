@@ -22,6 +22,11 @@ pnpm-debug.log*
 # Keep the 'drizzle' folder as it contains migration history
 !drizzle/
 
+# TanStack Start
+.output
+.tanstack
+app.config.timestamp_*.js
+
 # Vite
 dist-ssr
 *.local
