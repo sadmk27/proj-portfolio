@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 import {
   createRootRoute,
   Link,
@@ -82,7 +82,7 @@ function RootComponent() {
 }
 
 function ThemeObserver({ theme }: { theme: Theme }) {
-  React.useEffect(() => {
+  useEffect(() => {
     const root = document.documentElement;
     const applyTheme = () => {
       if (theme === "dark") {

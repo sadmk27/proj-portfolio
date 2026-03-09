@@ -4,7 +4,7 @@ import { setTheme, type Theme } from "./theme-provider";
 import { Moon, Sun, Monitor } from "lucide-react";
 
 export function ThemeToggle() {
-  const { theme } = useRouteContext({ from: "__root__" }) as { theme: Theme };
+  const { theme } = useRouteContext({ from: "__root__" });
   const router = useRouter();
 
   function handleToggle(nextTheme: Theme) {

@@ -14,8 +14,7 @@ export const submitContact = createServerFn({ method: "POST" }).handler(
         return { success: false, error: "Validation failed", issues };
       }
 
-      const validatedData = result.data;
-      console.log("New contact message received:", validatedData);
+      console.log("New contact message received.");
 
       return { success: true, message: "Message sent successfully!" };
     } catch (err) {
