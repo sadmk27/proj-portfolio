@@ -1,24 +1,31 @@
-import { createServerFn } from '@tanstack/react-start';
-import { contactFormSchema } from '@portfolio/validation';
+import { createServerFn } from "@tanstack/react-start";
+import { contactFormSchema } from "@portfolio/validation";
 
-export const submitContact = createServerFn({ method: 'POST' })
-    .handler(async ({ data }: { data: unknown }) => {
-        try {
-            const result = contactFormSchema.safeParse(data);
+export const submitContact = createServerFn({ method: "POST" }).handler(
+  async ({ data }: { data: unknown }) => {
+    try {
+      const result = contactFormSchema.safeParse(data);
 
-            if (!result.success) {
-                const issues = result.error.issues.map(i => ({ path: i.path, message: i.message }));
-                return { success: false, error: "Validation failed", issues };
-            }
+      if (!result.success) {
+        const issues = result.error.issues.map((i) => ({
+          path: i.path,
+          message: i.message,
+        }));
+        return { success: false, error: "Validation failed", issues };
+      }
 
-            const validatedData = result.data;
-            console.log("New contact message received:", validatedData);
+      console.log("New contact message received.");
 
-            return { success: true, message: "Message sent successfully!" };
-        } catch (err) {
-            if (err instanceof Error) {
-                return { success: false, error: "Failed to process contact request", details: err.message };
-            }
-            return { success: false, error: "Failed to process contact request" };
-        }
-    });
+      return { success: true, message: "Message sent successfully!" };
+    } catch (err) {
+      if (err instanceof Error) {
+        return {
+          success: false,
+          error: "Failed to process contact request",
+          details: err.message,
+        };
+      }
+      return { success: false, error: "Failed to process contact request" };
+    }
+  },
+);
