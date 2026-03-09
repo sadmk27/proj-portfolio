@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Print a nice styled message
+echo "\n✨  Running Prettier & Linters via lint-staged...\n"
+
+npx lint-staged

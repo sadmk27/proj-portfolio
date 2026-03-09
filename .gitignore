@@ -34,3 +34,16 @@ dist-ssr
 # TS
 *.tsbuildinfo
 routeTree.gen.ts
+
+# Testing and Coverage
+coverage/
+playwright-report/
+test-results/
+
+# Linting
+.eslintcache
+
+# Framework / Hosting Caches
+.vinxi
+.vercel
+.netlify
