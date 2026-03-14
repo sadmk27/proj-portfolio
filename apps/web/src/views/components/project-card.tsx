@@ -16,12 +16,11 @@ import {
 } from "lucide-react";
 
 export interface ProjectCardProps {
-  id: number;
   title: string;
   description: string;
   url?: string;
   imageUrl?: string;
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export function ProjectCard({

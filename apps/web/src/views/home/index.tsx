@@ -19,13 +19,12 @@ export function HomeView() {
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
-            id={project.id}
             title={project.title}
             description={project.description || ""}
             url={project.url || undefined}
             imageUrl={project.imageUrl || undefined}
             createdAt={
-              project.createdAt ? new Date(project.createdAt) : new Date()
+              project.createdAt ? new Date(project.createdAt) : undefined
             }
           />
         ))}
