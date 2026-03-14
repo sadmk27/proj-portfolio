@@ -1,6 +1,10 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ProjectCard } from "@/views/components/project-card";
+import { projectsQueryOptions } from "@/queries/projects/projectQueries";
 
 export function HomeView() {
+  const { data: projects } = useSuspenseQuery(projectsQueryOptions);
+
   return (
     <div className="container mx-auto flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 text-primary">
@@ -12,25 +16,24 @@ export function HomeView() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-        <ProjectCard
-          id={1}
-          title="Project 1"
-          description="Description 1"
-          url="https://google.com"
-          createdAt={new Date()}
-        />
-        <ProjectCard
-          id={2}
-          title="Project 2"
-          description="Description 2"
-          createdAt={new Date()}
-        />
-        <ProjectCard
-          id={3}
-          title="Project 3"
-          description="Description 3"
-          createdAt={new Date()}
-        />
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            id={project.id}
+            title={project.title}
+            description={project.description || ""}
+            url={project.url || undefined}
+            imageUrl={project.imageUrl || undefined}
+            createdAt={
+              project.createdAt ? new Date(project.createdAt) : new Date()
+            }
+          />
+        ))}
+        {projects.length === 0 && (
+          <div className="col-span-full text-center text-muted-foreground py-12">
+            Brak projektów do wyświetlenia.
+          </div>
+        )}
       </div>
     </div>
   );
