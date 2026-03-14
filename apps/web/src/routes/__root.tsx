@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 import {
-  createRootRoute,
+  createRootRouteWithContext,
   Link,
   Outlet,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import appCss from "../index.css?url";
 import { getTheme, type Theme } from "../theme-provider";
 import { ThemeToggle } from "../theme-toggle";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   beforeLoad: async () => ({
     theme: await getTheme(),
   }),
@@ -42,7 +46,7 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const { theme } = Route.useRouteContext();
+  const { theme, queryClient } = Route.useRouteContext();
   return (
     <html suppressHydrationWarning className={theme === "dark" ? "dark" : ""}>
       <head>
@@ -73,7 +77,9 @@ function RootComponent() {
             <ThemeToggle />
           </div>
         </nav>
-        <Outlet />
+        <QueryClientProvider client={queryClient}>
+          <Outlet />
+        </QueryClientProvider>
         <ThemeObserver theme={theme} />
         <Scripts />
       </body>
