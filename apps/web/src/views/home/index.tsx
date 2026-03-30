@@ -1,9 +1,13 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ProjectCard } from "@/views/components/project-card";
 import { projectsQueryOptions } from "@/queries/projects/projectQueries";
+import { columns } from "@/views/components/table/skills-table-columns";
+import { SkillsTable } from "@/views/components/table/skills-table";
+import { skillsQueryOptions } from "@/queries/skills/skillsQueries";
 
 export function HomeView() {
   const { data: projects } = useSuspenseQuery(projectsQueryOptions);
+  const { data: skills } = useSuspenseQuery(skillsQueryOptions);
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center p-8">
@@ -33,6 +37,9 @@ export function HomeView() {
             Brak projektów do wyświetlenia.
           </div>
         )}
+      </div>
+      <div className="container mx-auto py-10">
+        <SkillsTable columns={columns} data={skills} />
       </div>
     </div>
   );
