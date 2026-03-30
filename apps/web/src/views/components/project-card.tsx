@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,8 +31,9 @@ export function ProjectCard({
   imageUrl,
   createdAt,
 }: ProjectCardProps) {
+  const { t, i18n } = useTranslation();
   const formattedDate = createdAt
-    ? createdAt.toLocaleDateString("pl-PL", {
+    ? createdAt.toLocaleDateString(i18n.language, {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -45,7 +47,7 @@ export function ProjectCard({
           <>
             <img
               src={imageUrl}
-              alt={`Miniatura projektu ${title}`}
+              alt={t("project.thumbnailAlt", { title })}
               className="object-cover w-full h-full transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
             <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10" />
@@ -58,7 +60,7 @@ export function ProjectCard({
               strokeWidth={1.5}
             />
             <span className="text-xs font-semibold uppercase tracking-widest opacity-60">
-              Brak podglądu
+              {t("project.noPreview")}
             </span>
           </div>
         )}
@@ -75,7 +77,7 @@ export function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               className="ml-3 mt-0.5 shrink-0 text-muted-foreground hover:text-primary transition-colors duration-300"
-              title="Odwiedź stronę"
+              title={t("project.visitSite")}
             >
               <ExternalLink className="w-4 h-4" />
             </a>
@@ -91,7 +93,7 @@ export function ProjectCard({
 
       <CardContent className="flex-grow pb-6 px-6">
         <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
-          {description || "Brak opisu dla tego projektu."}
+          {description || t("project.noDescription")}
         </p>
       </CardContent>
 
@@ -110,7 +112,7 @@ export function ProjectCard({
             >
               <Globe className="w-4 h-4 mr-2" />
               <span className="font-semibold tracking-wide">
-                Zobacz projekt
+                {t("project.viewProject")}
               </span>
               <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" />
               <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
@@ -118,7 +120,7 @@ export function ProjectCard({
           </Button>
         ) : (
           <Button variant="secondary" className="w-full opacity-70" disabled>
-            Brak dostępu
+            {t("project.noAccess")}
           </Button>
         )}
       </CardFooter>

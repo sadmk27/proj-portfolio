@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -6,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, Column } from "@tanstack/react-table";
 import {
   ArrowUpDown,
   ChevronDown,
@@ -38,6 +39,82 @@ export const proficiencyToNumber = (proficiency: string) => {
   }
 };
 
+const HeaderTranslation = ({
+  column,
+  translationKey,
+}: {
+  column?: Column<Skills, unknown>;
+  translationKey: string;
+}) => {
+  const { t } = useTranslation();
+  if (column && column.getCanSort()) {
+    return (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="-ml-4"
+      >
+        {t(translationKey)}
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    );
+  }
+  return <>{t(translationKey)}</>;
+};
+
+const ProficiencyCellTranslation = ({
+  proficiency,
+}: {
+  proficiency: string;
+}) => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-full max-w-[160px] space-y-1.5">
+      <div className="flex items-center justify-between text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
+        <span>{t("skills.level")}</span>
+        <span>{proficiency}</span>
+      </div>
+      <Progress
+        value={proficiencyToNumber(proficiency)}
+        className="h-1.5 transition-all"
+      />
+    </div>
+  );
+};
+
+const ActionsCellTranslation = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex justify-end pr-2">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="flex size-8 text-muted-foreground data-[state=open]:bg-muted hover:text-primary transition-colors"
+            size="icon"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <EllipsisVerticalIcon className="h-4 w-4" />
+            <span className="sr-only">{t("skills.actions.openMenu")}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-40">
+          <DropdownMenuItem className="cursor-pointer">
+            {t("skills.actions.showUsage")}
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
+            {t("skills.actions.copyName")}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+            {t("skills.actions.delete")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
+
 export const columns: ColumnDef<Skills>[] = [
   {
     id: "expander",
@@ -64,18 +141,9 @@ export const columns: ColumnDef<Skills>[] = [
   },
   {
     accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="-ml-4"
-        >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <HeaderTranslation column={column} translationKey="skills.name" />
+    ),
     cell: ({ row }) => {
       return (
         <span className="font-medium text-foreground">
@@ -86,14 +154,14 @@ export const columns: ColumnDef<Skills>[] = [
   },
   {
     accessorKey: "category",
-    header: "Category",
+    header: () => <HeaderTranslation translationKey="skills.category" />,
     cell: ({ row }) => (
       <Badge variant="secondary">{row.getValue("category")}</Badge>
     ),
   },
   {
     accessorKey: "icon_name",
-    header: "Icon Name",
+    header: () => <HeaderTranslation translationKey="skills.iconName" />,
     cell: ({ row }) => {
       const iconName = row.getValue("icon_name") as string;
       return (
@@ -110,55 +178,13 @@ export const columns: ColumnDef<Skills>[] = [
   },
   {
     accessorKey: "proficiency",
-    header: "Proficiency",
-    cell: ({ row }) => {
-      const proficiency = row.getValue("proficiency") as string;
-      return (
-        <div className="w-full max-w-[160px] space-y-1.5">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
-            <span>Level</span>
-            <span>{proficiency}</span>
-          </div>
-          <Progress
-            value={proficiencyToNumber(proficiency)}
-            className="h-1.5 transition-all"
-          />
-        </div>
-      );
-    },
+    header: () => <HeaderTranslation translationKey="skills.proficiency" />,
+    cell: ({ row }) => (
+      <ProficiencyCellTranslation proficiency={row.getValue("proficiency")} />
+    ),
   },
   {
     id: "actions",
-    cell: () => {
-      return (
-        <div className="flex justify-end pr-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="flex size-8 text-muted-foreground data-[state=open]:bg-muted hover:text-primary transition-colors"
-                size="icon"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <EllipsisVerticalIcon className="h-4 w-4" />
-                <span className="sr-only">Open menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem className="cursor-pointer">
-                Show usage
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                Copy name
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
-    },
+    cell: () => <ActionsCellTranslation />,
   },
 ];

@@ -1,0 +1,54 @@
+{
+  "table": {
+    "filterSkills": "Filtruj umiejętności...",
+    "viewColumns": "Widok kolumn",
+    "toggleColumns": "Przełącz kolumny",
+    "noResults": "Brak wyników.",
+    "showingRows": "Pokazuje {{count}} z {{total}} wierszy",
+    "rowsPerPage": "Wiersze na stronę",
+    "pageCounter": "Strona {{current}} z {{total}}",
+    "pagination": {
+      "first": "Idź do pierwszej strony",
+      "previous": "Idź do poprzedniej strony",
+      "next": "Idź do następnej strony",
+      "last": "Idź do ostatniej strony"
+    }
+  },
+  "project": {
+    "thumbnailAlt": "Miniatura projektu {{title}}",
+    "noPreview": "Brak podglądu",
+    "visitSite": "Odwiedź stronę",
+    "noDescription": "Brak opisu dla tego projektu.",
+    "viewProject": "Zobacz projekt",
+    "noAccess": "Brak dostępu"
+  },
+  "about": {
+    "title": "O mnie"
+  },
+  "skills": {
+    "name": "Nazwa",
+    "category": "Kategoria",
+    "iconName": "Ikona",
+    "proficiency": "Zaawansowanie",
+    "level": "Poziom",
+    "actions": {
+      "openMenu": "Otwórz menu",
+      "showUsage": "Pokaż",
+      "copyName": "Kopiuj nazwę",
+      "delete": "Usuń"
+    }
+  },
+  "home": {
+    "welcome": "Witaj w moim Portfolio",
+    "description": "To jest moja nowa strona portfolio. Poniżej możesz zobaczyć próbkę moich projektów!",
+    "noProjects": "Brak projektów do wyświetlenia."
+  },
+  "common": {
+    "language": "Język",
+    "theme": "Zmień motyw",
+    "projects": "Projekty",
+    "skills": "Umiejętności",
+    "home": "Główna",
+    "about": "O mnie"
+  }
+}

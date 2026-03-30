@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "../components/language-switcher";
 import { ThemeToggle } from "../theme-toggle";
 import { getTheme, type Theme } from "../theme-provider";
 import "../index.css";
@@ -53,10 +55,11 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   const { theme, queryClient } = Route.useRouteContext();
+  const { t, i18n } = useTranslation();
 
   return (
     <html
-      lang="pl"
+      lang={i18n.language}
       suppressHydrationWarning
       className={theme === "dark" ? "dark" : ""}
     >
@@ -71,12 +74,13 @@ function RootComponent() {
       <body className="min-h-screen bg-background font-sans antialiased">
         <nav className="p-3 flex items-center gap-4 border-b border-border">
           <Link to="/" className="[&.active]:font-bold text-sm">
-            Home
+            {t("common.home") || "Home"}
           </Link>
           <Link to="/about" className="[&.active]:font-bold text-sm">
-            About
+            {t("common.about") || "About"}
           </Link>
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </nav>

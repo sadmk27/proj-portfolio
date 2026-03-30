@@ -1,25 +1,17 @@
 {
-    "extends": "../../packages/tsconfig/react.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "noEmit": true,
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        }
-    },
-    "include": [
-        "src",
-        ".tanstack"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+  "extends": "../../packages/tsconfig/react.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", ".tanstack"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
