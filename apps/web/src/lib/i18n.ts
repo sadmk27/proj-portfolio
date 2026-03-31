@@ -30,9 +30,9 @@ if (!i18n.isInitialized && typeof window !== "undefined") {
   i18n.use(LanguageDetector).use(initReactI18next).init(i18nConfig);
 }
 
-export function initI18nServer(lang: string) {
+export async function initI18nServer(lang: string) {
   const i18nInstance = i18n.createInstance();
-  i18nInstance.use(initReactI18next).init({
+  await i18nInstance.use(initReactI18next).init({
     ...i18nConfig,
     lng: lang,
   });

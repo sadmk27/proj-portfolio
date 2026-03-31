@@ -25,10 +25,10 @@ export function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => changeLanguage("en")}>
-          English {i18n.language === "en" && "✓"}
+          English {i18n.resolvedLanguage === "en" && "✓"}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLanguage("pl")}>
-          Polski {i18n.language === "pl" && "✓"}
+          Polski {i18n.resolvedLanguage === "pl" && "✓"}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
