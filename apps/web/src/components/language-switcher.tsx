@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -24,12 +25,13 @@ export function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => changeLanguage("en")}>
-          English {i18n.resolvedLanguage === "en" && "✓"}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => changeLanguage("pl")}>
-          Polski {i18n.resolvedLanguage === "pl" && "✓"}
-        </DropdownMenuItem>
+        <DropdownMenuRadioGroup
+          value={i18n.resolvedLanguage}
+          onValueChange={changeLanguage}
+        >
+          <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="pl">Polski</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );

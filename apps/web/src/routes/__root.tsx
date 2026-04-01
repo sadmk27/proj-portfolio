@@ -8,14 +8,16 @@ import {
 } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
+import { useTranslation, I18nextProvider } from "react-i18next";
 import { LanguageSwitcher } from "../components/language-switcher";
 import { ThemeToggle } from "../theme-toggle";
 import { getTheme, type Theme } from "../theme-provider";
 import "../index.css";
+import { type i18n } from "i18next";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
+  i18n: i18n;
 }>()({
   beforeLoad: async () => ({
     theme: await getTheme(),
@@ -54,7 +56,22 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
-  const { theme, queryClient } = Route.useRouteContext();
+  const { theme, queryClient, i18n: i18nInstance } = Route.useRouteContext();
+
+  return (
+    <I18nextProvider i18n={i18nInstance}>
+      <RootInner theme={theme} queryClient={queryClient} />
+    </I18nextProvider>
+  );
+}
+
+function RootInner({
+  theme,
+  queryClient,
+}: {
+  theme: Theme;
+  queryClient: QueryClient;
+}) {
   const { t, i18n } = useTranslation();
 
   return (

@@ -25,9 +25,20 @@ const i18nConfig = {
   },
 };
 
+// Hook up react-i18next BEFORE any initialization
+i18n.use(initReactI18next);
+
 // Initialize for the client
-if (!i18n.isInitialized && typeof window !== "undefined") {
-  i18n.use(LanguageDetector).use(initReactI18next).init(i18nConfig);
+if (!i18n.isInitialized) {
+  if (typeof window !== "undefined") {
+    i18n.use(LanguageDetector).init(i18nConfig);
+  } else {
+    // Initializing on server with minimal config to avoid Errors
+    i18n.init({
+      ...i18nConfig,
+      detection: undefined,
+    });
+  }
 }
 
 export async function initI18nServer(lang: string) {
