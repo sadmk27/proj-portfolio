@@ -1,0 +1,54 @@
+{
+  "table": {
+    "filterSkills": "Filter skills...",
+    "viewColumns": "View Columns",
+    "toggleColumns": "Toggle columns",
+    "noResults": "No results.",
+    "showingRows": "Showing {{count}} of {{total}} rows",
+    "rowsPerPage": "Rows per page",
+    "pageCounter": "Page {{current}} of {{total}}",
+    "pagination": {
+      "first": "Go to first page",
+      "previous": "Go to previous page",
+      "next": "Go to next page",
+      "last": "Go to last page"
+    }
+  },
+  "project": {
+    "thumbnailAlt": "Project thumbnail {{title}}",
+    "noPreview": "No preview",
+    "visitSite": "Visit site",
+    "noDescription": "No description for this project.",
+    "viewProject": "View project",
+    "noAccess": "No access"
+  },
+  "about": {
+    "title": "About me"
+  },
+  "skills": {
+    "name": "Name",
+    "category": "Category",
+    "iconName": "Icon Name",
+    "proficiency": "Proficiency",
+    "level": "Level",
+    "actions": {
+      "openMenu": "Open menu",
+      "showUsage": "Show",
+      "copyName": "Copy name",
+      "delete": "Delete"
+    }
+  },
+  "home": {
+    "welcome": "Welcome to my Portfolio",
+    "description": "This is my new portfolio page. Below you can see a sample of my projects!",
+    "noProjects": "No projects to display."
+  },
+  "common": {
+    "language": "Language",
+    "theme": "Toggle theme",
+    "projects": "Projects",
+    "skills": "Skills",
+    "home": "Home",
+    "about": "About"
+  }
+}

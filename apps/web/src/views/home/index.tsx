@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ProjectCard } from "@/views/components/project-card";
 import { projectsQueryOptions } from "@/queries/projects/projectQueries";
@@ -6,17 +7,17 @@ import { SkillsTable } from "@/views/components/table/skills-table";
 import { skillsQueryOptions } from "@/queries/skills/skillsQueries";
 
 export function HomeView() {
+  const { t } = useTranslation();
   const { data: projects } = useSuspenseQuery(projectsQueryOptions);
   const { data: skills } = useSuspenseQuery(skillsQueryOptions);
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 text-primary">
-        Welcome to my Portfolio
+        {t("home.welcome")}
       </h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-[600px]">
-        This is my new portfolio page. Below you can see a sample of my
-        projects!
+        {t("home.description")}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
@@ -34,7 +35,7 @@ export function HomeView() {
         ))}
         {projects.length === 0 && (
           <div className="col-span-full text-center text-muted-foreground py-12">
-            Brak projektów do wyświetlenia.
+            {t("home.noProjects")}
           </div>
         )}
       </div>

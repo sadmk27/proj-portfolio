@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type {
   Column,
   ColumnDef,
@@ -64,16 +65,17 @@ export type ToggleColumnsMenuProps<TData> = {
 export function ToggleColumnsMenu<TData>({
   table,
 }: ToggleColumnsMenuProps<TData>) {
+  const { t } = useTranslation();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="ml-auto">
           <ArrowRightLeft className="mr-2 h-4 w-4" />
-          View Columns
+          {t("table.viewColumns")}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("table.toggleColumns")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
@@ -104,6 +106,7 @@ export function SkillsTable<TData, TValue>({
   data,
   columns,
 }: SkillsTableProps<TData, TValue>) {
+  const { t } = useTranslation();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -134,7 +137,7 @@ export function SkillsTable<TData, TValue>({
     <div className="w-full space-y-4">
       <div className="flex items-center gap-4">
         <Input
-          placeholder="Filter skills..."
+          placeholder={t("table.filterSkills")}
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -196,7 +199,7 @@ export function SkillsTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t("table.noResults")}
                 </TableCell>
               </TableRow>
             )}
@@ -205,12 +208,14 @@ export function SkillsTable<TData, TValue>({
       </div>
       <div className="flex items-center justify-between px-2">
         <div className="flex-1 text-sm text-muted-foreground">
-          Showing {table.getRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} rows
+          {t("table.showingRows", {
+            count: table.getRowModel().rows.length,
+            total: table.getFilteredRowModel().rows.length,
+          })}
         </div>
         <div className="flex items-center space-x-6 lg:space-x-8">
           <div className="flex items-center space-x-2">
-            <p className="text-sm font-medium">Rows per page</p>
+            <p className="text-sm font-medium">{t("table.rowsPerPage")}</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value) => {
@@ -232,8 +237,10 @@ export function SkillsTable<TData, TValue>({
             </Select>
           </div>
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
+            {t("table.pageCounter", {
+              current: table.getState().pagination.pageIndex + 1,
+              total: table.getPageCount(),
+            })}
           </div>
           <div className="flex items-center space-x-2">
             <Button
@@ -242,7 +249,7 @@ export function SkillsTable<TData, TValue>({
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to first page</span>
+              <span className="sr-only">{t("table.pagination.first")}</span>
               <ChevronsLeft className="h-4 w-4" />
             </Button>
             <Button
@@ -251,7 +258,7 @@ export function SkillsTable<TData, TValue>({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to previous page</span>
+              <span className="sr-only">{t("table.pagination.previous")}</span>
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
@@ -260,7 +267,7 @@ export function SkillsTable<TData, TValue>({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to next page</span>
+              <span className="sr-only">{t("table.pagination.next")}</span>
               <ChevronRight className="h-4 w-4" />
             </Button>
             <Button
@@ -269,7 +276,7 @@ export function SkillsTable<TData, TValue>({
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to last page</span>
+              <span className="sr-only">{t("table.pagination.last")}</span>
               <ChevronsRight className="h-4 w-4" />
             </Button>
           </div>
