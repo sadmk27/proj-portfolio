@@ -5,6 +5,7 @@ import { projectsQueryOptions } from "@/queries/projects/projectQueries";
 import { columns } from "@/views/components/table/skills-table-columns";
 import { SkillsTable } from "@/views/components/table/skills-table";
 import { skillsQueryOptions } from "@/queries/skills/skillsQueries";
+import { ContactForm } from "../components/contact-form/contact-form";
 
 export function HomeView() {
   const { t } = useTranslation();
@@ -41,6 +42,9 @@ export function HomeView() {
       </div>
       <div className="container mx-auto py-10">
         <SkillsTable columns={columns} data={skills} />
+      </div>
+      <div className="container mx-auto py-10 flex items-center justify-center">
+        <ContactForm />
       </div>
     </div>
   );
