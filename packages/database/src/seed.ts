@@ -64,6 +64,7 @@ async function seed() {
       description: "Developing modern web applications for various clients.",
       start_date: "2023-01-01",
       end_date: "Present",
+      skills: ["React", "TypeScript", "Node.js", "PostgreSQL"],
     },
   ]);
 

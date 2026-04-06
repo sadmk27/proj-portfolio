@@ -6,11 +6,14 @@ import { columns } from "@/views/components/table/skills-table-columns";
 import { SkillsTable } from "@/views/components/table/skills-table";
 import { skillsQueryOptions } from "@/queries/skills/skillsQueries";
 import { ContactForm } from "../components/contact-form/contact-form";
+import { ExperienceCard } from "../components/experience-card";
+import { experienceQueryOptions } from "@/queries/experiences/experienceQueries";
 
 export function HomeView() {
   const { t } = useTranslation();
   const { data: projects } = useSuspenseQuery(projectsQueryOptions);
   const { data: skills } = useSuspenseQuery(skillsQueryOptions);
+  const { data: experiences } = useSuspenseQuery(experienceQueryOptions);
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center p-8">
@@ -45,6 +48,19 @@ export function HomeView() {
       </div>
       <div className="container mx-auto py-10 flex items-center justify-center">
         <ContactForm />
+      </div>
+      <div className="container mx-auto py-10 flex items-center justify-center">
+        {experiences.map((experience) => (
+          <ExperienceCard
+            key={experience.id}
+            title={experience.role}
+            company={experience.company}
+            description={experience.description}
+            startDate={experience.start_date}
+            endDate={experience.end_date}
+            skills={experience.skills}
+          />
+        ))}
       </div>
     </div>
   );

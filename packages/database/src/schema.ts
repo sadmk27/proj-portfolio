@@ -32,6 +32,7 @@ export const experiences = pgTable("experiences", {
   description: text("description").notNull(),
   start_date: text("start_date").notNull(),
   end_date: text("end_date").notNull(),
+  skills: text("skills").array().notNull(),
 });
 
 export const social_links = pgTable("social_links", {
