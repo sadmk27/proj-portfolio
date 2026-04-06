@@ -50,5 +50,31 @@
     "skills": "Umiejętności",
     "home": "Główna",
     "about": "O mnie"
+  },
+  "contact": {
+    "title": "Skontaktuj się ze mną",
+    "description": "Wyślij mi wiadomość, a ja skontaktuję się z Tobą tak szybko, jak to możliwe.",
+    "name": "Imię",
+    "email": "Email",
+    "message": "Wiadomość",
+    "send": "Wyślij wiadomość",
+    "characters": "znaków",
+    "validation": {
+      "name": {
+        "required": "Imię jest wymagane",
+        "min": "Imię musi mieć co najmniej 3 znaki"
+      },
+      "email": {
+        "required": "Email jest wymagany",
+        "email": "Email jest nieprawidłowy"
+      },
+      "message": {
+        "required": "Wiadomość jest wymagana",
+        "min": "Wiadomość musi mieć co najmniej 10 znaków",
+        "max": "Wiadomość musi mieć co najwyżej 500 znaków"
+      }
+    },
+    "success": "Wiadomość wysłana pomyślnie!",
+    "error": "Wystąpił błąd podczas wysyłania wiadomości."
   }
 }

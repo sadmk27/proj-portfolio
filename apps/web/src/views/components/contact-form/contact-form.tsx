@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 import {
   Card,
@@ -25,12 +26,17 @@ import {
 } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 
-const fromSchema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters long"),
-  email: z.string().email("Invalid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters long"),
-});
 export function ContactForm() {
+  const { t } = useTranslation();
+  const fromSchema = z.object({
+    title: z.string().min(3, t("contact.validation.name.min")),
+    email: z.string().email(t("contact.validation.email.email")),
+    message: z
+      .string()
+      .min(10, t("contact.validation.message.min"))
+      .max(500, t("contact.validation.message.max")),
+  });
+
   const form = useForm({
     defaultValues: {
       title: "",
@@ -41,7 +47,7 @@ export function ContactForm() {
       onChange: fromSchema,
     },
     onSubmit: async ({ value }) => {
-      toast("Thank you for your message!", {
+      toast(t("contact.success"), {
         description: (
           <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
             <code>{JSON.stringify(value, null, 2)}</code>
@@ -65,10 +71,8 @@ export function ContactForm() {
   return (
     <Card className="w-full sm:max-w-md">
       <CardHeader>
-        <CardTitle>Contact Me</CardTitle>
-        <CardDescription>
-          Send me a message and I'll get back to you as soon as possible.
-        </CardDescription>
+        <CardTitle>{t("contact.title")}</CardTitle>
+        <CardDescription>{t("contact.description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -86,14 +90,16 @@ export function ContactForm() {
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Title</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      {t("contact.name")}
+                    </FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="Title"
+                      placeholder={t("contact.name")}
                       autoComplete="off"
                       aria-invalid={isInvalid}
                     />
@@ -111,14 +117,16 @@ export function ContactForm() {
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      {t("contact.email")}
+                    </FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="Title"
+                      placeholder={t("contact.email")}
                       autoComplete="off"
                       aria-invalid={isInvalid}
                     />
@@ -136,7 +144,9 @@ export function ContactForm() {
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Message</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      {t("contact.message")}
+                    </FieldLabel>
                     <InputGroup>
                       <InputGroupTextarea
                         id={field.name}
@@ -144,7 +154,7 @@ export function ContactForm() {
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
-                        placeholder="Message"
+                        placeholder={t("contact.message")}
                         autoComplete="off"
                         aria-invalid={isInvalid}
                         rows={6}
@@ -152,7 +162,8 @@ export function ContactForm() {
                       />
                       <InputGroupAddon align="block-end">
                         <InputGroupText className="tabular-nums">
-                          {field.state.value.length}/500 characters
+                          {field.state.value.length}/500{" "}
+                          {t("contact.characters")}
                         </InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
@@ -172,7 +183,7 @@ export function ContactForm() {
           className="flex items-center justify-end"
         >
           <Button type="submit" form="contact-form">
-            Send Message
+            {t("contact.send")}
           </Button>
         </Field>
       </CardFooter>
