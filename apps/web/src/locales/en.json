@@ -50,5 +50,31 @@
     "skills": "Skills",
     "home": "Home",
     "about": "About"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "description": "Send me a message and I'll get back to you as soon as possible.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "characters": "characters",
+    "validation": {
+      "name": {
+        "required": "Name is required",
+        "min": "Name must be at least 3 characters long"
+      },
+      "email": {
+        "required": "Email is required",
+        "email": "Email is invalid"
+      },
+      "message": {
+        "required": "Message is required",
+        "min": "Message must be at least 10 characters long",
+        "max": "Message must be at most 500 characters long"
+      }
+    },
+    "success": "Message sent successfully!",
+    "error": "An error occurred while sending the message."
   }
 }
