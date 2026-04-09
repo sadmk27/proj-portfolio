@@ -15,6 +15,7 @@
     }
   },
   "project": {
+    "header": "Projekty",
     "thumbnailAlt": "Miniatura projektu {{title}}",
     "noPreview": "Brak podglądu",
     "visitSite": "Odwiedź stronę",
@@ -26,6 +27,7 @@
     "title": "O mnie"
   },
   "skills": {
+    "header": "Umiejętności",
     "name": "Nazwa",
     "category": "Kategoria",
     "iconName": "Ikona",
@@ -52,6 +54,7 @@
     "about": "O mnie"
   },
   "contact": {
+    "header": "Kontakt",
     "title": "Skontaktuj się ze mną",
     "description": "Wyślij mi wiadomość, a ja skontaktuję się z Tobą tak szybko, jak to możliwe.",
     "name": "Imię",
@@ -76,5 +79,9 @@
     },
     "success": "Wiadomość wysłana pomyślnie!",
     "error": "Wystąpił błąd podczas wysyłania wiadomości."
+  },
+  "experience": {
+    "header": "Doświadczenie",
+    "description": "Brak konkretnych osiągnięć."
   }
 }

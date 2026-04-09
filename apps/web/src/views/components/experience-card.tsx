@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Briefcase, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export interface ExperienceCardProps {
   title: string;
@@ -19,9 +20,10 @@ export function ExperienceCard({
   endDate,
   skills = [],
 }: ExperienceCardProps) {
+  const { t } = useTranslation();
   return (
-    <Card className="relative flex flex-col h-full w-full max-w-2xl overflow-hidden border-border/40 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md shadow-sm">
-      <div className="absolute left-0 top-0 h-full w-1.5 bg-primary/40" />
+    <Card className="relative flex flex-col h-full w-full max-w-full overflow-hidden border-border/40 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md shadow-sm">
+      <div className="absolute left-0 top-0 h-full w-2 bg-primary/40" />
 
       <CardHeader className="pb-4 px-8 pt-10 relative z-10">
         <div className="space-y-2">
@@ -45,24 +47,27 @@ export function ExperienceCard({
       <CardContent className="flex-grow px-8 pb-10 relative z-10">
         {description.length > 0 ? (
           <ul className="space-y-4">
-            {description.split("\n").map((point, index) => (
-              <li
-                key={index}
-                className="flex gap-4 text-sm md:text-base text-muted-foreground/90 leading-relaxed font-normal"
-              >
-                <div className="mt-1.5 flex-shrink-0">
-                  <ChevronRight
-                    className="w-4 h-4 text-primary/40"
-                    strokeWidth={3}
-                  />
-                </div>
-                <span>{point}</span>
-              </li>
-            ))}
+            {description
+              .split("\n")
+              .filter((p) => p.trim() !== "")
+              .map((point, index) => (
+                <li
+                  key={index}
+                  className="flex gap-4 text-sm md:text-base text-muted-foreground/90 leading-relaxed font-normal"
+                >
+                  <div className="mt-1.5 flex-shrink-0">
+                    <ChevronRight
+                      className="w-4 h-4 text-primary/40"
+                      strokeWidth={3}
+                    />
+                  </div>
+                  <span>{point}</span>
+                </li>
+              ))}
           </ul>
         ) : (
           <p className="text-sm italic text-muted-foreground/60 py-4">
-            No specific achievements listed yet.
+            {t("experience.description")}
           </p>
         )}
 
