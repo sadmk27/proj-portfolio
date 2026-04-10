@@ -91,6 +91,12 @@
     "header": "Edukacja",
     "description": "Brak konkretnych osiągnięć.",
     "badge": "Edukacja",
-    "degree": "Stopień"
+    "degree": "Stopień",
+    "link": "Link",
+    "noLink": "N/A",
+    "viewProject": "Zobacz projekt",
+    "loading": "Ładowanie...",
+    "noDescription": "Brak opisu dla tego projektu.",
+    "gpa": "Średnia"
   }
 }

@@ -80,7 +80,7 @@ export function HomeView() {
 
       <section className="w-full max-w-6xl py-12">
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
-          Education
+          {t("education.header")}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {educations.map((education) => (

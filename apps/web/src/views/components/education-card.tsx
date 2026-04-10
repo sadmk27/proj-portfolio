@@ -83,7 +83,7 @@ export function EducationCard({
               variant="outline"
               className="text-[10px] font-bold border-emerald-500/20 text-emerald-600 bg-emerald-500/5 dark:text-emerald-400"
             >
-              GPA: {gpa}
+              {t("education.gpa")} {gpa}
             </Badge>
           )}
           {thesis && (
@@ -141,11 +141,13 @@ export function EducationCard({
 
                 <div className="flex flex-col items-end gap-0.5 z-10 pr-1">
                   <span className="text-[9px] font-bold text-muted-foreground/40 uppercase tracking-widest">
-                    {t("project.view")}
+                    {t("project.viewProject")}
                   </span>
                   <div className="flex items-center gap-1 text-primary">
                     <span className="text-xs font-black tabular-nums tracking-tighter">
-                      {project?.url ? "LINK" : "N/A"}
+                      {project?.url
+                        ? t("education.link")
+                        : t("education.noLink")}
                     </span>
                   </div>
                 </div>

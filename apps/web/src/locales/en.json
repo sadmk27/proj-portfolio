@@ -91,6 +91,12 @@
     "header": "Education",
     "description": "No specific achievements listed yet.",
     "badge": "Education",
-    "degree": "Degree"
+    "degree": "Degree",
+    "link": "Link",
+    "noLink": "N/A",
+    "viewProject": "View project",
+    "loading": "Loading...",
+    "noDescription": "No description for this project.",
+    "gpa": "GPA"
   }
 }
