@@ -21,7 +21,10 @@
     "visitSite": "Odwiedź stronę",
     "noDescription": "Brak opisu dla tego projektu.",
     "viewProject": "Zobacz projekt",
-    "noAccess": "Brak dostępu"
+    "noAccess": "Brak dostępu",
+    "openModalButton": "Pokaż repozytorium github",
+    "badge": "Projekt",
+    "loading": "Ładowanie..."
   },
   "about": {
     "title": "O mnie"
@@ -83,5 +86,17 @@
   "experience": {
     "header": "Doświadczenie",
     "description": "Brak konkretnych osiągnięć."
+  },
+  "education": {
+    "header": "Edukacja",
+    "description": "Brak konkretnych osiągnięć.",
+    "badge": "Edukacja",
+    "degree": "Stopień",
+    "link": "Link",
+    "noLink": "N/A",
+    "viewProject": "Zobacz projekt",
+    "loading": "Ładowanie...",
+    "noDescription": "Brak opisu dla tego projektu.",
+    "gpa": "Średnia"
   }
 }

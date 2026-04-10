@@ -1,4 +1,11 @@
-import { pgTable, text, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  serial,
+  timestamp,
+  varchar,
+  integer,
+} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const about = pgTable("about", {
@@ -35,6 +42,19 @@ export const experiences = pgTable("experiences", {
   skills: text("skills").array().notNull(),
 });
 
+export const educations = pgTable("educations", {
+  id: serial("id").primaryKey(),
+  institution: text("institution").notNull(),
+  degree: text("degree").notNull(),
+  field_of_study: text("field_of_study").notNull(),
+  start_date: text("start_date").notNull(),
+  end_date: text("end_date").notNull(),
+  description: text("description").notNull(),
+  gpa: text("gpa"),
+  thesis: text("thesis"),
+  projectId: integer("project_id").references(() => projects.id),
+});
+
 export const social_links = pgTable("social_links", {
   id: serial("id").primaryKey(),
   platform: text("platform").notNull(),
@@ -53,3 +73,5 @@ export const insertExperienceSchema = createInsertSchema(experiences);
 export const selectExperienceSchema = createSelectSchema(experiences);
 export const insertSocialLinkSchema = createInsertSchema(social_links);
 export const selectSocialLinkSchema = createSelectSchema(social_links);
+export const insertEducationSchema = createInsertSchema(educations);
+export const selectEducationSchema = createSelectSchema(educations);
