@@ -21,7 +21,10 @@
     "visitSite": "Visit site",
     "noDescription": "No description for this project.",
     "viewProject": "View project",
-    "noAccess": "No access"
+    "noAccess": "No access",
+    "openModalButton": "Show github repository",
+    "badge": "Project",
+    "loading": "Loading..."
   },
   "about": {
     "title": "About me"
@@ -83,5 +86,11 @@
   "experience": {
     "header": "Experience",
     "description": "No specific achievements listed yet."
+  },
+  "education": {
+    "header": "Education",
+    "description": "No specific achievements listed yet.",
+    "badge": "Education",
+    "degree": "Degree"
   }
 }

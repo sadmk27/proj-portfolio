@@ -1,15 +1,23 @@
 import { createServerFn } from "@tanstack/react-start";
-import { db, about, projects, skills, experiences } from "@portfolio/database";
+import {
+  db,
+  about,
+  projects,
+  skills,
+  experiences,
+  educations,
+} from "@portfolio/database";
 
 export const getPortfolio = createServerFn({ method: "GET" }).handler(
   async () => {
     try {
-      const [aboutData, allProjects, allSkills, allExperiences] =
+      const [aboutData, allProjects, allSkills, allExperiences, allEducations] =
         await Promise.all([
           db.select().from(about).limit(1),
           db.select().from(projects),
           db.select().from(skills),
           db.select().from(experiences),
+          db.select().from(educations),
         ]);
 
       const aboutInfo = aboutData[0] || {
@@ -25,6 +33,7 @@ export const getPortfolio = createServerFn({ method: "GET" }).handler(
           projects: allProjects,
           skills: allSkills,
           experiences: allExperiences,
+          educations: allEducations,
         },
       };
     } catch (err) {

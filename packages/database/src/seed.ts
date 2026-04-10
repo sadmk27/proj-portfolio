@@ -1,5 +1,12 @@
 import { db } from "./index";
-import { about, projects, skills, experiences, social_links } from "./schema";
+import {
+  about,
+  projects,
+  skills,
+  experiences,
+  social_links,
+  educations,
+} from "./schema";
 
 async function seed() {
   console.log("🌱 Seeding database...");
@@ -68,7 +75,24 @@ async function seed() {
     },
   ]);
 
-  // 4. Seed Social Links
+  // 4. Seed Educations
+  console.log("  - Seeding educations...");
+  await db.insert(educations).values([
+    {
+      institution: "Politechnika Warszawska",
+      degree: "Inżynier",
+      field_of_study: "Informatyka",
+      start_date: "2023-01-01",
+      end_date: "Present",
+      description:
+        "Studies at the Warsaw University of Technology, focusing on software engineering and modern web technologies.",
+      gpa: "4.5",
+      thesis: "Inżynieria Oprogramowania",
+      projectId: 1,
+    },
+  ]);
+
+  // 5. Seed Social Links
   console.log("  - Seeding social links...");
   await db.insert(social_links).values([
     {
