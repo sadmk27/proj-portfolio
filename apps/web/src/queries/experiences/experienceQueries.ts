@@ -1,13 +1,14 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getPortfolio } from "../../server/portfolio";
+import { getExperiences } from "../../server/experience";
+import { queryKeys } from "../queryKeys";
 
 export const experienceQueryOptions = queryOptions({
-  queryKey: ["experiences"],
+  queryKey: queryKeys.portfolio.experiences(),
   queryFn: async () => {
-    const res = await getPortfolio();
+    const res = await getExperiences();
     if (!res.success || !res.data) {
       throw new Error(res.error || "Failed to fetch experiences");
     }
-    return res.data.experiences;
+    return res.data;
   },
 });

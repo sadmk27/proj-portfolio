@@ -1,13 +1,14 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getPortfolio } from "../../server/portfolio";
+import { getSkills } from "../../server/skill";
+import { queryKeys } from "../queryKeys";
 
 export const skillsQueryOptions = queryOptions({
-  queryKey: ["skills"],
+  queryKey: queryKeys.portfolio.skills(),
   queryFn: async () => {
-    const res = await getPortfolio();
+    const res = await getSkills();
     if (!res.success || !res.data) {
       throw new Error(res.error || "Failed to fetch skills");
     }
-    return res.data.skills;
+    return res.data;
   },
 });
