@@ -1,4 +1,10 @@
 {
+  "root": {
+    "error": "Wystąpił błąd krytyczny!",
+    "notFound": "404 - Nie znaleziono strony",
+    "backToHome": "Wróć do strony głównej",
+    "refresh": "Odśwież"
+  },
   "table": {
     "filterSkills": "Filtruj umiejętności...",
     "viewColumns": "Widok kolumn",
@@ -54,7 +60,8 @@
     "projects": "Projekty",
     "skills": "Umiejętności",
     "home": "Główna",
-    "about": "O mnie"
+    "about": "O mnie",
+    "portfolio": "Portfolio"
   },
   "contact": {
     "header": "Kontakt",
@@ -98,5 +105,9 @@
     "loading": "Ładowanie...",
     "noDescription": "Brak opisu dla tego projektu.",
     "gpa": "Średnia"
+  },
+  "personal": {
+    "name": "Szymon Adamkiewicz",
+    "role": "Software Engineer"
   }
 }

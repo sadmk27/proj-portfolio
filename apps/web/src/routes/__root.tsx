@@ -9,11 +9,10 @@ import {
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
-import { LanguageSwitcher } from "../components/language-switcher";
-import { ThemeToggle } from "../theme-toggle";
 import { getTheme, type Theme } from "../theme-provider";
 import "../index.css";
-import { type i18n } from "i18next";
+import { t, type i18n } from "i18next";
+import { Navbar } from "@/views/components/navbar/navbar";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -32,7 +31,7 @@ export const Route = createRootRouteWithContext<{
   component: RootComponent,
   errorComponent: ({ error }) => (
     <div className="p-10 border-4 border-red-500 bg-red-50 text-red-900">
-      <h1 className="text-2xl font-bold">Wystąpił błąd krytyczny!</h1>
+      <h1 className="text-2xl font-bold">{t("root.error")}</h1>
       <pre className="mt-4 p-2 bg-white rounded border text-xs overflow-auto">
         {error instanceof Error ? error.message : String(error)}
       </pre>
@@ -40,16 +39,16 @@ export const Route = createRootRouteWithContext<{
         onClick={() => window.location.reload()}
         className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
       >
-        Odśwież stronę
+        {t("root.refresh")}
       </button>
     </div>
   ),
 
   notFoundComponent: () => (
     <div className="p-10 flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">404 - Nie znaleziono strony</h1>
+      <h1 className="text-4xl font-bold">{t("root.notFound")}</h1>
       <Link to="/" className="mt-4 text-blue-500 underline">
-        Wróć do strony głównej
+        {t("root.backToHome")}
       </Link>
     </div>
   ),
@@ -72,7 +71,7 @@ function RootInner({
   theme: Theme;
   queryClient: QueryClient;
 }) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <html
@@ -89,18 +88,7 @@ function RootInner({
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <nav className="p-3 flex items-center gap-4 border-b border-border">
-          <Link to="/" className="[&.active]:font-bold text-sm">
-            {t("common.home") || "Home"}
-          </Link>
-          <Link to="/about" className="[&.active]:font-bold text-sm">
-            {t("common.about") || "About"}
-          </Link>
-          <div className="ml-auto flex items-center gap-2">
-            <LanguageSwitcher />
-            <ThemeToggle />
-          </div>
-        </nav>
+        <Navbar />
 
         <QueryClientProvider client={queryClient}>
           <div className="relative flex min-h-screen flex-col">
