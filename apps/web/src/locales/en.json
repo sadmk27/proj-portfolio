@@ -1,4 +1,10 @@
 {
+  "root": {
+    "error": "An error occurred",
+    "notFound": "404 - Not Found",
+    "backToHome": "Back to Home",
+    "refresh": "Refresh"
+  },
   "table": {
     "filterSkills": "Filter skills...",
     "viewColumns": "View Columns",
@@ -54,7 +60,10 @@
     "projects": "Projects",
     "skills": "Skills",
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "portfolio": "Portfolio",
+    "showMore": "Show More",
+    "showLess": "Show Less"
   },
   "contact": {
     "header": "Contact",
@@ -98,5 +107,9 @@
     "loading": "Loading...",
     "noDescription": "No description for this project.",
     "gpa": "GPA"
+  },
+  "personal": {
+    "name": "Szymon Adamkiewicz",
+    "role": "Software Engineer"
   }
 }

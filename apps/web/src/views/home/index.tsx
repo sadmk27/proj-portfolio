@@ -1,15 +1,19 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ProjectCard } from "@/views/components/project-card";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { ProjectCard } from "@/views/components/cards/project-card";
 import { projectsQueryOptions } from "@/queries/projects/projectQueries";
 import { columns } from "@/views/components/table/skills-table-columns";
 import { SkillsTable } from "@/views/components/table/skills-table";
 import { skillsQueryOptions } from "@/queries/skills/skillsQueries";
 import { ContactForm } from "@/views/components/contact-form/contact-form";
-import { ExperienceCard } from "@/views/components/experience-card";
+import { ExperienceCard } from "@/views/components/cards/experience-card";
 import { experienceQueryOptions } from "@/queries/experiences/experienceQueries";
-import { EducationCard } from "../components/education-card";
+import { EducationCard } from "@/views/components/cards/education-card";
 import { educationQueryOptions } from "@/queries/educations/educationQueries";
+import { Button } from "@/components/ui/button";
+import { ScrollToTop } from "@/views/components/navbar/scroll-to-top";
 
 export function HomeView() {
   const { t } = useTranslation();
@@ -18,94 +22,207 @@ export function HomeView() {
   const { data: experiences } = useSuspenseQuery(experienceQueryOptions);
   const { data: educations } = useSuspenseQuery(educationQueryOptions);
 
-  return (
-    <div className="container mx-auto flex flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 text-primary">
-        {t("home.welcome")}
-      </h1>
-      <p className="text-lg text-muted-foreground mb-8 text-center max-w-[600px]">
-        {t("home.description")}
-      </p>
+  const [expanded, setExpanded] = useState({
+    projects: false,
+    experience: false,
+    education: false,
+  });
 
-      <section className="w-full max-w-6xl py-12">
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
+  const toggleExpanded = (section: keyof typeof expanded) => {
+    setExpanded((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const displayedProjects = expanded.projects ? projects : projects.slice(0, 3);
+  const displayedExperiences = expanded.experience
+    ? experiences
+    : experiences.slice(0, 2);
+  const displayedEducations = expanded.education
+    ? educations
+    : educations.slice(0, 2);
+
+  return (
+    <div className="flex-1 w-full flex flex-col items-center select-none pb-20">
+      {/* Hero section */}
+      <section
+        id="home"
+        className="w-full min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-8"
+      >
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-8xl mb-6 text-primary text-center">
+          {t("home.welcome")}
+        </h1>
+        <p className="text-xl text-muted-foreground mb-12 text-center max-w-[700px] leading-relaxed">
+          {t("home.description")}
+        </p>
+        <div className="flex gap-4">
+          <a
+            href="#projects"
+            className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all shadow-lg"
+          >
+            {t("common.projects")}
+          </a>
+          <a
+            href="#contact"
+            className="px-8 py-4 border border-primary text-primary rounded-full font-bold hover:bg-primary/5 transition-all"
+          >
+            {t("contact.header")}
+          </a>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("project.header")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              description={project.description || ""}
-              url={project.url || undefined}
-              imageUrl={project.imageUrl || undefined}
-              createdAt={
-                project.createdAt ? new Date(project.createdAt) : undefined
-              }
-            />
-          ))}
-          {projects.length === 0 && (
-            <div className="col-span-full text-center text-muted-foreground py-12">
-              {t("home.noProjects")}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {displayedProjects.map((project) => (
+            <div key={project.id} className="animate-in fade-in duration-500">
+              <ProjectCard
+                title={project.title}
+                description={project.description || ""}
+                url={project.url || undefined}
+                imageUrl={project.imageUrl || undefined}
+                createdAt={
+                  project.createdAt ? new Date(project.createdAt) : undefined
+                }
+              />
             </div>
-          )}
+          ))}
         </div>
+        {projects.length > 3 && (
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => toggleExpanded("projects")}
+              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold hover:bg-primary hover:text-white transition-colors border-2"
+            >
+              {expanded.projects ? t("common.showLess") : t("common.seeMore")}
+              {expanded.projects ? (
+                <ChevronUp className="h-5 w-5" />
+              ) : (
+                <ChevronDown className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+        )}
       </section>
 
-      <section className="w-full max-w-6xl py-12">
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
+      {/* Skills Section */}
+      <section
+        id="skills"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("skills.header")}
         </h2>
-        <SkillsTable columns={columns} data={skills} />
+        <div className="w-full overflow-hidden">
+          <SkillsTable columns={columns} data={skills} />
+        </div>
       </section>
 
-      <section className="w-full max-w-6xl py-12">
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
+      {/* Experience Section */}
+      <section
+        id="experience"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("experience.header")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {experiences.map((experience) => (
-            <ExperienceCard
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+          {displayedExperiences.map((experience) => (
+            <div
               key={experience.id}
-              title={experience.role}
-              company={experience.company}
-              description={experience.description}
-              startDate={experience.start_date}
-              endDate={experience.end_date}
-              skills={experience.skills}
-            />
+              className="animate-in fade-in duration-500"
+            >
+              <ExperienceCard
+                title={experience.role}
+                company={experience.company}
+                description={experience.description}
+                startDate={experience.start_date}
+                endDate={experience.end_date}
+                skills={experience.skills}
+              />
+            </div>
           ))}
         </div>
+        {experiences.length > 2 && (
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => toggleExpanded("experience")}
+              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
+            >
+              {expanded.experience ? t("common.showLess") : t("common.seeMore")}
+              {expanded.experience ? (
+                <ChevronUp className="h-5 w-5" />
+              ) : (
+                <ChevronDown className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+        )}
       </section>
 
-      <section className="w-full max-w-6xl py-12">
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
+      {/* Education Section */}
+      <section
+        id="education"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("education.header")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {educations.map((education) => (
-            <EducationCard
-              key={education.id}
-              degree={education.degree}
-              institution={education.institution}
-              description={education.description}
-              start_date={education.start_date}
-              end_date={education.end_date}
-              projectId={education.projectId}
-              field_of_study={education.field_of_study}
-              gpa={education.gpa}
-              thesis={education.thesis}
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+          {displayedEducations.map((education) => (
+            <div key={education.id} className="animate-in fade-in duration-500">
+              <EducationCard
+                degree={education.degree}
+                institution={education.institution}
+                description={education.description}
+                start_date={education.start_date}
+                end_date={education.end_date}
+                projectId={education.projectId}
+                field_of_study={education.field_of_study}
+                gpa={education.gpa}
+                thesis={education.thesis}
+              />
+            </div>
           ))}
+        </div>
+        {educations.length > 2 && (
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => toggleExpanded("education")}
+              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
+            >
+              {expanded.education ? t("common.showLess") : t("common.seeMore")}
+              {expanded.education ? (
+                <ChevronUp className="h-5 w-5" />
+              ) : (
+                <ChevronDown className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+        )}
+      </section>
+
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
+          {t("contact.header")}
+        </h2>
+        <div className="w-full max-w-2xl backdrop-blur-sm transition-all">
+          <ContactForm />
         </div>
       </section>
 
-      <section className="w-full max-w-6xl py-12 flex flex-col items-center">
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-12 text-primary text-left">
-          {t("contact.header")}
-        </h2>
-        <ContactForm />
-      </section>
+      <ScrollToTop />
     </div>
   );
 }
