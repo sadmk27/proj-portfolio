@@ -111,5 +111,8 @@
   "personal": {
     "name": "Szymon Adamkiewicz",
     "role": "Software Engineer"
+  },
+  "footer": {
+    "description": "Wykonane z ❤️ dla lepszego internetu."
   }
 }

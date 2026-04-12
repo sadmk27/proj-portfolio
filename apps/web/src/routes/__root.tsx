@@ -13,6 +13,7 @@ import { getTheme, type Theme } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
 import { Navbar } from "@/views/components/navbar/navbar";
+import { Footer } from "@/views/components/footer/footer";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -95,6 +96,8 @@ function RootInner({
             <Outlet />
           </div>
         </QueryClientProvider>
+
+        <Footer />
 
         <ThemeObserver theme={theme} />
 

@@ -129,5 +129,12 @@
     @apply font-sans;
     scroll-padding-top: 4rem;
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  section,
+  footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
