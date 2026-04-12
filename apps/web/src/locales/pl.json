@@ -61,7 +61,9 @@
     "skills": "Umiejętności",
     "home": "Główna",
     "about": "O mnie",
-    "portfolio": "Portfolio"
+    "portfolio": "Portfolio",
+    "showMore": "Pokaż więcej",
+    "showLess": "Pokaż mniej"
   },
   "contact": {
     "header": "Kontakt",

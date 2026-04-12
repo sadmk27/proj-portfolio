@@ -1,17 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+
+const throttle = (callback: (...args: unknown[]) => void, delay: number) => {
+  let waiting = false;
+  return (...args: unknown[]) => {
+    if (!waiting) {
+      callback(...args);
+      waiting = true;
+      setTimeout(() => {
+        waiting = false;
+      }, delay);
+    }
+  };
+};
 
 export const ScrollToTop = () => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useState(false);
+
+  const throttledToggle = useMemo(
+    () =>
+      throttle(() => {
+        if (window.scrollY > 300) {
+          setVisible(true);
+        } else {
+          setVisible(false);
+        }
+      }, 100),
+    [],
+  );
 
   useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > 500);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", throttledToggle);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", throttledToggle);
     };
-  }, []);
+  }, [throttledToggle]);
 
   const goToTop = () => {
     window.scrollTo({
@@ -20,17 +44,15 @@ export const ScrollToTop = () => {
     });
   };
 
-  if (!visible) {
-    return null;
-  }
-
   return (
-    <Button
-      onClick={goToTop}
-      className="fixed bottom-8 right-8 rounded-full shadow-lg transition-all hover:scale-110"
-      size="icon"
-    >
-      <ArrowUp className="h-5 w-5" />
-    </Button>
+    isVisible && (
+      <Button
+        onClick={goToTop}
+        className="fixed bottom-8 right-8 rounded-full shadow-lg transition-all hover:scale-110"
+        size="icon"
+      >
+        <ArrowUp className="h-5 w-5" />
+      </Button>
+    )
   );
 };

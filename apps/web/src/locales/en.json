@@ -61,7 +61,9 @@
     "skills": "Skills",
     "home": "Home",
     "about": "About",
-    "portfolio": "Portfolio"
+    "portfolio": "Portfolio",
+    "showMore": "Show More",
+    "showLess": "Show Less"
   },
   "contact": {
     "header": "Contact",
