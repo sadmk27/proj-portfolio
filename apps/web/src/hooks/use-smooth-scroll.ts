@@ -1,22 +1,12 @@
 import { useEffect } from "react";
 import { lenisProvider } from "@/lenis-provider";
+import type { LenisOptions } from "lenis";
 
-export const useSmoothScroll = (options = {}) => {
+export const useSmoothScroll = (options: LenisOptions = {}) => {
   useEffect(() => {
     lenisProvider.init(options);
 
-    const observer = new MutationObserver(() => {
-      lenisProvider.update();
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-    });
-
     return () => {
-      observer.disconnect();
       lenisProvider.destroy();
     };
   }, []);
