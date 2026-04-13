@@ -45,7 +45,7 @@ export function HomeView() {
       {/* Hero section */}
       <section
         id="home"
-        className="w-full min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-8"
+        className="w-full min-h-screen flex flex-col items-center justify-center p-8 pt-24"
       >
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-8xl mb-6 text-primary text-center">
           {t("home.welcome")}

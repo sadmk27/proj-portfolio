@@ -127,14 +127,14 @@
 
   html {
     @apply font-sans;
-    scroll-padding-top: 4rem;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
   }
 
   section,
   footer {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
+    scroll-margin-top: 4rem;
   }
 }
