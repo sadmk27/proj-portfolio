@@ -1,30 +1,25 @@
 import { useEffect } from "react";
-import Lenis from "lenis";
+import { lenisProvider } from "@/lenis-provider";
 
-export function useSmoothScroll() {
+export const useSmoothScroll = (options = {}) => {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.5,
-      lerp: 0.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      syncTouch: false,
-      touchMultiplier: 2,
-      wheelMultiplier: 1.1,
-      smoothWheel: true,
-      infinite: false,
+    lenisProvider.init(options);
+
+    const observer = new MutationObserver(() => {
+      lenisProvider.update();
     });
 
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-
-    rafId = requestAnimationFrame(raf);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    });
 
     return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
+      observer.disconnect();
+      lenisProvider.destroy();
     };
   }, []);
-}
+
+  return lenisProvider;
+};
