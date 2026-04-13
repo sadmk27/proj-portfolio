@@ -13,6 +13,8 @@ import { getTheme, type Theme } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
 import { Navbar } from "@/views/components/navbar/navbar";
+import { Footer } from "@/views/components/footer/footer";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -72,6 +74,7 @@ function RootInner({
   queryClient: QueryClient;
 }) {
   const { i18n } = useTranslation();
+  useSmoothScroll();
 
   return (
     <html
@@ -95,6 +98,8 @@ function RootInner({
             <Outlet />
           </div>
         </QueryClientProvider>
+
+        <Footer />
 
         <ThemeObserver theme={theme} />
 

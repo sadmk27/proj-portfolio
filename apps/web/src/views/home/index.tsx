@@ -45,7 +45,7 @@ export function HomeView() {
       {/* Hero section */}
       <section
         id="home"
-        className="w-full min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-8"
+        className="w-full min-h-screen flex flex-col items-center justify-center p-8 pt-24"
       >
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-8xl mb-6 text-primary text-center">
           {t("home.welcome")}
@@ -99,7 +99,7 @@ export function HomeView() {
               onClick={() => toggleExpanded("projects")}
               className="gap-2 rounded-full px-8 py-6 text-lg font-semibold hover:bg-primary hover:text-white transition-colors border-2"
             >
-              {expanded.projects ? t("common.showLess") : t("common.seeMore")}
+              {expanded.projects ? t("common.showLess") : t("common.showMore")}
               {expanded.projects ? (
                 <ChevronUp className="h-5 w-5" />
               ) : (
@@ -155,7 +155,9 @@ export function HomeView() {
               onClick={() => toggleExpanded("experience")}
               className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
             >
-              {expanded.experience ? t("common.showLess") : t("common.seeMore")}
+              {expanded.experience
+                ? t("common.showLess")
+                : t("common.showMore")}
               {expanded.experience ? (
                 <ChevronUp className="h-5 w-5" />
               ) : (
@@ -198,7 +200,7 @@ export function HomeView() {
               onClick={() => toggleExpanded("education")}
               className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
             >
-              {expanded.education ? t("common.showLess") : t("common.seeMore")}
+              {expanded.education ? t("common.showLess") : t("common.showMore")}
               {expanded.education ? (
                 <ChevronUp className="h-5 w-5" />
               ) : (

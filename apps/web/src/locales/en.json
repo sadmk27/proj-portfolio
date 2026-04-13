@@ -111,5 +111,8 @@
   "personal": {
     "name": "Szymon Adamkiewicz",
     "role": "Software Engineer"
+  },
+  "footer": {
+    "description": "Made with ❤️ for better web."
   }
 }
