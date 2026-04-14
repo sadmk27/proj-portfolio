@@ -219,7 +219,7 @@ export function HomeView() {
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("contact.header")}
         </h2>
-        <div className="w-full max-w-2xl backdrop-blur-sm transition-all">
+        <div className="w-full max-w-2xl backdrop-blur-sm transition-all flex items-center justify-center">
           <ContactForm />
         </div>
       </section>

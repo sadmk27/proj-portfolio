@@ -1,55 +1,52 @@
-import { useRouteContext, useRouter } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "@tanstack/react-router";
+import { Switch } from "@/components/ui/switch";
 import { setTheme, type Theme } from "./theme-provider";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
-  const { theme } = useRouteContext({ from: "__root__" });
+  const { setTheme: setNextTheme, resolvedTheme } = useTheme();
   const router = useRouter();
 
-  function handleToggle(nextTheme: Theme) {
-    if (theme === nextTheme) {
-      return;
-    }
-
+  function handleToggle(checked: boolean) {
+    const nextTheme: Theme = checked ? "dark" : "light";
+    setNextTheme(nextTheme);
     setTheme({ data: nextTheme }).then(() => {
       router.invalidate();
     });
   }
 
+  const isDark = resolvedTheme === "dark";
+
   return (
     <div
-      className="flex items-center gap-0.5 border border-border rounded-[min(var(--radius-md),10px)] p-0.5 h-8"
+      className="flex items-center gap-3 px-2 py-1 rounded-full bg-muted/30 border border-border/40 backdrop-blur-sm"
       role="group"
       aria-label="Theme toggle"
     >
-      <Button
-        variant={theme === "light" ? "secondary" : "ghost"}
-        size="icon-sm"
-        onClick={() => handleToggle("light")}
-        aria-label="Light mode"
-        title="Light mode"
-      >
-        <Sun />
-      </Button>
-      <Button
-        variant={theme === "system" ? "secondary" : "ghost"}
-        size="icon-sm"
-        onClick={() => handleToggle("system")}
-        aria-label="System mode"
-        title="System mode"
-      >
-        <Monitor />
-      </Button>
-      <Button
-        variant={theme === "dark" ? "secondary" : "ghost"}
-        size="icon-sm"
-        onClick={() => handleToggle("dark")}
-        aria-label="Dark mode"
-        title="Dark mode"
-      >
-        <Moon />
-      </Button>
+      <Sun
+        className={cn(
+          "h-4 w-4 transition-colors duration-300",
+          !isDark
+            ? "text-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]"
+            : "text-muted-foreground/60",
+        )}
+      />
+      <Switch
+        checked={isDark}
+        onCheckedChange={handleToggle}
+        aria-label="Toggle dark mode"
+        size="sm"
+      />
+      <Moon
+        className={cn(
+          "h-4 w-4 transition-colors duration-300",
+          isDark
+            ? "text-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]"
+            : "text-muted-foreground/60",
+        )}
+      />
     </div>
   );
 }

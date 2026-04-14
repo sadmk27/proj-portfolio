@@ -82,6 +82,19 @@ class LenisProvider {
   public getInstance(): Lenis | null {
     return this.lenis;
   }
+
+  public scrollTo(
+    target: number | string | HTMLElement,
+    options?: Parameters<Lenis["scrollTo"]>[1],
+  ): void {
+    if (this.lenis) {
+      this.lenis.scrollTo(target, options);
+    }
+  }
+
+  public scrollToTop(): void {
+    this.scrollTo(0);
+  }
 }
 
 export const lenisProvider = new LenisProvider();

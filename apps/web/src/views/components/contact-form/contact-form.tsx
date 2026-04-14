@@ -181,9 +181,9 @@ export function ContactForm() {
       <CardFooter>
         <Field
           orientation="horizontal"
-          className="flex items-center justify-end"
+          className="flex items-center justify-center w-full"
         >
-          <Button type="submit" form="contact-form">
+          <Button type="submit" form="contact-form" className="w-1/2">
             {t("contact.send")}
           </Button>
         </Field>

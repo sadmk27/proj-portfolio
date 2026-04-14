@@ -9,7 +9,7 @@ export const useSmoothScroll = (options: LenisOptions = {}) => {
     return () => {
       lenisProvider.destroy();
     };
-  }, []);
+  }, [options]);
 
   return lenisProvider;
 };
