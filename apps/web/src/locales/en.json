@@ -57,13 +57,16 @@
   "common": {
     "language": "Language",
     "theme": "Toggle theme",
+    "menu": "Menu",
     "projects": "Projects",
     "skills": "Skills",
     "home": "Home",
     "about": "About",
     "portfolio": "Portfolio",
     "showMore": "Show More",
-    "showLess": "Show Less"
+    "showLess": "Show Less",
+    "navigation": "Navigation",
+    "settings": "Settings"
   },
   "contact": {
     "header": "Contact",
@@ -110,7 +113,8 @@
   },
   "personal": {
     "name": "Szymon Adamkiewicz",
-    "role": "Software Engineer"
+    "role": "Software Engineer",
+    "avatar": "https://github.com/shadcn.png"
   },
   "footer": {
     "description": "Made with ❤️ for better web."

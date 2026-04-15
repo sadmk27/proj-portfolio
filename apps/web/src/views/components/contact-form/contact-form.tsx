@@ -1,4 +1,3 @@
-import * as z from "zod";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -25,21 +24,15 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
+import { contactFormSchema } from "@portfolio/validation";
 
 export function ContactForm() {
   const { t } = useTranslation();
-  const fromSchema = z.object({
-    title: z.string().min(3, t("contact.validation.name.min")),
-    email: z.string().email(t("contact.validation.email.email")),
-    message: z
-      .string()
-      .min(10, t("contact.validation.message.min"))
-      .max(500, t("contact.validation.message.max")),
-  });
+  const fromSchema = contactFormSchema;
 
   const form = useForm({
     defaultValues: {
-      title: "",
+      name: "",
       email: "",
       message: "",
     },
@@ -84,7 +77,7 @@ export function ContactForm() {
         >
           <FieldGroup>
             <form.Field
-              name="title"
+              name="name"
               children={(field) => {
                 const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid;
@@ -181,9 +174,9 @@ export function ContactForm() {
       <CardFooter>
         <Field
           orientation="horizontal"
-          className="flex items-center justify-end"
+          className="flex items-center justify-center w-full"
         >
-          <Button type="submit" form="contact-form">
+          <Button type="submit" form="contact-form" className="w-1/2">
             {t("contact.send")}
           </Button>
         </Field>

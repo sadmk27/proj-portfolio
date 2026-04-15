@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { ProjectCard } from "@/views/components/cards/project-card";
 import { projectsQueryOptions } from "@/queries/projects/projectQueries";
@@ -14,13 +13,23 @@ import { EducationCard } from "@/views/components/cards/education-card";
 import { educationQueryOptions } from "@/queries/educations/educationQueries";
 import { Button } from "@/components/ui/button";
 import { ScrollToTop } from "@/views/components/navbar/scroll-to-top";
+import { useSuspenseQueries } from "@tanstack/react-query";
 
 export function HomeView() {
   const { t } = useTranslation();
-  const { data: projects } = useSuspenseQuery(projectsQueryOptions);
-  const { data: skills } = useSuspenseQuery(skillsQueryOptions);
-  const { data: experiences } = useSuspenseQuery(experienceQueryOptions);
-  const { data: educations } = useSuspenseQuery(educationQueryOptions);
+  const [
+    { data: projects },
+    { data: skills },
+    { data: experiences },
+    { data: educations },
+  ] = useSuspenseQueries({
+    queries: [
+      projectsQueryOptions,
+      skillsQueryOptions,
+      experienceQueryOptions,
+      educationQueryOptions,
+    ],
+  });
 
   const [expanded, setExpanded] = useState({
     projects: false,
@@ -219,7 +228,7 @@ export function HomeView() {
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("contact.header")}
         </h2>
-        <div className="w-full max-w-2xl backdrop-blur-sm transition-all">
+        <div className="w-full max-w-2xl backdrop-blur-sm transition-all flex items-center justify-center">
           <ContactForm />
         </div>
       </section>

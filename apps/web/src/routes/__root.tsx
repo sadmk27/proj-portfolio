@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   createRootRouteWithContext,
   Link,
@@ -9,12 +8,14 @@ import {
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
-import { getTheme, type Theme } from "../theme-provider";
+import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
 import { Navbar } from "@/views/components/navbar/navbar";
 import { Footer } from "@/views/components/footer/footer";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { HomeSkeleton } from "@/views/home/home-skeleton";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -31,6 +32,9 @@ export const Route = createRootRouteWithContext<{
     ],
   }),
   component: RootComponent,
+
+  pendingComponent: HomeSkeleton,
+
   errorComponent: ({ error }) => (
     <div className="p-10 border-4 border-red-500 bg-red-50 text-red-900">
       <h1 className="text-2xl font-bold">{t("root.error")}</h1>
@@ -91,50 +95,22 @@ function RootInner({
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <Navbar />
-
         <QueryClientProvider client={queryClient}>
-          <div className="relative flex min-h-screen flex-col">
-            <Outlet />
-          </div>
+          <ThemeProvider attribute="class" defaultTheme={theme} enableSystem>
+            <TooltipProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <Navbar />
+                <div className="flex-1">
+                  <Outlet />
+                </div>
+                <Footer />
+              </div>
+            </TooltipProvider>
+          </ThemeProvider>
         </QueryClientProvider>
-
-        <Footer />
-
-        <ThemeObserver theme={theme} />
 
         <Scripts />
       </body>
     </html>
   );
-}
-
-function ThemeObserver({ theme }: { theme: Theme }) {
-  useEffect(() => {
-    const root = window.document.documentElement;
-
-    const applyTheme = () => {
-      root.classList.remove("light", "dark");
-      if (theme === "system") {
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-        root.classList.add(systemTheme);
-      } else {
-        root.classList.add(theme);
-      }
-    };
-
-    applyTheme();
-
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handler = () => applyTheme();
-      mediaQuery.addEventListener("change", handler);
-      return () => mediaQuery.removeEventListener("change", handler);
-    }
-  }, [theme]);
-
-  return null;
 }

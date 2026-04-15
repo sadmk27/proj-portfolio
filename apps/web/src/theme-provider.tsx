@@ -1,28 +1,14 @@
-import { createServerFn } from "@tanstack/react-start";
-import { getCookie, setCookie } from "@tanstack/react-start/server";
-import * as z from "zod";
+import {
+  ThemeProvider as NextThemesProvider,
+  type ThemeProviderProps,
+} from "next-themes";
 
-const storageKey = "theme";
+import { themeValidator } from "./theme-schema";
+export type { Theme } from "./theme-schema";
+export { themeValidator };
 
-const themeValidator = z.enum(["light", "dark", "system"]);
+export { getTheme, setTheme } from "./server/theme";
 
-export type Theme = z.infer<typeof themeValidator>;
-
-export const getTheme = createServerFn().handler(() => {
-  const raw = getCookie(storageKey);
-  if (raw === "dark") {
-    return "dark" as const;
-  }
-
-  if (raw === "light") {
-    return "light" as const;
-  }
-
-  return "system" as const;
-});
-
-export const setTheme = createServerFn({ method: "POST" })
-  .inputValidator(themeValidator)
-  .handler(({ data }) => {
-    setCookie(storageKey, data);
-  });
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+}
