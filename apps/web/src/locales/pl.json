@@ -57,13 +57,16 @@
   "common": {
     "language": "Język",
     "theme": "Zmień motyw",
+    "menu": "Menu",
     "projects": "Projekty",
     "skills": "Umiejętności",
     "home": "Główna",
     "about": "O mnie",
     "portfolio": "Portfolio",
     "showMore": "Pokaż więcej",
-    "showLess": "Pokaż mniej"
+    "showLess": "Pokaż mniej",
+    "navigation": "Nawigacja",
+    "settings": "Ustawienia"
   },
   "contact": {
     "header": "Kontakt",
@@ -110,7 +113,8 @@
   },
   "personal": {
     "name": "Szymon Adamkiewicz",
-    "role": "Software Engineer"
+    "role": "Software Engineer",
+    "avatar": "https://github.com/shadcn.png"
   },
   "footer": {
     "description": "Wykonane z ❤️ dla lepszego internetu."

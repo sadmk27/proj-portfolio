@@ -1,82 +1,86 @@
-import { Terminal } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "@/components/language-switcher";
-import { ThemeToggle } from "@/theme-toggle";
-import { cn } from "@/lib/utils";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { NavLogo } from "./nav-logo";
+import { NavLinks } from "./nav-links";
+import { NavActions } from "./nav-actions";
+import { useState } from "react";
 
 export function Navbar() {
   const { t } = useTranslation();
-
-  const navLinks = [
-    { href: "#projects", label: t("project.header") },
-    { href: "#skills", label: t("skills.header") },
-    { href: "#experience", label: t("experience.header") },
-    { href: "#education", label: t("education.header") },
-    { href: "#contact", label: t("contact.header") },
-  ];
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto grid grid-cols-3 h-16 items-center px-4">
+      <div className="container mx-auto h-16 px-4 flex items-center justify-between md:grid md:grid-cols-3">
         {/* Left Section: Branding */}
-        <a
-          href="#home"
-          className="flex items-center gap-2 font-bold cursor-pointer justify-self-start hover:opacity-80 transition-opacity"
-        >
-          <Terminal className="h-6 w-6 text-primary" />
-          <span className="hidden sm:inline-block">
-            {t("common.portfolio")}
-          </span>
-        </a>
-
-        {/* Center Section: Navigation */}
-        <div className="flex justify-center">
-          <NavigationMenu className="hidden md:flex">
-            <NavigationMenuList>
-              {navLinks.map((link) => (
-                <NavigationMenuItem key={link.href}>
-                  <NavigationMenuLink
-                    href={link.href}
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent cursor-pointer hover:text-primary transition-colors",
-                    )}
-                  >
-                    {link.label}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+        <div className="flex justify-start">
+          <NavLogo />
         </div>
 
-        {/* Right Section: Profile & Toggles */}
-        <div className="flex items-center gap-3 justify-self-end">
-          <div className="hidden lg:flex items-center gap-2 border-r pr-4 mr-1">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>SA</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold truncate max-w-[150px]">
-                {t("personal.name")}
-              </span>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">
-                {t("personal.role")}
-              </span>
-            </div>
+        {/* Center Section: Navigation (Desktop only) */}
+        <div className="hidden md:flex justify-center">
+          <NavLinks />
+        </div>
+
+        {/* Right Section: Actions (Desktop only) or Burger (Mobile only) */}
+        <div className="flex items-center justify-end gap-3">
+          {/* Desktop Actions */}
+          <div className="hidden md:flex">
+            <NavActions />
           </div>
-          <div className="flex items-center gap-1">
-            <LanguageSwitcher />
-            <ThemeToggle />
+
+          {/* Mobile Navigation Trigger */}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="p-2 hover:bg-accent rounded-md transition-colors"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-[300px] sm:w-[400px] flex flex-col"
+              >
+                <SheetHeader className="text-left pb-6 border-b">
+                  <SheetTitle>{t("common.menu")}</SheetTitle>
+                </SheetHeader>
+
+                <div className="flex flex-col py-6 gap-8 overflow-y-auto flex-1">
+                  <div className="px-2">
+                    <h3 className="text-sm font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
+                      {t("common.navigation")}
+                    </h3>
+                    <NavLinks
+                      orientation="vertical"
+                      onItemClick={() => setIsOpen(false)}
+                    />
+                  </div>
+
+                  <div className="mt-auto px-2 pt-6 border-t space-y-6">
+                    <div>
+                      <h3 className="text-sm font-semibold text-muted-foreground mb-4 px-2 uppercase tracking-wider">
+                        {t("common.settings")}
+                      </h3>
+                      <NavActions
+                        showProfile={true}
+                        forceShowProfile={true}
+                        className="flex flex-row justify-between items-center w-full px-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
