@@ -3,7 +3,7 @@ import { db, about } from "@portfolio/database";
 
 export const getAbout = createServerFn({ method: "GET" }).handler(async () => {
   try {
-    const aboutData = await db.select().from(about);
+    const aboutData = await db.select().from(about).limit(1);
     return { success: true, data: aboutData };
   } catch (err) {
     if (err instanceof Error) {

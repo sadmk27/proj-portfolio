@@ -33,7 +33,6 @@
   "dependencies": {
     "@tanstack/react-form-start": "^1.28.6",
     "dotenv": "^17.3.1",
-    "github-calendar": "^2.3.4",
     "react-github-calendar": "^5.0.6"
   },
   "workspaces": [

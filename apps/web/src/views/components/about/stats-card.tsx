@@ -8,6 +8,7 @@ import { GithubIcon } from "lucide-react";
 const selectLastMonths = (contributions: Activity[], months: number) => {
   const today = new Date();
   const startPeriod = new Date();
+
   startPeriod.setMonth(today.getMonth() - months);
 
   return contributions.filter((activity) => {
@@ -37,6 +38,7 @@ export function StatsCard() {
   const { t } = useTranslation();
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const githubUsername = process.env.GITHUB_USERNAME as string;
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 0);
@@ -66,7 +68,7 @@ export function StatsCard() {
       </CardHeader>
       <CardContent className="px-6 pb-6 pt-0 flex flex-col items-center justify-center h-[calc(100%-40px)]">
         <GitHubCalendar
-          username="sadmk27"
+          username={githubUsername}
           transformData={(data) => selectLastMonths(data, 7)}
           theme={calendarTheme}
           colorScheme={resolvedTheme as "light" | "dark"}

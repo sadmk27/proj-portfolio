@@ -5,6 +5,7 @@ import { ContactFormSkeleton } from "../components/contact-form/contact-form-ske
 import { HeroSectionSkeleton } from "../components/hero/hero-section-skeleton";
 import { ExperienceCardSkeleton } from "../components/cards/experience-card-skeleton";
 import { EducationCardSkeleton } from "../components/cards/education-card-skeleton";
+import { AboutSectionSkeleton } from "../components/about/about-section-skeleton";
 
 export function HomeSkeleton() {
   return (
@@ -17,16 +18,7 @@ export function HomeSkeleton() {
       {/* About Section skeleton */}
       <section className="w-full max-w-6xl py-12 px-4">
         <Skeleton className="h-10 w-48 mb-12" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <Skeleton className="h-64 md:h-96" />
-          <div className="space-y-4">
-            <Skeleton className="h-8 w-64" />
-            <Skeleton className="h-6 w-full" />
-            <Skeleton className="h-6 w-5/6" />
-            <Skeleton className="h-6 w-4/5" />
-            <Skeleton className="h-6 w-3/4" />
-          </div>
-        </div>
+        <AboutSectionSkeleton />
       </section>
 
       {/* Projects Section skeleton */}
