@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/noto-sans";
+@import "react-github-calendar/tooltips.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -139,4 +140,23 @@
     scroll-snap-stop: normal;
     scroll-margin-top: 4rem;
   }
+}
+
+@layer components {
+  /* GitHub Calendar Tooltip Styling */
+  .react-activity-calendar__tooltip {
+    @apply bg-popover text-popover-foreground border border-border px-3 py-1.5 rounded-md text-[13px] shadow-xl backdrop-blur-md;
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    transition: opacity 0.2s ease-in-out;
+
+    .react-activity-calendar__tooltip-arrow {
+      @apply fill-popover;
+      /* Optional: if you want the arrow to have a border effect, it's harder with SVG fill, 
+         but we'll keep it simple and clean matching the popover bg. */
+    }
+  }
+
+  /* Customizing the activity blocks to match project theme if needed via CSS */
+  /* However, it's better to pass the theme prop to the component for color scales. */
 }

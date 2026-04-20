@@ -25,6 +25,7 @@ export function NavLinks({
 
   const navLinks = useMemo(
     () => [
+      { href: "#about", label: t("about.header") },
       { href: "#projects", label: t("project.header") },
       { href: "#skills", label: t("skills.header") },
       { href: "#experience", label: t("experience.header") },

@@ -14,16 +14,20 @@ import { educationQueryOptions } from "@/queries/educations/educationQueries";
 import { Button } from "@/components/ui/button";
 import { ScrollToTop } from "@/views/components/navbar/scroll-to-top";
 import { useSuspenseQueries } from "@tanstack/react-query";
+import { aboutQueryOptions } from "@/queries/about/aboutQueries";
+import { AboutSection } from "@/views/components/about/about-section";
 
 export function HomeView() {
   const { t } = useTranslation();
   const [
+    { data: about },
     { data: projects },
     { data: skills },
     { data: experiences },
     { data: educations },
   ] = useSuspenseQueries({
     queries: [
+      aboutQueryOptions,
       projectsQueryOptions,
       skillsQueryOptions,
       experienceQueryOptions,
@@ -76,6 +80,22 @@ export function HomeView() {
             {t("contact.header")}
           </a>
         </div>
+      </section>
+
+      <section
+        id="about"
+        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+      >
+        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
+          {t("about.header")}
+        </h2>
+        <AboutSection
+          name={about.name}
+          role={about.role}
+          description={about.description}
+          imageUrl={about.imageUrl}
+          interests={about.interests}
+        />
       </section>
 
       {/* Projects Section */}

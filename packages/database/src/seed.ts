@@ -11,16 +11,20 @@ import {
 async function seed() {
   console.log("🌱 Seeding database...");
 
+  // 1. Seed About
   console.log("  - Seeding about...");
   await db.insert(about).values([
     {
-      name: "Your Name",
-      title: "Fullstack Developer",
-      bio: "A passionate developer building high-performance web applications.",
+      name: "Szymon Krawczyk",
+      role: "Fullstack Developer",
+      description:
+        "A passionate developer building high-performance web applications.",
+      imageUrl: "https://placehold.co/600x400/242424/ffffff?text=Profile+Image",
+      interests: ["React", "TypeScript", "Node.js", "PostgreSQL"],
     },
   ]);
 
-  // 1. Seed Skills
+  // 2. Seed Skills
   console.log("  - Seeding skills...");
   await db.insert(skills).values([
     {
@@ -49,7 +53,7 @@ async function seed() {
     },
   ]);
 
-  // 2. Seed Projects
+  // 3. Seed Projects
   console.log("  - Seeding projects...");
   await db.insert(projects).values([
     {
@@ -62,7 +66,7 @@ async function seed() {
     },
   ]);
 
-  // 3. Seed Experiences
+  // 4. Seed Experiences
   console.log("  - Seeding experiences...");
   await db.insert(experiences).values([
     {
@@ -75,7 +79,7 @@ async function seed() {
     },
   ]);
 
-  // 4. Seed Educations
+  // 5. Seed Educations
   console.log("  - Seeding educations...");
   await db.insert(educations).values([
     {
@@ -92,7 +96,7 @@ async function seed() {
     },
   ]);
 
-  // 5. Seed Social Links
+  // 6. Seed Social Links
   console.log("  - Seeding social links...");
   await db.insert(social_links).values([
     {
