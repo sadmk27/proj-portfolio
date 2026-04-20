@@ -11,8 +11,10 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 export const about = pgTable("about", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  title: text("title").notNull(),
-  bio: text("bio").notNull(),
+  role: text("role").notNull(),
+  description: text("description").notNull(),
+  imageUrl: varchar("image_url", { length: 512 }),
+  interests: text("interests").array().notNull(),
 });
 
 export const projects = pgTable("projects", {

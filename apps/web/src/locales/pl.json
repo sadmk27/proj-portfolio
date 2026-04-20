@@ -33,7 +33,15 @@
     "loading": "Ładowanie..."
   },
   "about": {
-    "title": "O mnie"
+    "header": "O mnie",
+    "noImage": "Brak obrazu",
+    "Desc-title": "Mój opis",
+    "Interests-title": "Osobiste zainteresowania",
+    "loading": "Ładowanie...",
+    "noDescription": "Brak opisu.",
+    "noInterests": "Brak zainteresowań.",
+    "imageAlt": "Zdjęcie profilowe",
+    "stats-title": "Statystyki GitHub"
   },
   "skills": {
     "header": "Umiejętności",

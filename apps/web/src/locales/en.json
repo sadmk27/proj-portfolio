@@ -33,7 +33,15 @@
     "loading": "Loading..."
   },
   "about": {
-    "title": "About me"
+    "header": "About me",
+    "noImage": "No image available",
+    "Desc-title": "My description",
+    "Interests-title": "Personal interests",
+    "loading": "Loading...",
+    "noDescription": "No description available.",
+    "noInterests": "No interests available.",
+    "imageAlt": "Profile",
+    "stats-title": "GitHub Contributions"
   },
   "skills": {
     "header": "Skills",
