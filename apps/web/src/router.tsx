@@ -12,6 +12,7 @@ export function getRouter(i18n: i18n = defaultI18nInstance) {
     context: {
       queryClient,
       i18n: i18n,
+      session: undefined!,
     },
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,

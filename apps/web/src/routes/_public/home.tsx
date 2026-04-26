@@ -7,7 +7,7 @@ import { experienceQueryOptions } from "@/queries/experiences/experienceQueries"
 import { educationQueryOptions } from "@/queries/educations/educationQueries";
 import { aboutQueryOptions } from "@/queries/about/aboutQueries";
 
-export const Route = createFileRoute("/home")({
+export const Route = createFileRoute("/_public/home")({
   component: HomeView,
   pendingComponent: HomeSkeleton,
   pendingMs: 0,
