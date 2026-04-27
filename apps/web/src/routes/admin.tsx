@@ -7,7 +7,7 @@ export const Route = createFileRoute("/admin")({
 
     if (!session || session.user.role !== "admin") {
       throw redirect({
-        to: "/admin/login",
+        to: "/admin_/login",
         search: {
           redirect: location.href,
         },
