@@ -6,10 +6,51 @@ import {
   experiences,
   social_links,
   educations,
+  users,
+  accounts,
 } from "./schema";
+import { hashPassword } from "better-auth/crypto";
 
 async function seed() {
   console.log("🌱 Seeding database...");
+
+  // 0. Seed Admin User
+  console.log("  - Seeding admin user...");
+  const adminPassword = "admin123"; // Change this to a strong password in production
+  const hashedPassword = await hashPassword(adminPassword);
+
+  // Create admin user
+  await db
+    .insert(users)
+    .values({
+      id: "admin_user_1",
+      name: "Admin",
+      email: "admin@portfolio.local",
+      emailVerified: true,
+      role: "admin",
+      banned: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .onConflictDoNothing();
+
+  // Create admin account with password
+  await db
+    .insert(accounts)
+    .values({
+      id: "admin_account_1",
+      accountId: "admin@portfolio.local",
+      providerId: "credential",
+      userId: "admin_user_1",
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .onConflictDoNothing();
+
+  console.log("    Admin user created:");
+  console.log("    Email: admin@portfolio.local");
+  console.log("    Password: admin123");
 
   // 1. Seed About
   console.log("  - Seeding about...");
