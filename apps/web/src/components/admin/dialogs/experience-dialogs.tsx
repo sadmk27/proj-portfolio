@@ -13,11 +13,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+} from "../../ui/dialog";
+import { Label } from "../../ui/label";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
+import { Button } from "../../ui/button";
 
 export function ExperienceFormDialog({
   open,

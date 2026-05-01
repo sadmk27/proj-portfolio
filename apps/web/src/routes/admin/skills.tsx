@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   SkillFormDialog,
   SkillDeleteDialog,
-} from "@/components/admin/skill-dialogs";
+} from "@/components/admin/dialogs/skill-dialogs";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import type { SelectSkill as Skill } from "@portfolio/database";
@@ -16,6 +16,20 @@ export const Route = createFileRoute("/admin/skills")({
     return { skills: (res.data || []) as Skill[] };
   },
   component: SkillsPage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Skills"
+        description="Manage your skills and proficiencies."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "Failed to load skills"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function SkillsPage() {

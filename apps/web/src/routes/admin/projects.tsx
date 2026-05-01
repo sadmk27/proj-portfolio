@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   ProjectFormDialog,
   ProjectDeleteDialog,
-} from "@/components/admin/project-dialogs";
+} from "@/components/admin/dialogs/project-dialogs";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import type { SelectProject as Project } from "@portfolio/database";
@@ -16,6 +16,20 @@ export const Route = createFileRoute("/admin/projects")({
     return { projects: (res.data || []) as Project[] };
   },
   component: ProjectsPage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Projects"
+        description="Manage your portfolio projects."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "Failed to load projects"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function ProjectsPage() {

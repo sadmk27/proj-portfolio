@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   EducationFormDialog,
   EducationDeleteDialog,
-} from "@/components/admin/education-dialogs";
+} from "@/components/admin/dialogs/education-dialogs";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import type { SelectEducation as Education } from "@portfolio/database";
@@ -16,6 +16,20 @@ export const Route = createFileRoute("/admin/educations")({
     return { educations: (res.data || []) as Education[] };
   },
   component: EducationsPage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Education"
+        description="Manage your education history."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "Failed to load educations"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function EducationsPage() {

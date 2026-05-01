@@ -116,7 +116,7 @@ export function SkillFormDialog({
             <Label htmlFor="skill-category">Category *</Label>
             <Select
               value={formData.category}
-              onValueChange={(value) =>
+              onValueChange={(value: string) =>
                 setFormData({ ...formData, category: value })
               }
             >
@@ -148,7 +148,7 @@ export function SkillFormDialog({
             <Label htmlFor="skill-proficiency">Proficiency *</Label>
             <Select
               value={formData.proficiency}
-              onValueChange={(value) =>
+              onValueChange={(value: string) =>
                 setFormData({ ...formData, proficiency: value })
               }
             >

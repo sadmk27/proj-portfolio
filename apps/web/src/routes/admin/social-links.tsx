@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   SocialLinkFormDialog,
   SocialLinkDeleteDialog,
-} from "@/components/admin/social-link-dialogs";
+} from "@/components/admin/dialogs/social-link-dialogs";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import type { SelectSocialLink as SocialLink } from "@portfolio/database";
@@ -17,6 +17,22 @@ export const Route = createFileRoute("/admin/social-links")({
     return { links: (res.data || []) as SocialLink[] };
   },
   component: SocialLinksPage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Social Links"
+        description="Manage your social media links."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error
+            ? error.message
+            : "Failed to load social links"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function SocialLinksPage() {

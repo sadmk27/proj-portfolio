@@ -69,7 +69,7 @@ export function StatsCard() {
       <CardContent className="px-6 pb-6 pt-0 flex flex-col items-center justify-center h-[calc(100%-40px)]">
         <GitHubCalendar
           username={githubUsername}
-          transformData={(data) => selectLastMonths(data, 7)}
+          transformData={(data: Activity[]) => selectLastMonths(data, 7)}
           theme={calendarTheme}
           colorScheme={resolvedTheme as "light" | "dark"}
           fontSize={11}

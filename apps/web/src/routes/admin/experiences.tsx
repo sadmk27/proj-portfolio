@@ -5,7 +5,7 @@ import { useState } from "react";
 import {
   ExperienceFormDialog,
   ExperienceDeleteDialog,
-} from "@/components/admin/experience-dialogs";
+} from "@/components/admin/dialogs/experience-dialogs";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminDataTable } from "@/components/admin/admin-data-table";
 import type { SelectExperience as Experience } from "@portfolio/database";
@@ -30,6 +30,22 @@ export const Route = createFileRoute("/admin/experiences")({
     }
   },
   component: ExperiencesPage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Experiences"
+        description="Manage your work experiences."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error
+            ? error.message
+            : "Failed to load experiences"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function ExperiencesPage() {

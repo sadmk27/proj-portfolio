@@ -41,13 +41,18 @@ export function AboutForm({ about }: { about: About | null }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!about) return;
+    if (!about) {
+      return;
+    }
     setLoading(true);
     try {
       const res = await updateAbout({ data: { id: about.id, ...formData } });
       if (res.success) {
         toast.success("Profile updated successfully");
-        router.invalidate();
+        // Navigate to the same route to trigger loader re-run
+        router.invalidate().then(() => {
+          router.navigate({ to: "/admin/profile" });
+        });
       } else {
         toast.error(res.error || "Failed to update profile");
       }

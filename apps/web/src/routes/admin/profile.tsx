@@ -10,6 +10,20 @@ export const Route = createFileRoute("/admin/profile")({
     return { about: res.data || null };
   },
   component: ProfilePage,
+  errorComponent: ({ error }) => (
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="Profile"
+        description="Manage your personal information displayed on the portfolio."
+      />
+      <div className="border rounded-xl bg-card p-6 text-red-600">
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "Failed to load profile"}
+        </p>
+      </div>
+    </div>
+  ),
 });
 
 function ProfilePage() {
