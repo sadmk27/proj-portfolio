@@ -5,6 +5,24 @@
     "backToHome": "Back to Home",
     "refresh": "Refresh"
   },
+  "login": {
+    "success": "Logged in succesfuly",
+    "title": "Log in to admin panel",
+    "description": "Enter your email and password to access the admin panel.",
+    "email": "Email",
+    "password": "Password"
+  },
+  "admin": {
+    "header": "Admin Panel",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "skills": "Skills",
+    "experiences": "Experiences",
+    "educations": "Education",
+    "socialLinks": "Social Links",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
   "table": {
     "filterSkills": "Filter skills...",
     "viewColumns": "View Columns",

@@ -21,6 +21,6 @@ export const projectByIdQueryOptions = (id: number) =>
       if (!res.success || !res.data) {
         throw new Error(res.error || "Failed to fetch project");
       }
-      return res.data[0];
+      return res.data;
     },
   });

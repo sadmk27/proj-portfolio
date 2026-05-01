@@ -5,6 +5,24 @@
     "backToHome": "Wróć do strony głównej",
     "refresh": "Odśwież"
   },
+  "login": {
+    "success": "zalogowano pomyślnie",
+    "title": "Zaloguj się do panelu admina",
+    "description": "Wpisz swój email oraz hasło, aby uzyskać dostęp do panelu admina.",
+    "email": "Email",
+    "password": "Hasło"
+  },
+  "admin": {
+    "header": "Panel Admina",
+    "dashboard": "Pulpit",
+    "projects": "Projekty",
+    "skills": "Umiejętności",
+    "experiences": "Doświadczenie",
+    "educations": "Edukacja",
+    "socialLinks": "Linki społecznościowe",
+    "profile": "Profil",
+    "logout": "Wyloguj się"
+  },
   "table": {
     "filterSkills": "Filtruj umiejętności...",
     "viewColumns": "Widok kolumn",

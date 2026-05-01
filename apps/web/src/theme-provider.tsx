@@ -1,3 +1,4 @@
+import { type PropsWithChildren } from "react";
 import {
   ThemeProvider as NextThemesProvider,
   type ThemeProviderProps,
@@ -9,6 +10,9 @@ export { themeValidator };
 
 export { getTheme, setTheme } from "./server/theme";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+export function ThemeProvider({
+  children,
+  ...props
+}: PropsWithChildren<ThemeProviderProps>) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }

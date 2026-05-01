@@ -91,7 +91,9 @@ export function ToggleColumnsMenu<TData>({
                 key={column.id}
                 className="capitalize"
                 checked={column.getIsVisible()}
-                onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                onCheckedChange={(value: boolean) =>
+                  column.toggleVisibility(!!value)
+                }
               >
                 {column.id}
               </DropdownMenuCheckboxItem>
@@ -218,7 +220,7 @@ export function SkillsTable<TData, TValue>({
             <p className="text-sm font-medium">{t("table.rowsPerPage")}</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
-              onValueChange={(value) => {
+              onValueChange={(value: string) => {
                 table.setPageSize(Number(value));
               }}
             >

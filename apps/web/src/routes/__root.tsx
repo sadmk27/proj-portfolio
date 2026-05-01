@@ -11,19 +11,24 @@ import { useTranslation, I18nextProvider } from "react-i18next";
 import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
-import { Navbar } from "@/views/components/navbar/navbar";
-import { Footer } from "@/views/components/footer/footer";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
+import { getSession } from "@/server/lib/auth.functions";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   i18n: i18n;
+  session: Awaited<ReturnType<typeof getSession>>;
 }>()({
-  beforeLoad: async () => ({
-    theme: await getTheme(),
-  }),
+  beforeLoad: async () => {
+    const [theme, session] = await Promise.all([getTheme(), getSession()]);
+
+    return {
+      theme,
+      session,
+    };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -61,11 +66,16 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
-  const { theme, queryClient, i18n: i18nInstance } = Route.useRouteContext();
+  const {
+    theme,
+    queryClient,
+    i18n: i18nInstance,
+    session,
+  } = Route.useRouteContext();
 
   return (
     <I18nextProvider i18n={i18nInstance}>
-      <RootInner theme={theme} queryClient={queryClient} />
+      <RootInner theme={theme} queryClient={queryClient} session={session} />
     </I18nextProvider>
   );
 }
@@ -76,6 +86,7 @@ function RootInner({
 }: {
   theme: Theme;
   queryClient: QueryClient;
+  session: Awaited<ReturnType<typeof getSession>>;
 }) {
   const { i18n } = useTranslation();
   useSmoothScroll();
@@ -99,11 +110,9 @@ function RootInner({
           <ThemeProvider attribute="class" defaultTheme={theme} enableSystem>
             <TooltipProvider>
               <div className="relative flex min-h-screen flex-col">
-                <Navbar />
                 <div className="flex-1">
                   <Outlet />
                 </div>
-                <Footer />
               </div>
             </TooltipProvider>
           </ThemeProvider>
