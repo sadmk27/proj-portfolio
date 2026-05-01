@@ -17,6 +17,10 @@
     "dashboard": "Dashboard",
     "projects": "Projects",
     "skills": "Skills",
+    "experiences": "Experiences",
+    "educations": "Education",
+    "socialLinks": "Social Links",
+    "profile": "Profile",
     "logout": "Logout"
   },
   "table": {

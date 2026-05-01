@@ -17,6 +17,10 @@
     "dashboard": "Pulpit",
     "projects": "Projekty",
     "skills": "Umiejętności",
+    "experiences": "Doświadczenie",
+    "educations": "Edukacja",
+    "socialLinks": "Linki społecznościowe",
+    "profile": "Profil",
     "logout": "Wyloguj się"
   },
   "table": {

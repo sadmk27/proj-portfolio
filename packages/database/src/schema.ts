@@ -119,16 +119,33 @@ export const social_links = pgTable("social_links", {
   icon: text("icon").notNull(),
 });
 
+import { z } from "zod";
+
 // Zod Schemas for Validation
 export const insertAboutSchema = createInsertSchema(about);
-export const selectAboutSchema = createSelectSchema(about);
+export const selectAboutSchema = createSelectSchema(about).extend({
+  interests: z.array(z.string()),
+});
+export type SelectAbout = z.infer<typeof selectAboutSchema>;
+
 export const insertProjectSchema = createInsertSchema(projects);
 export const selectProjectSchema = createSelectSchema(projects);
+export type SelectProject = z.infer<typeof selectProjectSchema>;
+
 export const insertSkillSchema = createInsertSchema(skills);
 export const selectSkillSchema = createSelectSchema(skills);
+export type SelectSkill = z.infer<typeof selectSkillSchema>;
+
 export const insertExperienceSchema = createInsertSchema(experiences);
-export const selectExperienceSchema = createSelectSchema(experiences);
+export const selectExperienceSchema = createSelectSchema(experiences).extend({
+  skills: z.array(z.string()),
+});
+export type SelectExperience = z.infer<typeof selectExperienceSchema>;
+
 export const insertSocialLinkSchema = createInsertSchema(social_links);
 export const selectSocialLinkSchema = createSelectSchema(social_links);
+export type SelectSocialLink = z.infer<typeof selectSocialLinkSchema>;
+
 export const insertEducationSchema = createInsertSchema(educations);
 export const selectEducationSchema = createSelectSchema(educations);
+export type SelectEducation = z.infer<typeof selectEducationSchema>;
