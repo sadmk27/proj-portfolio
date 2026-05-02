@@ -18,19 +18,19 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto h-16 px-4 flex items-center justify-between md:grid md:grid-cols-3">
+      <div className="container mx-auto h-16 px-4 flex items-center justify-between gap-4 md:gap-8">
         {/* Left Section: Branding */}
-        <div className="flex justify-start">
+        <div className="flex justify-start flex-shrink-0">
           <NavLogo />
         </div>
 
         {/* Center Section: Navigation (Desktop only) */}
-        <div className="hidden md:flex justify-center">
+        <div className="hidden md:flex justify-center flex-1 min-w-0">
           <NavLinks />
         </div>
 
         {/* Right Section: Actions (Desktop only) or Burger (Mobile only) */}
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center justify-end gap-3 flex-shrink-0">
           {/* Desktop Actions */}
           <div className="hidden md:flex">
             <NavActions />
