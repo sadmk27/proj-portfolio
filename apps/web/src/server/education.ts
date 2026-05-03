@@ -5,29 +5,24 @@ import {
   educationInputSchema,
   educationUpdateSchema,
 } from "@portfolio/validation";
+import { withErrorHandling } from "./lib/errors";
+import { ERROR_MESSAGES } from "./lib/errorMessages";
 
-export const getEducations = createServerFn({ method: "GET" }).handler(
-  async () => {
-    try {
+export const getEducations = createServerFn({ method: "GET" }).handler(() =>
+  withErrorHandling(
+    async () => {
       const educationData = await db.select().from(educations);
-      return { success: true as const, data: educationData };
-    } catch (err) {
-      if (err instanceof Error) {
-        return {
-          success: false as const,
-          error: "Failed to fetch educations",
-          details: err.message,
-        };
-      }
-      return { success: false as const, error: "Failed to fetch educations" };
-    }
-  },
+      return educationData;
+    },
+    ERROR_MESSAGES.EDUCATION.FETCH_FAILED,
+    500,
+  ),
 );
 
 export const createEducation = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => educationInputSchema.parse(data))
-  .handler(async ({ data }) => {
-    try {
+  .handler(({ data }) => {
+    withErrorHandling(async () => {
       const inserted = await db
         .insert(educations)
         .values({
@@ -42,16 +37,14 @@ export const createEducation = createServerFn({ method: "POST" })
           projectId: data.projectId || null,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
-    } catch {
-      return { success: false as const, error: "Failed to create education" };
-    }
+      return inserted[0];
+    }, ERROR_MESSAGES.EDUCATION.CREATE_FAILED);
   });
 
 export const updateEducation = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => educationUpdateSchema.parse(data))
-  .handler(async ({ data }) => {
-    try {
+  .inputValidator(({ data }) => educationUpdateSchema.parse(data))
+  .handler(({ data }) => {
+    withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(educations)
@@ -63,10 +56,8 @@ export const updateEducation = createServerFn({ method: "POST" })
         })
         .where(eq(educations.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
-    } catch {
-      return { success: false as const, error: "Failed to update education" };
-    }
+      return updated[0];
+    }, ERROR_MESSAGES.EDUCATION.UPDATE_FAILED);
   });
 
 export const deleteEducation = createServerFn({ method: "POST" })
@@ -74,11 +65,9 @@ export const deleteEducation = createServerFn({ method: "POST" })
     if (typeof id !== "number") throw new Error("Invalid id");
     return id;
   })
-  .handler(async ({ data: id }) => {
-    try {
+  .handler(({ data: id }) => {
+    withErrorHandling(async () => {
       await db.delete(educations).where(eq(educations.id, id));
-      return { success: true as const };
-    } catch {
-      return { success: false as const, error: "Failed to delete education" };
-    }
+      return null;
+    }, ERROR_MESSAGES.EDUCATION.DELETE_FAILED);
   });

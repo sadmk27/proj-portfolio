@@ -2,27 +2,24 @@ import { createServerFn } from "@tanstack/react-start";
 import { db, about } from "@portfolio/database";
 import { eq } from "drizzle-orm";
 import { aboutUpdateSchema } from "@portfolio/validation";
+import { withErrorHandling } from "./lib/errors";
+import { ERROR_MESSAGES } from "./lib/errorMessages";
 
-export const getAbout = createServerFn({ method: "GET" }).handler(async () => {
-  try {
-    const aboutData = await db.select().from(about).limit(1);
-    return { success: true as const, data: aboutData[0] || null };
-  } catch (err) {
-    if (err instanceof Error) {
-      return {
-        success: false as const,
-        error: "Failed to fetch about",
-        details: err.message,
-      };
-    }
-    return { success: false as const, error: "Failed to fetch about" };
-  }
-});
+export const getAbout = createServerFn({ method: "GET" }).handler(() =>
+  withErrorHandling(
+    async () => {
+      const aboutData = await db.select().from(about).limit(1);
+      return aboutData[0] || null;
+    },
+    ERROR_MESSAGES.ABOUT.FETCH_FAILED,
+    500,
+  ),
+);
 
 export const updateAbout = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => aboutUpdateSchema.parse(data))
-  .handler(async ({ data }) => {
-    try {
+  .handler(({ data }) =>
+    withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(about)
@@ -32,8 +29,6 @@ export const updateAbout = createServerFn({ method: "POST" })
         })
         .where(eq(about.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
-    } catch {
-      return { success: false as const, error: "Failed to update profile" };
-    }
-  });
+      return updated[0];
+    }, ERROR_MESSAGES.ABOUT.UPDATE_FAILED),
+  );
