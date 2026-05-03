@@ -62,6 +62,8 @@ async function seed() {
         "A passionate developer building high-performance web applications.",
       imageUrl: "https://placehold.co/600x400/242424/ffffff?text=Profile+Image",
       interests: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -73,24 +75,32 @@ async function seed() {
       category: "Frontend",
       icon_name: "react",
       proficiency: "Expert",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "TypeScript",
       category: "Languages",
       icon_name: "typescript",
       proficiency: "Advanced",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "Node.js",
       category: "Backend",
       icon_name: "nodejs",
       proficiency: "Intermediate",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "PostgreSQL",
       category: "Database",
       icon_name: "postgresql",
       proficiency: "Intermediate",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -104,6 +114,8 @@ async function seed() {
       url: "https://github.com/yourhandle/portfolio",
       imageUrl:
         "https://placehold.co/600x400/242424/ffffff?text=Portfolio+Project",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -117,6 +129,8 @@ async function seed() {
       start_date: "2023-01-01",
       end_date: "Present",
       skills: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -134,6 +148,8 @@ async function seed() {
       gpa: "4.5",
       thesis: "Inżynieria Oprogramowania",
       projectId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -144,11 +160,15 @@ async function seed() {
       platform: "GitHub",
       url: "https://github.com/yourhandle",
       icon: "github",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/yourhandle",
       icon: "linkedin",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 

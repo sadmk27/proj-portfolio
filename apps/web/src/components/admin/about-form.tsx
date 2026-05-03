@@ -49,7 +49,6 @@ export function AboutForm({ about }: { about: About | null }) {
       const res = await updateAbout({ data: { id: about.id, ...formData } });
       if (res.success) {
         toast.success("Profile updated successfully");
-        // Navigate to the same route to trigger loader re-run
         router.invalidate().then(() => {
           router.navigate({ to: "/admin/profile" });
         });
