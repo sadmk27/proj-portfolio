@@ -14,6 +14,7 @@ import { t, type i18n } from "i18next";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
+import BackgroundParallax from "@/lib/background-parallax";
 import { getSession } from "@/server/lib/auth.functions";
 
 export const Route = createRootRouteWithContext<{
@@ -89,7 +90,17 @@ function RootInner({
   session: Awaited<ReturnType<typeof getSession>>;
 }) {
   const { i18n } = useTranslation();
-  useSmoothScroll();
+  useSmoothScroll({
+    autoRaf: false,
+    autoToggle: true,
+    anchors: false,
+    allowNestedScroll: true,
+    naiveDimensions: true,
+    stopInertiaOnNavigate: true,
+    lerp: 0.5,
+    duration: 1.5,
+    smoothWheel: true,
+  });
 
   return (
     <html
@@ -109,9 +120,12 @@ function RootInner({
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class" defaultTheme={theme} enableSystem>
             <TooltipProvider>
-              <div className="relative flex min-h-screen flex-col">
-                <div className="flex-1">
-                  <Outlet />
+              <div className="relative min-h-screen">
+                <BackgroundParallax />
+                <div className="relative z-10 flex min-h-screen flex-col">
+                  <div className="flex-1">
+                    <Outlet />
+                  </div>
                 </div>
               </div>
             </TooltipProvider>

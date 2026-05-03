@@ -51,7 +51,7 @@ export function HomeView() {
     : experiences.slice(0, 2);
   const displayedEducations = expanded.education
     ? educations
-    : educations.slice(0, 2);
+    : educations.slice(0, 3);
 
   return (
     <div className="flex-1 w-full flex flex-col items-center select-none pb-20">
@@ -205,7 +205,7 @@ export function HomeView() {
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("education.header")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-12">
           {displayedEducations.map((education) => (
             <div key={education.id} className="animate-in fade-in duration-500">
               <EducationCard
@@ -222,7 +222,7 @@ export function HomeView() {
             </div>
           ))}
         </div>
-        {educations.length > 2 && (
+        {educations.length > 3 && (
           <div className="flex justify-center">
             <Button
               variant="outline"
@@ -248,7 +248,7 @@ export function HomeView() {
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
           {t("contact.header")}
         </h2>
-        <div className="w-full max-w-2xl backdrop-blur-sm transition-all flex items-center justify-center">
+        <div className="w-full max-w-2xl transition-all flex items-center justify-center">
           <ContactForm />
         </div>
       </section>
