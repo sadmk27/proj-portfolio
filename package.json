@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@tanstack/react-form-start": "^1.28.6",
-    "assets": "^3.0.1",
     "dotenv": "^17.3.1",
     "react-github-calendar": "^5.0.6"
   },

@@ -28,5 +28,3 @@ export function getAssetUrl(name: string) {
 export function getBackgroundUrl(name: string) {
   return getAssetUrl(name);
 }
-
-export * from "./assets";
