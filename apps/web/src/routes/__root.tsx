@@ -91,7 +91,13 @@ function RootInner({
 }) {
   const { i18n } = useTranslation();
   useSmoothScroll({
-    lerp: 0.1,
+    autoRaf: false,
+    autoToggle: true,
+    anchors: false,
+    allowNestedScroll: true,
+    naiveDimensions: true,
+    stopInertiaOnNavigate: true,
+    lerp: 0.5,
     duration: 1.5,
     smoothWheel: true,
   });

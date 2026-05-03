@@ -7,12 +7,12 @@ class LenisProvider {
   private refCount = 0;
 
   private defaultOptions: LenisOptions = {
-    duration: 1.5,
-    lerp: 0.05,
+    duration: 2.5,
+    lerp: 0.025,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     syncTouch: false,
-    touchMultiplier: 2,
-    wheelMultiplier: 1.1,
+    touchMultiplier: 1.5,
+    wheelMultiplier: 0.8,
     smoothWheel: true,
     infinite: false,
   };
