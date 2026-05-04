@@ -22,9 +22,10 @@ export type Skills = {
   category: string;
   icon_name: string;
   proficiency: string;
+  expanded_description: string;
 };
 
-export const proficiencyToNumber = (proficiency: string) => {
+export const proficiencyToNumber = (proficiency: string): number => {
   switch (proficiency) {
     case "Beginner":
       return 25;

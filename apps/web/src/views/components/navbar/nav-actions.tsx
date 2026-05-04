@@ -29,7 +29,7 @@ export function NavActions({
         >
           <Avatar className="h-8 w-8">
             <AvatarImage src={t("personal.avatar")} />
-            <AvatarFallback>SA</AvatarFallback>
+            <AvatarFallback>{t("common.avatar")}</AvatarFallback>
           </Avatar>
           <div
             className={cn(

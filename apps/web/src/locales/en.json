@@ -53,13 +53,13 @@
   "about": {
     "header": "About me",
     "noImage": "No image available",
-    "Desc-title": "My description",
-    "Interests-title": "Personal interests",
+    "descTitle": "My description",
+    "interestsTitle": "Personal interests",
     "loading": "Loading...",
     "noDescription": "No description available.",
     "noInterests": "No interests available.",
     "imageAlt": "Profile",
-    "stats-title": "GitHub Contributions"
+    "statsTitle": "GitHub Contributions"
   },
   "skills": {
     "header": "Skills",
@@ -68,6 +68,7 @@
     "iconName": "Icon Name",
     "proficiency": "Proficiency",
     "level": "Level",
+    "masteryLevel": "Mastery Level",
     "actions": {
       "openMenu": "Open menu",
       "showUsage": "Show",
@@ -92,7 +93,9 @@
     "showMore": "Show More",
     "showLess": "Show Less",
     "navigation": "Navigation",
-    "settings": "Settings"
+    "settings": "Settings",
+    "openMenu": "Open menu",
+    "avatar": "SA"
   },
   "contact": {
     "header": "Contact",

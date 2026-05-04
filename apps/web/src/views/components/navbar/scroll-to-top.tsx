@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
-export const ScrollToTop = () => {
+export function ScrollToTop() {
   const { isVisible, scrollToTop } = useScrollToTop();
 
   return (
@@ -16,4 +16,4 @@ export const ScrollToTop = () => {
       </Button>
     )
   );
-};
+}

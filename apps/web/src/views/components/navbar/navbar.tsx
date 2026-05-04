@@ -7,9 +7,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { NavLogo } from "./nav-logo";
-import { NavLinks } from "./nav-links";
-import { NavActions } from "./nav-actions";
+import { NavLogo } from "@/views/components/navbar/nav-logo";
+import { NavLinks } from "@/views/components/navbar/nav-links";
+import { NavActions } from "@/views/components/navbar/nav-actions";
 import { useState } from "react";
 
 export function Navbar() {
@@ -42,7 +42,7 @@ export function Navbar() {
               <SheetTrigger asChild>
                 <button
                   className="p-2 hover:bg-accent rounded-md transition-colors"
-                  aria-label="Open menu"
+                  aria-label={t("common.openMenu")}
                 >
                   <Menu className="h-6 w-6" />
                 </button>

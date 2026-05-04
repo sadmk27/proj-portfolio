@@ -53,13 +53,13 @@
   "about": {
     "header": "O mnie",
     "noImage": "Brak obrazu",
-    "Desc-title": "Mój opis",
-    "Interests-title": "Osobiste zainteresowania",
+    "descTitle": "Mój opis",
+    "interestsTitle": "Osobiste zainteresowania",
     "loading": "Ładowanie...",
     "noDescription": "Brak opisu.",
     "noInterests": "Brak zainteresowań.",
     "imageAlt": "Zdjęcie profilowe",
-    "stats-title": "Statystyki GitHub"
+    "statsTitle": "Statystyki GitHub"
   },
   "skills": {
     "header": "Umiejętności",
@@ -68,6 +68,7 @@
     "iconName": "Ikona",
     "proficiency": "Zaawansowanie",
     "level": "Poziom",
+    "masteryLevel": "Poziom opanowania",
     "actions": {
       "openMenu": "Otwórz menu",
       "showUsage": "Pokaż",
@@ -92,7 +93,9 @@
     "showMore": "Pokaż więcej",
     "showLess": "Pokaż mniej",
     "navigation": "Nawigacja",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "openMenu": "Otwórz menu",
+    "avatar": "SA"
   },
   "contact": {
     "header": "Kontakt",

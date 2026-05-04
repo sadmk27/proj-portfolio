@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function ExperienceCardSkeleton({ key }: { key: number }) {
+export function ExperienceCardSkeleton() {
   return (
-    <Card key={key} className="h-[300px] relative overflow-hidden">
+    <Card className="h-[300px] relative overflow-hidden">
       <div className="absolute left-0 top-0 h-full w-2 bg-muted" />
       <CardHeader className="px-8 pt-10 pb-4">
         <Skeleton className="h-8 w-1/2 mb-2" />

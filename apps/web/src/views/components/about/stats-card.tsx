@@ -49,7 +49,7 @@ export function StatsCard() {
     return (
       <Card className="h-full overflow-hidden border-2 transition-colors">
         <CardHeader>
-          <CardTitle>{t("about.stats-title")}</CardTitle>
+          <CardTitle>{t("about.statsTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="p-6 pt-0 animate-pulse">
           <div className="h-[120px] w-full bg-muted rounded-md" />
@@ -63,7 +63,7 @@ export function StatsCard() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <GithubIcon className="h-5 w-5 text-primary" />
-          {t("about.stats-title")}
+          {t("about.statsTitle")}
         </CardTitle>
       </CardHeader>
       <CardContent className="px-6 pb-6 pt-0 flex flex-col items-center justify-center h-[calc(100%-40px)]">

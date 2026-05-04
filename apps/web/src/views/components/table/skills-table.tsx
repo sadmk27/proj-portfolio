@@ -1,21 +1,19 @@
 import { useTranslation } from "react-i18next";
-import type {
-  Column,
-  ColumnDef,
-  ColumnFiltersState,
-  ExpandedState,
-  SortingState,
-  Table,
-  VisibilityState,
-} from "@tanstack/react-table";
 import {
+  type Column,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type ExpandedState,
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  type SortingState,
+  type Table,
   useReactTable,
+  type VisibilityState,
 } from "@tanstack/react-table";
 import {
   Table as TableUI,
@@ -51,7 +49,7 @@ import {
   ChevronsRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SkillDetailView } from "./skill-detail-view";
+import { SkillDetailView } from "@/views/components/table/skill-detail-view";
 import { lenisProvider } from "@/lenis-provider";
 
 interface SkillsTableProps<TData, TValue> {

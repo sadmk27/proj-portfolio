@@ -7,7 +7,6 @@ export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactFormSchema.parse(data))
   .handler(() =>
     withErrorHandling(async () => {
-      console.log("New contact message received.");
       return { message: "Message sent successfully!" };
     }, ERROR_MESSAGES.CONTACT.SUBMIT_FAILED),
   );

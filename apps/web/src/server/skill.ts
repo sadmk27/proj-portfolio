@@ -27,6 +27,7 @@ export const createSkill = createServerFn({ method: "POST" })
           category: data.category,
           icon_name: data.icon_name,
           proficiency: data.proficiency,
+          expanded_description: data.expanded_description,
         })
         .returning();
       return inserted[0];

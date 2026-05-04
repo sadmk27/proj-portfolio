@@ -1,12 +1,10 @@
-import { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import {
   ThemeProvider as NextThemesProvider,
   type ThemeProviderProps,
 } from "next-themes";
 
-import { themeValidator } from "./theme-schema";
-export type { Theme } from "./theme-schema";
-export { themeValidator };
+export { themeValidator, type Theme } from "./theme-schema";
 
 export { getTheme, setTheme } from "./server/theme";
 

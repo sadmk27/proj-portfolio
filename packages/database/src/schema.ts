@@ -90,6 +90,7 @@ export const skills = pgTable("skills", {
   category: text("category").notNull(),
   icon_name: text("icon_name").notNull(),
   proficiency: text("proficiency").notNull(),
+  expanded_description: text("expanded_description").notNull().default(""),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

@@ -5,8 +5,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
 import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";

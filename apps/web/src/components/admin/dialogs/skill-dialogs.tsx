@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -53,6 +54,7 @@ export function SkillFormDialog({
     category: skill?.category || "",
     icon_name: skill?.icon_name || "",
     proficiency: skill?.proficiency || "",
+    expanded_description: skill?.expanded_description || "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -163,6 +165,24 @@ export function SkillFormDialog({
                 ))}
               </SelectContent>
             </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="skill-expanded-description">
+              Expanded Description *
+            </Label>
+            <Textarea
+              id="skill-expanded-description"
+              value={formData.expanded_description}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  expanded_description: e.target.value,
+                })
+              }
+              placeholder="Describe where this skill is used and what proficiency means."
+              rows={5}
+              required
+            />
           </div>
           <DialogFooter>
             <Button

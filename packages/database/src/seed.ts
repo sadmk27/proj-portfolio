@@ -75,6 +75,8 @@ async function seed() {
       category: "Frontend",
       icon_name: "react",
       proficiency: "Expert",
+      expanded_description:
+        "Expertise in React involves deep understanding of its core principles, including component-based architecture, state management, hooks, and the virtual DOM. Proficiency in React enables the development of dynamic and responsive user interfaces, efficient rendering, and seamless integration with backend services.",
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -83,6 +85,8 @@ async function seed() {
       category: "Languages",
       icon_name: "typescript",
       proficiency: "Advanced",
+      expanded_description:
+        "Advanced proficiency in TypeScript includes a strong grasp of its type system, including interfaces, generics, and advanced types. It also involves experience with TypeScript's tooling, such as tsconfig configuration, and the ability to effectively use TypeScript in large codebases to improve code quality and maintainability.",
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -91,6 +95,8 @@ async function seed() {
       category: "Backend",
       icon_name: "nodejs",
       proficiency: "Intermediate",
+      expanded_description:
+        "Intermediate proficiency in Node.js includes a solid understanding of its event-driven architecture, asynchronous programming model, and core modules. It also involves experience with popular frameworks like Express.js, and the ability to build RESTful APIs, handle database interactions, and manage server-side logic effectively.",
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -99,6 +105,8 @@ async function seed() {
       category: "Database",
       icon_name: "postgresql",
       proficiency: "Intermediate",
+      expanded_description:
+        "Intermediate proficiency in PostgreSQL includes a good understanding of relational database concepts, SQL querying, and database design principles. It also involves experience with advanced features like indexing, transactions, and stored procedures, as well as the ability to optimize queries and manage database performance effectively.",
       createdAt: new Date(),
       updatedAt: new Date(),
     },

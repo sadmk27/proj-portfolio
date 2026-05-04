@@ -21,6 +21,10 @@ export function ExperienceCard({
   skills = [],
 }: ExperienceCardProps) {
   const { t } = useTranslation();
+  const descriptionPoints = description
+    .split("\n")
+    .filter((point) => point.trim() !== "");
+
   return (
     <Card className="relative flex flex-col h-full w-full max-w-full overflow-hidden border-border/40 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md shadow-sm">
       <div className="absolute left-0 top-0 h-full w-2 bg-primary/40" />
@@ -47,23 +51,20 @@ export function ExperienceCard({
       <CardContent className="flex-grow px-8 pb-10 relative z-10">
         {description.length > 0 ? (
           <ul className="space-y-4">
-            {description
-              .split("\n")
-              .filter((p) => p.trim() !== "")
-              .map((point, index) => (
-                <li
-                  key={index}
-                  className="flex gap-4 text-sm md:text-base text-muted-foreground/90 leading-relaxed font-normal"
-                >
-                  <div className="mt-1.5 flex-shrink-0">
-                    <ChevronRight
-                      className="w-4 h-4 text-primary/40"
-                      strokeWidth={3}
-                    />
-                  </div>
-                  <span>{point}</span>
-                </li>
-              ))}
+            {descriptionPoints.map((point) => (
+              <li
+                key={point}
+                className="flex gap-4 text-sm md:text-base text-muted-foreground/90 leading-relaxed font-normal"
+              >
+                <div className="mt-1.5 flex-shrink-0">
+                  <ChevronRight
+                    className="w-4 h-4 text-primary/40"
+                    strokeWidth={3}
+                  />
+                </div>
+                <span>{point}</span>
+              </li>
+            ))}
           </ul>
         ) : (
           <p className="text-sm italic text-muted-foreground/60 py-4">

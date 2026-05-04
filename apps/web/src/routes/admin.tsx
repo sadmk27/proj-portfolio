@@ -1,7 +1,6 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
-import type { UserRole } from "@/server/lib/auth.types";
-import type { Session } from "@/server/lib/auth.types";
+import type { Session, UserRole } from "@/server/lib/auth.types";
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: async ({ location }) => {
