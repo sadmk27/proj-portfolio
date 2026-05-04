@@ -19,7 +19,7 @@ export const getSkills = createServerFn({ method: "GET" }).handler(() =>
 export const createSkill = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => skillInputSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(skills)
         .values({
@@ -29,21 +29,21 @@ export const createSkill = createServerFn({ method: "POST" })
           proficiency: data.proficiency,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
+      return inserted[0];
     }, ERROR_MESSAGES.SKILL.CREATE_FAILED);
   });
 
 export const updateSkill = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => skillUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(skills)
         .set(updateData)
         .where(eq(skills.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
+      return updated[0];
     }, ERROR_MESSAGES.SKILL.UPDATE_FAILED);
   });
 
@@ -53,8 +53,8 @@ export const deleteSkill = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       await db.delete(skills).where(eq(skills.id, id));
-      return { success: true as const };
+      return null;
     }, ERROR_MESSAGES.SKILL.DELETE_FAILED);
   });

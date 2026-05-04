@@ -26,7 +26,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useState, Fragment } from "react";
+import { useEffect, useState, Fragment, type SyntheticEvent } from "react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -52,6 +52,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SkillDetailView } from "./skill-detail-view";
+import { lenisProvider } from "@/lenis-provider";
 
 interface SkillsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -91,6 +92,10 @@ export function ToggleColumnsMenu<TData>({
                 key={column.id}
                 className="capitalize"
                 checked={column.getIsVisible()}
+                onSelect={(event: SyntheticEvent) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }}
                 onCheckedChange={(value: boolean) =>
                   column.toggleVisibility(!!value)
                 }
@@ -135,21 +140,27 @@ export function SkillsTable<TData, TValue>({
     },
   });
 
+  const { pageIndex, pageSize } = table.getState().pagination;
+
+  useEffect(() => {
+    lenisProvider.update();
+  }, [columnVisibility, expanded, pageIndex, pageSize]);
+
   return (
     <div className="w-full space-y-4">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <Input
           placeholder={t("table.filterSkills")}
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
         <ToggleColumnsMenu table={table} />
       </div>
       <div className="rounded-xl border bg-card shadow-sm overflow-hidden">
-        <TableUI>
+        <TableUI className="min-w-[680px]">
           <TableHeader className="bg-muted/50">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="hover:bg-transparent">
@@ -157,7 +168,7 @@ export function SkillsTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className="font-semibold px-4 py-3"
+                      className="px-3 py-3 font-semibold sm:px-4"
                     >
                       {header.isPlaceholder
                         ? null
@@ -184,7 +195,7 @@ export function SkillsTable<TData, TValue>({
                     onClick={() => row.toggleExpanded()}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="px-4 py-2">
+                      <TableCell key={cell.id} className="px-3 py-2 sm:px-4">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),
@@ -208,19 +219,20 @@ export function SkillsTable<TData, TValue>({
           </TableBody>
         </TableUI>
       </div>
-      <div className="flex items-center justify-between px-2">
-        <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex flex-col gap-3 px-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-sm text-muted-foreground">
           {t("table.showingRows", {
             count: table.getRowModel().rows.length,
             total: table.getFilteredRowModel().rows.length,
           })}
         </div>
-        <div className="flex items-center space-x-6 lg:space-x-8">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-3 sm:justify-end lg:gap-6">
+          <div className="flex items-center gap-2">
             <p className="text-sm font-medium">{t("table.rowsPerPage")}</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value: string) => {
+                setExpanded({});
                 table.setPageSize(Number(value));
               }}
             >
@@ -244,7 +256,7 @@ export function SkillsTable<TData, TValue>({
               total: table.getPageCount(),
             })}
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"

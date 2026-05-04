@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { ProjectCard } from "@/views/components/cards/project-card";
@@ -16,6 +16,7 @@ import { ScrollToTop } from "@/views/components/navbar/scroll-to-top";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { aboutQueryOptions } from "@/queries/about/aboutQueries";
 import { AboutSection } from "@/views/components/about/about-section";
+import { lenisProvider } from "@/lenis-provider";
 
 export function HomeView() {
   const { t } = useTranslation();
@@ -44,6 +45,10 @@ export function HomeView() {
   const toggleExpanded = (section: keyof typeof expanded) => {
     setExpanded((prev) => ({ ...prev, [section]: !prev[section] }));
   };
+
+  useEffect(() => {
+    lenisProvider.update();
+  }, [expanded]);
 
   const displayedProjects = expanded.projects ? projects : projects.slice(0, 3);
   const displayedExperiences = expanded.experience

@@ -3,9 +3,9 @@ export function createQueryFn<T>(
 ): () => Promise<T> {
   return async () => {
     const res = await serverFn();
-    if (!res.success || !res.data) {
+    if (!res.success) {
       throw new Error(res.error || "Failed to fetch data");
     }
-    return res.data;
+    return res.data as T;
   };
 }

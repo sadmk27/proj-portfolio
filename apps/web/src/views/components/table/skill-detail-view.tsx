@@ -18,12 +18,12 @@ export function SkillDetailView<TData>({ row }: { row: Row<TData> }) {
         colSpan={row.getVisibleCells().length}
         className="py-4 pt-0 whitespace-normal overflow-hidden"
       >
-        <div className="mx-4 md:mx-12 rounded-xl bg-background/50 border border-border/50 shadow-inner animate-in fade-in slide-in-from-top-2 duration-300">
-          <CardContent className="py-6">
+        <div className="mx-1 rounded-xl border border-border/50 bg-background/50 shadow-inner animate-in fade-in slide-in-from-top-2 duration-300 sm:mx-4 md:mx-12">
+          <CardContent className="p-4 sm:py-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
               <div className="space-y-4 min-w-0">
                 <CardHeader className="p-0 border-none">
-                  <CardTitle className="text-xl flex items-center gap-2">
+                  <CardTitle className="flex items-center gap-2 break-words text-lg sm:text-xl">
                     <span className="text-primary font-mono opacity-50">#</span>
                     {row.getValue("name") as string}
                   </CardTitle>
@@ -48,8 +48,8 @@ export function SkillDetailView<TData>({ row }: { row: Row<TData> }) {
               </div>
 
               <Field className="justify-center gap-4 min-w-0">
-                <div className="flex items-center justify-between gap-4">
-                  <FieldLabel className="text-sm font-semibold text-foreground whitespace-nowrap">
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+                  <FieldLabel className="text-sm font-semibold text-foreground">
                     Mastery Level
                   </FieldLabel>
                   <Badge variant="ghost" className="text-primary font-bold">

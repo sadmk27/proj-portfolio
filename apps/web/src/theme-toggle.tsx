@@ -1,23 +1,29 @@
-import { useRouter } from "@tanstack/react-router";
 import { Switch } from "@/components/ui/switch";
 import { setTheme, type Theme } from "./theme-provider";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const { setTheme: setNextTheme, resolvedTheme } = useTheme();
-  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const frameId = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 
   function handleToggle(checked: boolean) {
     const nextTheme: Theme = checked ? "dark" : "light";
     setNextTheme(nextTheme);
-    setTheme({ data: nextTheme }).then(() => {
-      router.invalidate();
-    });
+    setTheme({ data: nextTheme });
   }
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <div
@@ -36,6 +42,7 @@ export function ThemeToggle() {
       <Switch
         checked={isDark}
         onCheckedChange={handleToggle}
+        disabled={!mounted}
         aria-label="Toggle dark mode"
         size="sm"
       />

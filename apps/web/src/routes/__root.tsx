@@ -11,23 +11,21 @@ import { useTranslation, I18nextProvider } from "react-i18next";
 import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
+import { useMemo } from "react";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
 import BackgroundParallax from "@/lib/background-parallax";
-import { getSession } from "@/server/lib/auth.functions";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   i18n: i18n;
-  session: Awaited<ReturnType<typeof getSession>>;
 }>()({
   beforeLoad: async () => {
-    const [theme, session] = await Promise.all([getTheme(), getSession()]);
+    const theme = await getTheme();
 
     return {
       theme,
-      session,
     };
   },
   head: () => ({
@@ -67,16 +65,11 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
-  const {
-    theme,
-    queryClient,
-    i18n: i18nInstance,
-    session,
-  } = Route.useRouteContext();
+  const { theme, queryClient, i18n: i18nInstance } = Route.useRouteContext();
 
   return (
     <I18nextProvider i18n={i18nInstance}>
-      <RootInner theme={theme} queryClient={queryClient} session={session} />
+      <RootInner theme={theme} queryClient={queryClient} />
     </I18nextProvider>
   );
 }
@@ -87,20 +80,24 @@ function RootInner({
 }: {
   theme: Theme;
   queryClient: QueryClient;
-  session: Awaited<ReturnType<typeof getSession>>;
 }) {
   const { i18n } = useTranslation();
-  useSmoothScroll({
-    autoRaf: false,
-    autoToggle: true,
-    anchors: false,
-    allowNestedScroll: true,
-    naiveDimensions: true,
-    stopInertiaOnNavigate: true,
-    lerp: 0.5,
-    duration: 1.5,
-    smoothWheel: true,
-  });
+  const smoothScrollOptions = useMemo(
+    () => ({
+      autoRaf: false,
+      autoToggle: true,
+      anchors: false,
+      allowNestedScroll: true,
+      naiveDimensions: true,
+      stopInertiaOnNavigate: true,
+      lerp: 0.25,
+      duration: 0.5,
+      smoothWheel: true,
+    }),
+    [],
+  );
+
+  useSmoothScroll(smoothScrollOptions);
 
   return (
     <html

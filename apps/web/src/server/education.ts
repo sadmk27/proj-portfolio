@@ -22,7 +22,7 @@ export const getEducations = createServerFn({ method: "GET" }).handler(() =>
 export const createEducation = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => educationInputSchema.parse(data))
   .handler(({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(educations)
         .values({
@@ -42,9 +42,9 @@ export const createEducation = createServerFn({ method: "POST" })
   });
 
 export const updateEducation = createServerFn({ method: "POST" })
-  .inputValidator(({ data }) => educationUpdateSchema.parse(data))
+  .inputValidator((data: unknown) => educationUpdateSchema.parse(data))
   .handler(({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(educations)
@@ -66,7 +66,7 @@ export const deleteEducation = createServerFn({ method: "POST" })
     return id;
   })
   .handler(({ data: id }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       await db.delete(educations).where(eq(educations.id, id));
       return null;
     }, ERROR_MESSAGES.EDUCATION.DELETE_FAILED);

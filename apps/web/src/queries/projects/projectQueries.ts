@@ -11,5 +11,5 @@ export const projectsQueryOptions = queryOptions({
 export const projectByIdQueryOptions = (id: number) =>
   queryOptions({
     queryKey: queryKeys.projects.detail(id),
-    queryFn: createQueryFn(() => getProjectById({ data: id })),
+    queryFn: createQueryFn(async () => getProjectById({ data: id })),
   });

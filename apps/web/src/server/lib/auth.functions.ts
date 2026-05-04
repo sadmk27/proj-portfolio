@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeaders } from "@tanstack/react-start/server";
 import { auth } from "./auth";
+import type { UserRole } from "./auth.types";
 
 export const getSession = createServerFn({ method: "GET" }).handler(
   async () => {
@@ -29,7 +30,7 @@ export const ensureAdminSession = createServerFn({ method: "GET" }).handler(
     const headers = getRequestHeaders();
     const session = await auth.api.getSession({ headers });
 
-    if (!session || session.user.role !== "admin") {
+    if (!session || session.user.role !== ("ADMIN" as UserRole)) {
       throw new Error("Unauthorized: Admin access required");
     }
 

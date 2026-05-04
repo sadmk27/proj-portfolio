@@ -52,7 +52,7 @@ const HeaderTranslation = ({
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="-ml-4"
+        className="-ml-3 sm:-ml-4"
       >
         {t(translationKey)}
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -69,7 +69,7 @@ const ProficiencyCellTranslation = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <div className="w-full max-w-[160px] space-y-1.5">
+    <div className="w-full min-w-[140px] max-w-[160px] space-y-1.5">
       <div className="flex items-center justify-between text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
         <span>{t("skills.level")}</span>
         <span>{proficiency}</span>
@@ -165,11 +165,11 @@ export const columns: ColumnDef<Skills>[] = [
     cell: ({ row }) => {
       const iconName = row.getValue("icon_name") as string;
       return (
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-[140px] items-center gap-3">
           <div className="flex size-8 items-center justify-center rounded-lg bg-muted/50 transition-colors group-hover:bg-primary/10">
             <i className={`devicon-${iconName}-plain colored text-xl`}></i>
           </div>
-          <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+          <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors truncate">
             {iconName}
           </span>
         </div>

@@ -22,7 +22,7 @@ export const getSocialLinks = createServerFn({ method: "GET" }).handler(() =>
 export const createSocialLink = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => socialLinkInputSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(social_links)
         .values({
@@ -31,21 +31,21 @@ export const createSocialLink = createServerFn({ method: "POST" })
           icon: data.icon,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
+      return inserted[0];
     }, ERROR_MESSAGES.SOCIAL_LINK.CREATE_FAILED);
   });
 
 export const updateSocialLink = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => socialLinkUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(social_links)
         .set(updateData)
         .where(eq(social_links.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
+      return updated[0];
     }, ERROR_MESSAGES.SOCIAL_LINK.UPDATE_FAILED);
   });
 
@@ -55,8 +55,8 @@ export const deleteSocialLink = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       await db.delete(social_links).where(eq(social_links.id, id));
-      return { success: true as const };
+      return null;
     }, ERROR_MESSAGES.SOCIAL_LINK.DELETE_FAILED);
   });

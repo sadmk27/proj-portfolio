@@ -3,7 +3,10 @@ import Lenis, { type LenisOptions } from "lenis";
 class LenisProvider {
   private lenis: Lenis | null = null;
   private rafId: number | null = null;
-  private observer: MutationObserver | null = null;
+  private resizeRafId: number | null = null;
+  private handleWindowResize = (): void => {
+    this.update();
+  };
   private refCount = 0;
 
   private defaultOptions: LenisOptions = {
@@ -42,16 +45,20 @@ class LenisProvider {
 
     this.rafId = requestAnimationFrame(animate);
 
-    this.observer = new MutationObserver(() => {
-      this.update();
+    window.addEventListener("resize", this.handleWindowResize, {
+      passive: true,
     });
-    this.observer.observe(document.body, { childList: true, subtree: true });
   }
 
   public update(): void {
-    if (this.lenis) {
-      this.lenis.resize();
+    if (!this.lenis || this.resizeRafId !== null) {
+      return;
     }
+
+    this.resizeRafId = requestAnimationFrame(() => {
+      this.resizeRafId = null;
+      this.lenis?.resize();
+    });
   }
 
   public destroy(): void {
@@ -66,10 +73,12 @@ class LenisProvider {
       this.rafId = null;
     }
 
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = null;
+    if (this.resizeRafId !== null) {
+      cancelAnimationFrame(this.resizeRafId);
+      this.resizeRafId = null;
     }
+
+    window.removeEventListener("resize", this.handleWindowResize);
 
     if (this.lenis) {
       this.lenis.destroy();

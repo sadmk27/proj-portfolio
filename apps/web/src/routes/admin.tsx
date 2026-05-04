@@ -1,11 +1,15 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import type { UserRole } from "@/server/lib/auth.types";
+import type { Session } from "@/server/lib/auth.types";
 
 export const Route = createFileRoute("/admin")({
-  beforeLoad: async ({ location, context }) => {
-    const session = context.session;
+  beforeLoad: async ({ location }) => {
+    const session: Session | null = await fetch("/api/auth/session").then(
+      (res) => res.json(),
+    );
 
-    if (!session || session.user.role !== "admin") {
+    if (!session || session.user.role !== ("ADMIN" as UserRole)) {
       throw redirect({
         to: "/admin/login",
         search: {

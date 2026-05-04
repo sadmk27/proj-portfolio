@@ -19,13 +19,13 @@ export const getProjects = createServerFn({ method: "GET" }).handler(() =>
 export const getProjectById = createServerFn({ method: "GET" })
   .inputValidator((id: number) => id)
   .handler(async ({ data: id }) => {
-    withErrorHandling(
+    return withErrorHandling(
       async () => {
         const projectData = await db
           .select()
           .from(projects)
           .where(eq(projects.id, id));
-        return { success: true as const, data: projectData[0] };
+        return projectData[0] || null;
       },
       ERROR_MESSAGES.PROJECT.FETCH_FAILED,
       500,
@@ -35,7 +35,7 @@ export const getProjectById = createServerFn({ method: "GET" })
 export const createProject = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => projectInputSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(projects)
         .values({
@@ -45,14 +45,14 @@ export const createProject = createServerFn({ method: "POST" })
           imageUrl: data.imageUrl || null,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
+      return inserted[0];
     }, ERROR_MESSAGES.PROJECT.CREATE_FAILED);
   });
 
 export const updateProject = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => projectUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(projects)
@@ -64,7 +64,7 @@ export const updateProject = createServerFn({ method: "POST" })
         })
         .where(eq(projects.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
+      return updated[0];
     }, ERROR_MESSAGES.PROJECT.UPDATE_FAILED);
   });
 
@@ -74,8 +74,8 @@ export const deleteProject = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    withErrorHandling(async () => {
+    return withErrorHandling(async () => {
       await db.delete(projects).where(eq(projects.id, id));
-      return { success: true as const };
+      return null;
     }, ERROR_MESSAGES.PROJECT.DELETE_FAILED);
   });

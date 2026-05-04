@@ -12,7 +12,7 @@ const BackgroundParallax: React.FC = () => {
       const scrollY = window.scrollY;
       const parallaxOffset = -scrollY * 0.3; // Adjust multiplier for parallax intensity
 
-      backgroundRef.current.style.top = `${parallaxOffset}px`;
+      backgroundRef.current.style.transform = `translate3d(0, ${parallaxOffset}px, 0)`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -28,8 +28,8 @@ const BackgroundParallax: React.FC = () => {
           backgroundImage: `url(${deepSpaceUrl})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          willChange: "top",
-          top: 0,
+          willChange: "transform",
+          transform: "translate3d(0, 0, 0)",
         }}
       />
     </div>
