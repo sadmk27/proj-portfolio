@@ -15,27 +15,25 @@ const i18nConfig = {
   resources,
   fallbackLng: "en",
   interpolation: {
-    escapeValue: false, // react already safes from xss
+    escapeValue: false,
   },
   detection: {
     order: ["cookie", "localStorage", "navigator"],
     caches: ["cookie"],
-    cookieMinutes: 10080, // 7 days
+    cookieMinutes: 10080,
     lookupCookie: "i18next",
   },
 };
 
-// Hook up react-i18next BEFORE any initialization
 i18n.use(initReactI18next);
 
-// Initialize for the client
 if (!i18n.isInitialized) {
   if (typeof window !== "undefined") {
     i18n.use(LanguageDetector).init(i18nConfig);
   } else {
-    // Initializing on server with minimal config to avoid Errors
     i18n.init({
       ...i18nConfig,
+      lng: "en",
       detection: undefined,
     });
   }
@@ -46,6 +44,7 @@ export async function initI18nServer(lang: string) {
   await i18nInstance.use(initReactI18next).init({
     ...i18nConfig,
     lng: lang,
+    detection: undefined,
   });
   return i18nInstance;
 }

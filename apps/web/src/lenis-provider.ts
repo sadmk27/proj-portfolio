@@ -24,12 +24,6 @@ class LenisProvider {
     this.refCount++;
 
     if (this.lenis) {
-      if (Object.keys(options).length > 0) {
-        console.warn(
-          "LenisProvider: init was called with options but an instance already exists. " +
-            "These options will be ignored to ensure consistent behavior across the application.",
-        );
-      }
       return;
     }
 

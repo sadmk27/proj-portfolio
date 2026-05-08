@@ -6,6 +6,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   server: {
     port: 3000,
+    hmr: {
+      overlay: false,
+    },
+  },
+  resolve: {
+    dedupe: ["react", "react-dom", "react-i18next", "i18next"],
   },
   plugins: [
     tsConfigPaths({

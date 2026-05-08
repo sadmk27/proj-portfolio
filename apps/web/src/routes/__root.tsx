@@ -7,26 +7,20 @@ import {
 } from "@tanstack/react-router";
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
-import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
+import { type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
-import { useMemo } from "react";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
 import BackgroundParallax from "@/lib/background-parallax";
+import type { LenisOptions } from "lenis";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   i18n: i18n;
+  theme: Theme;
 }>()({
-  beforeLoad: async () => {
-    const theme = await getTheme();
-
-    return {
-      theme,
-    };
-  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -73,6 +67,18 @@ function RootComponent() {
   );
 }
 
+const LENIS_OPTIONS: LenisOptions = {
+  autoRaf: false,
+  autoToggle: true,
+  anchors: false,
+  allowNestedScroll: true,
+  naiveDimensions: true,
+  stopInertiaOnNavigate: true,
+  lerp: 0.25,
+  duration: 0.5,
+  smoothWheel: true,
+};
+
 function RootInner({
   theme,
   queryClient,
@@ -81,22 +87,8 @@ function RootInner({
   queryClient: QueryClient;
 }) {
   const { i18n } = useTranslation();
-  const smoothScrollOptions = useMemo(
-    () => ({
-      autoRaf: false,
-      autoToggle: true,
-      anchors: false,
-      allowNestedScroll: true,
-      naiveDimensions: true,
-      stopInertiaOnNavigate: true,
-      lerp: 0.25,
-      duration: 0.5,
-      smoothWheel: true,
-    }),
-    [],
-  );
 
-  useSmoothScroll(smoothScrollOptions);
+  useSmoothScroll(LENIS_OPTIONS);
 
   return (
     <html
@@ -114,7 +106,7 @@ function RootInner({
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider attribute="class" defaultTheme={theme} enableSystem>
+          <ThemeProvider attribute="class" defaultTheme={theme}>
             <TooltipProvider>
               <div className="relative min-h-screen">
                 <BackgroundParallax />

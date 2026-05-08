@@ -4,9 +4,14 @@ import {
 } from "@tanstack/react-start/server";
 import { initI18nServer } from "./lib/i18n";
 import { getRouter } from "./router";
+import { themeValidator } from "./theme-schema";
 
 export default createStartHandler(async (renderOptions) => {
   const cookie = renderOptions.request.headers.get("cookie") || "";
+
+  const themeCookie = cookie.match(/theme=([^;]+)/)?.[1];
+  const theme = themeValidator.catch("system").parse(themeCookie);
+
   const match = cookie.match(/i18next=([^;]+)/);
   const acceptLanguage =
     renderOptions.request.headers.get("accept-language") || "";
@@ -31,7 +36,7 @@ export default createStartHandler(async (renderOptions) => {
   }
 
   const i18n = await initI18nServer(lang);
-  const router = getRouter(i18n);
+  const router = getRouter({ i18n, theme });
 
   return defaultStreamHandler({
     ...renderOptions,

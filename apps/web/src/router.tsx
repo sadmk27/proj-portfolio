@@ -1,17 +1,19 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import { getQueryClient } from "./lib/query-client";
+import i18nGlobal from "./lib/i18n";
 import type { i18n } from "i18next";
-import defaultI18nInstance from "./lib/i18n";
+import type { Theme } from "./theme-provider";
 
-export function getRouter(i18n: i18n = defaultI18nInstance) {
+export function getRouter(context?: { i18n?: i18n; theme?: Theme }) {
   const queryClient = getQueryClient();
 
   const router = createTanStackRouter({
     routeTree,
     context: {
       queryClient,
-      i18n,
+      i18n: context?.i18n ?? i18nGlobal,
+      theme: context?.theme ?? "system",
     },
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
