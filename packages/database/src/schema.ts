@@ -70,6 +70,8 @@ export const about = pgTable("about", {
   description: text("description").notNull(),
   imageUrl: varchar("image_url", { length: 512 }),
   interests: text("interests").array().notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const projects = pgTable("projects", {
@@ -79,6 +81,7 @@ export const projects = pgTable("projects", {
   url: varchar("url", { length: 512 }),
   imageUrl: varchar("image_url", { length: 512 }),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const skills = pgTable("skills", {
@@ -87,6 +90,9 @@ export const skills = pgTable("skills", {
   category: text("category").notNull(),
   icon_name: text("icon_name").notNull(),
   proficiency: text("proficiency").notNull(),
+  expanded_description: text("expanded_description").notNull().default(""),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const experiences = pgTable("experiences", {
@@ -97,6 +103,8 @@ export const experiences = pgTable("experiences", {
   start_date: text("start_date").notNull(),
   end_date: text("end_date").notNull(),
   skills: text("skills").array().notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const educations = pgTable("educations", {
@@ -110,6 +118,8 @@ export const educations = pgTable("educations", {
   gpa: text("gpa"),
   thesis: text("thesis"),
   projectId: integer("project_id").references(() => projects.id),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const social_links = pgTable("social_links", {
@@ -117,6 +127,8 @@ export const social_links = pgTable("social_links", {
   platform: text("platform").notNull(),
   url: text("url").notNull(),
   icon: text("icon").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 import { z } from "zod";

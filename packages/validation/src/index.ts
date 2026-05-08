@@ -30,6 +30,7 @@ export const skillInputSchema = z.object({
   category: z.string().min(1, "Category is required"),
   icon_name: z.string().min(1, "Icon name is required"),
   proficiency: z.string().min(1, "Proficiency is required"),
+  expanded_description: z.string().min(1, "Expanded description is required"),
 });
 
 export const skillUpdateSchema = skillInputSchema.partial().extend({

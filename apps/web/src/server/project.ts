@@ -2,50 +2,40 @@ import { createServerFn } from "@tanstack/react-start";
 import { db, projects } from "@portfolio/database";
 import { eq } from "drizzle-orm";
 import { projectInputSchema, projectUpdateSchema } from "@portfolio/validation";
+import { withErrorHandling } from "./lib/errors";
+import { ERROR_MESSAGES } from "./lib/errorMessages";
 
-export const getProjects = createServerFn({ method: "GET" }).handler(
-  async () => {
-    try {
+export const getProjects = createServerFn({ method: "GET" }).handler(() =>
+  withErrorHandling(
+    async () => {
       const projectData = await db.select().from(projects);
-      return { success: true as const, data: projectData };
-    } catch (err) {
-      if (err instanceof Error) {
-        return {
-          success: false as const,
-          error: "Failed to fetch projects",
-          details: err.message,
-        };
-      }
-      return { success: false as const, error: "Failed to fetch projects" };
-    }
-  },
+      return projectData;
+    },
+    ERROR_MESSAGES.PROJECT.FETCH_FAILED,
+    500,
+  ),
 );
 
 export const getProjectById = createServerFn({ method: "GET" })
   .inputValidator((id: number) => id)
   .handler(async ({ data: id }) => {
-    try {
-      const projectData = await db
-        .select()
-        .from(projects)
-        .where(eq(projects.id, id));
-      return { success: true as const, data: projectData[0] };
-    } catch (err) {
-      if (err instanceof Error) {
-        return {
-          success: false as const,
-          error: "Failed to fetch project",
-          details: err.message,
-        };
-      }
-      return { success: false as const, error: "Failed to fetch project" };
-    }
+    return withErrorHandling(
+      async () => {
+        const projectData = await db
+          .select()
+          .from(projects)
+          .where(eq(projects.id, id));
+        return projectData[0] || null;
+      },
+      ERROR_MESSAGES.PROJECT.FETCH_FAILED,
+      500,
+    );
   });
 
 export const createProject = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => projectInputSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(projects)
         .values({
@@ -55,16 +45,14 @@ export const createProject = createServerFn({ method: "POST" })
           imageUrl: data.imageUrl || null,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
-    } catch {
-      return { success: false as const, error: "Failed to create project" };
-    }
+      return inserted[0];
+    }, ERROR_MESSAGES.PROJECT.CREATE_FAILED);
   });
 
 export const updateProject = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => projectUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(projects)
@@ -76,10 +64,8 @@ export const updateProject = createServerFn({ method: "POST" })
         })
         .where(eq(projects.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
-    } catch {
-      return { success: false as const, error: "Failed to update project" };
-    }
+      return updated[0];
+    }, ERROR_MESSAGES.PROJECT.UPDATE_FAILED);
   });
 
 export const deleteProject = createServerFn({ method: "POST" })
@@ -88,10 +74,8 @@ export const deleteProject = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    try {
+    return withErrorHandling(async () => {
       await db.delete(projects).where(eq(projects.id, id));
-      return { success: true as const };
-    } catch {
-      return { success: false as const, error: "Failed to delete project" };
-    }
+      return null;
+    }, ERROR_MESSAGES.PROJECT.DELETE_FAILED);
   });

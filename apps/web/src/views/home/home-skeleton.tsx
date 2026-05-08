@@ -1,11 +1,11 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { SkillsTableSkeleton } from "@/views/components/table/skills-table-skeleton";
-import { ProjectCardSkeleton } from "../components/cards/project-card-skeleton";
-import { ContactFormSkeleton } from "../components/contact-form/contact-form-skeleton";
-import { HeroSectionSkeleton } from "../components/hero/hero-section-skeleton";
-import { ExperienceCardSkeleton } from "../components/cards/experience-card-skeleton";
-import { EducationCardSkeleton } from "../components/cards/education-card-skeleton";
-import { AboutSectionSkeleton } from "../components/about/about-section-skeleton";
+import { ProjectCardSkeleton } from "@/views/components/cards/project-card-skeleton";
+import { ContactFormSkeleton } from "@/views/components/contact-form/contact-form-skeleton";
+import { HeroSectionSkeleton } from "@/views/components/hero/hero-section-skeleton";
+import { ExperienceCardSkeleton } from "@/views/components/cards/experience-card-skeleton";
+import { EducationCardSkeleton } from "@/views/components/cards/education-card-skeleton";
+import { AboutSectionSkeleton } from "@/views/components/about/about-section-skeleton";
 
 export function HomeSkeleton() {
   return (

@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { projectByIdQueryOptions } from "@/queries/projects/projectQueries";
 import { useQuery } from "@tanstack/react-query";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface EducationCardProps {
   institution: string;
@@ -49,10 +49,12 @@ export function EducationCard({
   thesis,
   projectId,
 }: EducationCardProps) {
+  const hasProject = typeof projectId === "number";
   const { data: project } = useQuery({
-    ...projectByIdQueryOptions(projectId!),
-    enabled: !!projectId,
+    ...projectByIdQueryOptions(projectId ?? 0),
+    enabled: hasProject,
   });
+  const { t } = useTranslation();
   return (
     <Card className="w-full max-w-sm h-full overflow-hidden relative flex flex-col">
       <CardHeader>
@@ -100,7 +102,7 @@ export function EducationCard({
             "{thesis}"
           </p>
         </div>
-        {projectId && (
+        {hasProject && (
           <Dialog>
             <DialogTrigger asChild>
               <div className="group relative mt-4 flex items-center gap-4 p-3 rounded-2xl border border-border/50 bg-muted/30 hover:bg-muted/50 hover:border-primary/30 transition-all duration-300 cursor-pointer overflow-hidden shadow-sm hover:shadow-md">

@@ -1,11 +1,13 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import type { UserRole } from "@/server/lib/auth.types";
+import { getSession } from "@/server/lib/auth.functions";
 
 export const Route = createFileRoute("/admin")({
-  beforeLoad: async ({ location, context }) => {
-    const session = context.session;
+  beforeLoad: async ({ location }) => {
+    const session = await getSession();
 
-    if (!session || session.user.role !== "admin") {
+    if (!session) {
       throw redirect({
         to: "/admin/login",
         search: {
@@ -13,6 +15,13 @@ export const Route = createFileRoute("/admin")({
         },
       });
     }
+
+    if (session.user.role !== ("ADMIN" as UserRole)) {
+      throw redirect({
+        to: "/admin/login",
+      });
+    }
+    return { session };
   },
   component: () => (
     <div className="flex h-screen overflow-hidden">

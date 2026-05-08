@@ -2,27 +2,24 @@ import { createServerFn } from "@tanstack/react-start";
 import { db, skills } from "@portfolio/database";
 import { eq } from "drizzle-orm";
 import { skillInputSchema, skillUpdateSchema } from "@portfolio/validation";
+import { withErrorHandling } from "./lib/errors";
+import { ERROR_MESSAGES } from "./lib/errorMessages";
 
-export const getSkills = createServerFn({ method: "GET" }).handler(async () => {
-  try {
-    const skillData = await db.select().from(skills);
-    return { success: true as const, data: skillData };
-  } catch (err) {
-    if (err instanceof Error) {
-      return {
-        success: false as const,
-        error: "Failed to fetch skills",
-        details: err.message,
-      };
-    }
-    return { success: false as const, error: "Failed to fetch skills" };
-  }
-});
+export const getSkills = createServerFn({ method: "GET" }).handler(() =>
+  withErrorHandling(
+    async () => {
+      const skillData = await db.select().from(skills);
+      return skillData;
+    },
+    ERROR_MESSAGES.SKILL.FETCH_FAILED,
+    500,
+  ),
+);
 
 export const createSkill = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => skillInputSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(skills)
         .values({
@@ -30,28 +27,25 @@ export const createSkill = createServerFn({ method: "POST" })
           category: data.category,
           icon_name: data.icon_name,
           proficiency: data.proficiency,
+          expanded_description: data.expanded_description,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
-    } catch {
-      return { success: false as const, error: "Failed to create skill" };
-    }
+      return inserted[0];
+    }, ERROR_MESSAGES.SKILL.CREATE_FAILED);
   });
 
 export const updateSkill = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => skillUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(skills)
         .set(updateData)
         .where(eq(skills.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
-    } catch {
-      return { success: false as const, error: "Failed to update skill" };
-    }
+      return updated[0];
+    }, ERROR_MESSAGES.SKILL.UPDATE_FAILED);
   });
 
 export const deleteSkill = createServerFn({ method: "POST" })
@@ -60,10 +54,8 @@ export const deleteSkill = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    try {
+    return withErrorHandling(async () => {
       await db.delete(skills).where(eq(skills.id, id));
-      return { success: true as const };
-    } catch {
-      return { success: false as const, error: "Failed to delete skill" };
-    }
+      return null;
+    }, ERROR_MESSAGES.SKILL.DELETE_FAILED);
   });

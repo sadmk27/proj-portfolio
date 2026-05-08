@@ -13,7 +13,7 @@ export function DescriptionCard({ description }: DescriptionCardProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Quote className="h-5 w-5 text-primary" />
-          {t("about.Desc-title")}
+          {t("about.descTitle")}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6 pt-0">

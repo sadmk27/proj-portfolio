@@ -1,14 +1,20 @@
+const QUERY_KEYS = {
+  projects: ["projects"] as const,
+  about: ["about"] as const,
+  skills: ["skills"] as const,
+  experiences: ["experiences"] as const,
+  educations: ["educations"] as const,
+};
+
 export const queryKeys = {
-  portfolio: {
-    all: ["portfolio"] as const,
-    about: () => ["portfolio", "about"] as const,
-    educations: () => ["portfolio", "educations"] as const,
-    experiences: () => ["portfolio", "experiences"] as const,
-    skills: () => ["portfolio", "skills"] as const,
-  },
   projects: {
-    all: ["projects"] as const,
-    list: () => ["projects", "list"] as const,
-    detail: (id: number) => ["projects", "detail", id] as const,
+    list: () => QUERY_KEYS.projects,
+    detail: (id: number) => [...QUERY_KEYS.projects, id] as const,
+  },
+  portfolio: {
+    about: () => QUERY_KEYS.about,
+    skills: () => QUERY_KEYS.skills,
+    experiences: () => QUERY_KEYS.experiences,
+    educations: () => QUERY_KEYS.educations,
   },
 };

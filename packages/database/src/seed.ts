@@ -62,6 +62,8 @@ async function seed() {
         "A passionate developer building high-performance web applications.",
       imageUrl: "https://placehold.co/600x400/242424/ffffff?text=Profile+Image",
       interests: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -73,24 +75,40 @@ async function seed() {
       category: "Frontend",
       icon_name: "react",
       proficiency: "Expert",
+      expanded_description:
+        "Expertise in React involves deep understanding of its core principles, including component-based architecture, state management, hooks, and the virtual DOM. Proficiency in React enables the development of dynamic and responsive user interfaces, efficient rendering, and seamless integration with backend services.",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "TypeScript",
       category: "Languages",
       icon_name: "typescript",
       proficiency: "Advanced",
+      expanded_description:
+        "Advanced proficiency in TypeScript includes a strong grasp of its type system, including interfaces, generics, and advanced types. It also involves experience with TypeScript's tooling, such as tsconfig configuration, and the ability to effectively use TypeScript in large codebases to improve code quality and maintainability.",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "Node.js",
       category: "Backend",
       icon_name: "nodejs",
       proficiency: "Intermediate",
+      expanded_description:
+        "Intermediate proficiency in Node.js includes a solid understanding of its event-driven architecture, asynchronous programming model, and core modules. It also involves experience with popular frameworks like Express.js, and the ability to build RESTful APIs, handle database interactions, and manage server-side logic effectively.",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       name: "PostgreSQL",
       category: "Database",
       icon_name: "postgresql",
       proficiency: "Intermediate",
+      expanded_description:
+        "Intermediate proficiency in PostgreSQL includes a good understanding of relational database concepts, SQL querying, and database design principles. It also involves experience with advanced features like indexing, transactions, and stored procedures, as well as the ability to optimize queries and manage database performance effectively.",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -104,6 +122,8 @@ async function seed() {
       url: "https://github.com/yourhandle/portfolio",
       imageUrl:
         "https://placehold.co/600x400/242424/ffffff?text=Portfolio+Project",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -117,6 +137,8 @@ async function seed() {
       start_date: "2023-01-01",
       end_date: "Present",
       skills: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -134,6 +156,8 @@ async function seed() {
       gpa: "4.5",
       thesis: "Inżynieria Oprogramowania",
       projectId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 
@@ -144,11 +168,15 @@ async function seed() {
       platform: "GitHub",
       url: "https://github.com/yourhandle",
       icon: "github",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/yourhandle",
       icon: "linkedin",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 

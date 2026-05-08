@@ -5,29 +5,24 @@ import {
   socialLinkInputSchema,
   socialLinkUpdateSchema,
 } from "@portfolio/validation";
+import { withErrorHandling } from "./lib/errors";
+import { ERROR_MESSAGES } from "./lib/errorMessages";
 
-export const getSocialLinks = createServerFn({ method: "GET" }).handler(
-  async () => {
-    try {
+export const getSocialLinks = createServerFn({ method: "GET" }).handler(() =>
+  withErrorHandling(
+    async () => {
       const linkData = await db.select().from(social_links);
-      return { success: true as const, data: linkData };
-    } catch (err) {
-      if (err instanceof Error) {
-        return {
-          success: false as const,
-          error: "Failed to fetch social links",
-          details: err.message,
-        };
-      }
-      return { success: false as const, error: "Failed to fetch social links" };
-    }
-  },
+      return linkData;
+    },
+    ERROR_MESSAGES.SOCIAL_LINK.FETCH_FAILED,
+    500,
+  ),
 );
 
 export const createSocialLink = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => socialLinkInputSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const inserted = await db
         .insert(social_links)
         .values({
@@ -36,26 +31,22 @@ export const createSocialLink = createServerFn({ method: "POST" })
           icon: data.icon,
         })
         .returning();
-      return { success: true as const, data: inserted[0] };
-    } catch {
-      return { success: false as const, error: "Failed to create social link" };
-    }
+      return inserted[0];
+    }, ERROR_MESSAGES.SOCIAL_LINK.CREATE_FAILED);
   });
 
 export const updateSocialLink = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => socialLinkUpdateSchema.parse(data))
   .handler(async ({ data }) => {
-    try {
+    return withErrorHandling(async () => {
       const { id, ...updateData } = data;
       const updated = await db
         .update(social_links)
         .set(updateData)
         .where(eq(social_links.id, id))
         .returning();
-      return { success: true as const, data: updated[0] };
-    } catch {
-      return { success: false as const, error: "Failed to update social link" };
-    }
+      return updated[0];
+    }, ERROR_MESSAGES.SOCIAL_LINK.UPDATE_FAILED);
   });
 
 export const deleteSocialLink = createServerFn({ method: "POST" })
@@ -64,10 +55,8 @@ export const deleteSocialLink = createServerFn({ method: "POST" })
     return id;
   })
   .handler(async ({ data: id }) => {
-    try {
+    return withErrorHandling(async () => {
       await db.delete(social_links).where(eq(social_links.id, id));
-      return { success: true as const };
-    } catch {
-      return { success: false as const, error: "Failed to delete social link" };
-    }
+      return null;
+    }, ERROR_MESSAGES.SOCIAL_LINK.DELETE_FAILED);
   });

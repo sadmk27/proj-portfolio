@@ -5,31 +5,22 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
-import { getTheme, type Theme, ThemeProvider } from "../theme-provider";
+import { type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
 import BackgroundParallax from "@/lib/background-parallax";
-import { getSession } from "@/server/lib/auth.functions";
+import type { LenisOptions } from "lenis";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   i18n: i18n;
-  session: Awaited<ReturnType<typeof getSession>>;
+  theme: Theme;
 }>()({
-  beforeLoad: async () => {
-    const [theme, session] = await Promise.all([getTheme(), getSession()]);
-
-    return {
-      theme,
-      session,
-    };
-  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -67,19 +58,26 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
-  const {
-    theme,
-    queryClient,
-    i18n: i18nInstance,
-    session,
-  } = Route.useRouteContext();
+  const { theme, queryClient, i18n: i18nInstance } = Route.useRouteContext();
 
   return (
     <I18nextProvider i18n={i18nInstance}>
-      <RootInner theme={theme} queryClient={queryClient} session={session} />
+      <RootInner theme={theme} queryClient={queryClient} />
     </I18nextProvider>
   );
 }
+
+const LENIS_OPTIONS: LenisOptions = {
+  autoRaf: false,
+  autoToggle: true,
+  anchors: false,
+  allowNestedScroll: true,
+  naiveDimensions: true,
+  stopInertiaOnNavigate: true,
+  lerp: 0.25,
+  duration: 0.5,
+  smoothWheel: true,
+};
 
 function RootInner({
   theme,
@@ -87,20 +85,10 @@ function RootInner({
 }: {
   theme: Theme;
   queryClient: QueryClient;
-  session: Awaited<ReturnType<typeof getSession>>;
 }) {
   const { i18n } = useTranslation();
-  useSmoothScroll({
-    autoRaf: false,
-    autoToggle: true,
-    anchors: false,
-    allowNestedScroll: true,
-    naiveDimensions: true,
-    stopInertiaOnNavigate: true,
-    lerp: 0.5,
-    duration: 1.5,
-    smoothWheel: true,
-  });
+
+  useSmoothScroll(LENIS_OPTIONS);
 
   return (
     <html
@@ -118,7 +106,7 @@ function RootInner({
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider attribute="class" defaultTheme={theme} enableSystem>
+          <ThemeProvider attribute="class" defaultTheme={theme}>
             <TooltipProvider>
               <div className="relative min-h-screen">
                 <BackgroundParallax />

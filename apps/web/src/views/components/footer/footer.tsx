@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export const Footer = () => {
+export function Footer() {
   const { t } = useTranslation();
   return (
     <footer className="w-full">
@@ -48,4 +48,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+}

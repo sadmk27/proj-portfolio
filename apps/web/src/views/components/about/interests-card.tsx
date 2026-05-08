@@ -14,12 +14,12 @@ export function InterestsCard({ interests }: InterestsCardProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Heart className="h-5 w-5 text-primary" />
-          {t("about.Interests-title")}
+          {t("about.interestsTitle")}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2">
-        {interests.map((interest, index) => (
-          <Badge key={index} variant="secondary" className="gap-1 px-3 py-1">
+        {interests.map((interest) => (
+          <Badge key={interest} variant="secondary" className="gap-1 px-3 py-1">
             {interest}
           </Badge>
         ))}
