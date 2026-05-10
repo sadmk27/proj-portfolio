@@ -9,8 +9,10 @@ import {
   User,
   LogOut,
 } from "lucide-react";
-import { authClient } from "../../lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { useTranslation } from "react-i18next";
+import { UploadButton } from "@/lib/uploadthing";
+import "@uploadthing/react/styles.css";
 
 const adminNavRoutes = [
   {
@@ -89,6 +91,9 @@ export function AdminSidebar() {
           );
         })}
       </nav>
+      <div className="p-4 border-t">
+        <UploadButton endpoint="imageUploader" />
+      </div>
       <div className="p-4 border-t">
         <button
           className="flex items-center gap-3 px-4 py-2 w-full rounded-lg hover:bg-destructive/10 text-destructive transition-colors text-sm"

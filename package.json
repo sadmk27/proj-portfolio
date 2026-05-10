@@ -31,7 +31,9 @@
     "node": ">=18"
   },
   "dependencies": {
-    "dotenv": "^17.3.1"
+    "@uploadthing/react": "^7.3.3",
+    "dotenv": "^17.3.1",
+    "uploadthing": "^7.7.4"
   },
   "workspaces": [
     "apps/*",
