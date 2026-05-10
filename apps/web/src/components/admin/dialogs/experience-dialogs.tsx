@@ -145,10 +145,7 @@ export function ExperienceFormDialog({
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    skills: e.target.value
-                      .split(",")
-                      .map((s) => s.trim())
-                      .filter(Boolean),
+                    skills: e.target.value.split(",").map((s) => s.trim()),
                   }))
                 }
                 placeholder="e.g. React, TypeScript"

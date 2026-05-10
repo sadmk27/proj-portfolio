@@ -162,7 +162,9 @@ export function EducationFormDialog({
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    projectId: e.target.value ? Number(e.target.value) : null,
+                    projectId: e.target.value
+                      ? parseInt(e.target.value, 10)
+                      : null,
                   }))
                 }
               />
