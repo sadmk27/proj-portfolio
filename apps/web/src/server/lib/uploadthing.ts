@@ -14,14 +14,13 @@ export const uploadRouter = {
       maxFileCount: 1,
     },
   })
-    .middleware(async ({ req }) => {
-      const adminUser = await ensureAdminSession(req);
-
-      if (!adminUser) {
+    .middleware(async () => {
+      try {
+        const adminUser = await ensureAdminSession();
+        return { userId: adminUser.user.id };
+      } catch {
         throw new UploadThingError("Unauthorized");
       }
-
-      return { userId: adminUser.user.id };
     })
     .onUploadComplete(async ({ metadata }) => {
       return { uploadedBy: metadata.userId };
