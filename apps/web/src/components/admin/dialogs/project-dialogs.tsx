@@ -73,6 +73,9 @@ export function ProjectFormDialog({
     }
   };
 
+  const set = (key: string, val: string) =>
+    setFormData((prev) => ({ ...prev, [key]: val }));
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -85,9 +88,7 @@ export function ProjectFormDialog({
             <Input
               id="title"
               value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
+              onChange={(e) => set("title", e.target.value)}
               required
             />
           </div>
@@ -96,9 +97,7 @@ export function ProjectFormDialog({
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) =>
-                setFormData({ ...formData, description: e.target.value })
-              }
+              onChange={(e) => set("description", e.target.value)}
             />
           </div>
           <div className="space-y-2">
@@ -107,9 +106,7 @@ export function ProjectFormDialog({
               id="url"
               type="url"
               value={formData.url}
-              onChange={(e) =>
-                setFormData({ ...formData, url: e.target.value })
-              }
+              onChange={(e) => set("url", e.target.value)}
             />
           </div>
           <div className="space-y-2">
@@ -118,9 +115,7 @@ export function ProjectFormDialog({
               id="imageUrl"
               type="url"
               value={formData.imageUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, imageUrl: e.target.value })
-              }
+              onChange={(e) => set("imageUrl", e.target.value)}
             />
           </div>
           <DialogFooter>

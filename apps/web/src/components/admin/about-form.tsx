@@ -26,17 +26,23 @@ export function AboutForm({ about }: { about: About | null }) {
 
   const addInterest = () => {
     const trimmed = interestInput.trim();
-    if (trimmed && !formData.interests.includes(trimmed)) {
-      setFormData({ ...formData, interests: [...formData.interests, trimmed] });
+    if (trimmed) {
+      setFormData((prev) => {
+        if (prev.interests.includes(trimmed)) {
+          toast.error("Interest already added");
+          return prev;
+        }
+        return { ...prev, interests: [...prev.interests, trimmed] };
+      });
     }
     setInterestInput("");
   };
 
   const removeInterest = (interest: string) => {
-    setFormData({
-      ...formData,
-      interests: formData.interests.filter((i) => i !== interest),
-    });
+    setFormData((prev) => ({
+      ...prev,
+      interests: prev.interests.filter((i) => i !== interest),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,6 +76,9 @@ export function AboutForm({ about }: { about: About | null }) {
     );
   }
 
+  const set = (key: string, val: string) =>
+    setFormData((prev) => ({ ...prev, [key]: val }));
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       <div className="grid grid-cols-2 gap-4">
@@ -78,7 +87,7 @@ export function AboutForm({ about }: { about: About | null }) {
           <Input
             id="about-name"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={(e) => set("name", e.target.value)}
             required
           />
         </div>
@@ -87,7 +96,7 @@ export function AboutForm({ about }: { about: About | null }) {
           <Input
             id="about-role"
             value={formData.role}
-            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+            onChange={(e) => set("role", e.target.value)}
             required
           />
         </div>
@@ -97,9 +106,7 @@ export function AboutForm({ about }: { about: About | null }) {
         <Textarea
           id="about-desc"
           value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
+          onChange={(e) => set("description", e.target.value)}
           rows={5}
           required
         />
@@ -110,9 +117,7 @@ export function AboutForm({ about }: { about: About | null }) {
           id="about-image"
           type="url"
           value={formData.imageUrl}
-          onChange={(e) =>
-            setFormData({ ...formData, imageUrl: e.target.value })
-          }
+          onChange={(e) => set("imageUrl", e.target.value)}
           placeholder="https://..."
         />
       </div>

@@ -74,7 +74,7 @@ export function ExperienceFormDialog({
   };
 
   const set = (key: string, val: string) =>
-    setFormData({ ...formData, [key]: val });
+    setFormData((prev) => ({ ...prev, [key]: val }));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -141,8 +141,16 @@ export function ExperienceFormDialog({
               <Label htmlFor="exp-skills">Skills *</Label>
               <Input
                 id="exp-skills"
-                value={formData.skills}
-                onChange={(e) => set("skills", e.target.value)}
+                value={formData.skills.join(", ")}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    skills: e.target.value
+                      .split(",")
+                      .map((s) => s.trim())
+                      .filter(Boolean),
+                  }))
+                }
                 placeholder="e.g. React, TypeScript"
                 required
               />

@@ -64,6 +64,7 @@ function SkillsPage() {
       <AdminDataTable
         data={skills}
         columns={[
+          { header: "ID", accessor: "id" },
           { header: "Name", accessor: "name" },
           { header: "Category", accessor: "category" },
           { header: "Icon", accessor: "icon_name" },

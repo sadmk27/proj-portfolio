@@ -1,6 +1,6 @@
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
-import { useSearch } from "@tanstack/react-router";
+import { useSearch, useRouter } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
@@ -9,13 +9,14 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function LoginForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -33,9 +34,10 @@ export function LoginForm() {
         callbackURL,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success(t("login.success"));
-          window.location.href = callbackURL;
+          await router.invalidate();
+          router.navigate({ to: callbackURL });
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);

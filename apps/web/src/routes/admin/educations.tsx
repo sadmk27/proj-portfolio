@@ -64,6 +64,7 @@ function EducationsPage() {
       <AdminDataTable
         data={educations}
         columns={[
+          { header: "ID", accessor: "id" },
           { header: "Institution", accessor: "institution" },
           { header: "Degree", accessor: "degree" },
           { header: "Field", accessor: "field_of_study" },

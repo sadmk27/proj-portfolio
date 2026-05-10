@@ -8,11 +8,13 @@ import type { Theme } from "./theme-provider";
 export function getRouter(context?: { i18n?: i18n; theme?: Theme }) {
   const queryClient = getQueryClient();
 
+  const i18nInstance = context?.i18n ?? i18nGlobal;
+
   const router = createTanStackRouter({
     routeTree,
     context: {
       queryClient,
-      i18n: context?.i18n ?? i18nGlobal,
+      i18n: i18nInstance,
       theme: context?.theme ?? "system",
     },
     defaultPreload: "intent",

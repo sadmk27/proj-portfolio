@@ -95,6 +95,9 @@ export function SkillFormDialog({
     }
   };
 
+  const set = (key: string, val: string) =>
+    setFormData((prev) => ({ ...prev, [key]: val }));
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -107,9 +110,7 @@ export function SkillFormDialog({
             <Input
               id="skill-name"
               value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
+              onChange={(e) => set("name", e.target.value)}
               placeholder="e.g. React, TypeScript"
               required
             />
@@ -118,9 +119,7 @@ export function SkillFormDialog({
             <Label htmlFor="skill-category">Category *</Label>
             <Select
               value={formData.category}
-              onValueChange={(value: string) =>
-                setFormData({ ...formData, category: value })
-              }
+              onValueChange={(value: string) => set("category", value)}
             >
               <SelectTrigger id="skill-category" className="w-full">
                 <SelectValue placeholder="Select category" />
@@ -139,9 +138,7 @@ export function SkillFormDialog({
             <Input
               id="skill-icon"
               value={formData.icon_name}
-              onChange={(e) =>
-                setFormData({ ...formData, icon_name: e.target.value })
-              }
+              onChange={(e) => set("icon_name", e.target.value)}
               placeholder="e.g. SiReact, SiTypescript"
               required
             />
@@ -150,9 +147,7 @@ export function SkillFormDialog({
             <Label htmlFor="skill-proficiency">Proficiency *</Label>
             <Select
               value={formData.proficiency}
-              onValueChange={(value: string) =>
-                setFormData({ ...formData, proficiency: value })
-              }
+              onValueChange={(value: string) => set("proficiency", value)}
             >
               <SelectTrigger id="skill-proficiency" className="w-full">
                 <SelectValue placeholder="Select proficiency" />
@@ -173,12 +168,7 @@ export function SkillFormDialog({
             <Textarea
               id="skill-expanded-description"
               value={formData.expanded_description}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  expanded_description: e.target.value,
-                })
-              }
+              onChange={(e) => set("expanded_description", e.target.value)}
               placeholder="Describe where this skill is used and what proficiency means."
               rows={5}
               required

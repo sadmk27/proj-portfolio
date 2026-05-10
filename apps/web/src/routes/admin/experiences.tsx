@@ -80,12 +80,14 @@ function ExperiencesPage() {
       <AdminDataTable
         data={experiences}
         columns={[
+          { header: "ID", accessor: "id" },
           { header: "Company", accessor: "company" },
           { header: "Role", accessor: "role" },
           {
             header: "Period",
             accessor: (e) => `${e.start_date} – ${e.end_date}`,
           },
+          { header: "Description", accessor: "description" },
           { header: "Skills", accessor: (e) => e.skills.join(", ") || "-" },
         ]}
         onEdit={handleEdit}

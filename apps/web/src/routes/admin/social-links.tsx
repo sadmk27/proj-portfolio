@@ -67,6 +67,7 @@ function SocialLinksPage() {
       <AdminDataTable
         data={links}
         columns={[
+          { header: "ID", accessor: "id" },
           { header: "Platform", accessor: "platform" },
           {
             header: "URL",

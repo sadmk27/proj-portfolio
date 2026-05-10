@@ -73,7 +73,7 @@ export function EducationFormDialog({
   };
 
   const set = (key: string, val: string) =>
-    setFormData({ ...formData, [key]: val });
+    setFormData((prev) => ({ ...prev, [key]: val }));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -155,13 +155,26 @@ export function EducationFormDialog({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="edu-thesis">Thesis</Label>
+              <Label htmlFor="edu-project">Project ID</Label>
               <Input
-                id="edu-thesis"
-                value={formData.thesis}
-                onChange={(e) => set("thesis", e.target.value)}
+                id="edu-project"
+                value={formData.projectId || ""}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    projectId: e.target.value ? Number(e.target.value) : null,
+                  }))
+                }
               />
             </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="edu-thesis">Thesis</Label>
+            <Input
+              id="edu-thesis"
+              value={formData.thesis}
+              onChange={(e) => set("thesis", e.target.value)}
+            />
           </div>
           <DialogFooter>
             <Button
