@@ -64,6 +64,7 @@ function ProjectsPage() {
       <AdminDataTable
         data={projects}
         columns={[
+          { header: "ID", accessor: "id" },
           {
             header: "Image",
             accessor: (p) =>

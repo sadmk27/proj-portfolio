@@ -15,6 +15,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomeSkeleton } from "@/views/home/home-skeleton";
 import BackgroundParallax from "@/lib/background-parallax";
 import type { LenisOptions } from "lenis";
+import { Toaster } from "sonner";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -119,7 +120,7 @@ function RootInner({
             </TooltipProvider>
           </ThemeProvider>
         </QueryClientProvider>
-
+        <Toaster position="top-right" />
         <Scripts />
       </body>
     </html>

@@ -27,7 +27,7 @@ async function seed() {
       name: "Admin",
       email: "admin@portfolio.local",
       emailVerified: true,
-      role: "admin",
+      role: "ADMIN",
       banned: false,
       createdAt: new Date(),
       updatedAt: new Date(),
