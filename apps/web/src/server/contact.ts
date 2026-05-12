@@ -1,12 +1,24 @@
-import { createServerFn } from "@tanstack/react-start";
 import { contactFormSchema } from "@portfolio/validation";
-import { withErrorHandling } from "./lib/errors";
-import { ERROR_MESSAGES } from "./lib/errorMessages";
+import { createServerFn } from "@tanstack/react-start";
+import { Resend } from "resend";
 
-export const submitContact = createServerFn({ method: "POST" })
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const sendContactEmail = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactFormSchema.parse(data))
-  .handler(() =>
-    withErrorHandling(async () => {
-      return { message: "Message sent successfully!" };
-    }, ERROR_MESSAGES.CONTACT.SUBMIT_FAILED),
-  );
+  .handler(async ({ data }) => {
+    const { name, email, message } = data;
+
+    const { error } = await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
+      to: "szymon.adamkiewicz1@gmail.com",
+      replyTo: email,
+      subject: `New contact form submission from ${name}`,
+      text: message,
+      html: `<p>${message}</p><p>From: ${name} (${email})</p>`,
+    });
+
+    if (error) {
+      throw new Error("Failed to send email");
+    }
+  });

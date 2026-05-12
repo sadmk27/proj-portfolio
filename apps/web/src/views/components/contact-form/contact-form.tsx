@@ -25,9 +25,12 @@ import {
 } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { contactFormSchema } from "@portfolio/validation";
+import { useState } from "react";
+import { sendContactEmail } from "@/server/contact";
 
 export function ContactForm() {
   const { t } = useTranslation();
+  const [serverError, setServerError] = useState<string | null>(null);
   const fromSchema = contactFormSchema;
 
   const form = useForm({
@@ -40,26 +43,38 @@ export function ContactForm() {
       onChange: fromSchema,
     },
     onSubmit: async ({ value }) => {
-      toast(t("contact.success"), {
-        description: (
-          <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-            <code>{JSON.stringify(value, null, 2)}</code>
-          </pre>
-        ),
-        position: "bottom-right",
-        classNames: {
-          content: "flex flex-col gap-2",
-        },
-        style: {
-          "--border-radius": "calc(var(--radius) + 4px)",
-          "--background": "var(--background)",
-          "--foreground": "var(--foreground)",
-          "--border": "var(--border)",
-          "--ring": "var(--ring)",
-        } as React.CSSProperties,
-      });
+      setServerError(null);
+
+      try {
+        await sendContactEmail({ data: value });
+
+        toast(t("contact.success"), {
+          description: (
+            <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
+              <code>{JSON.stringify(value, null, 2)}</code>
+            </pre>
+          ),
+          position: "bottom-right",
+          classNames: {
+            content: "flex flex-col gap-2",
+          },
+          style: {
+            "--border-radius": "calc(var(--radius) + 4px)",
+            "--background": "var(--background)",
+            "--foreground": "var(--foreground)",
+            "--border": "var(--border)",
+            "--ring": "var(--ring)",
+          } as React.CSSProperties,
+        });
+
+        form.reset();
+      } catch {
+        setServerError(t("contact.error"));
+      }
     },
   });
+
+  const isSubmitting = form.state.isSubmitting;
 
   return (
     <Card className="w-full sm:max-w-md">
@@ -68,6 +83,12 @@ export function ContactForm() {
         <CardDescription>{t("contact.description")}</CardDescription>
       </CardHeader>
       <CardContent>
+        {serverError && (
+          <p role="alert" className="mb-4 text-sm text-destructive">
+            {serverError}
+          </p>
+        )}
+
         <form
           id="contact-form"
           onSubmit={(e) => {
@@ -176,7 +197,12 @@ export function ContactForm() {
           orientation="horizontal"
           className="flex items-center justify-center w-full"
         >
-          <Button type="submit" form="contact-form" className="w-1/2">
+          <Button
+            type="submit"
+            form="contact-form"
+            className="w-1/2"
+            disabled={isSubmitting}
+          >
             {t("contact.send")}
           </Button>
         </Field>
