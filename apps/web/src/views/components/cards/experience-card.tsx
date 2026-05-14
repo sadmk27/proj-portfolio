@@ -26,7 +26,7 @@ export function ExperienceCard({
     .filter((point) => point.trim() !== "");
 
   return (
-    <Card className="relative flex flex-col h-full w-full max-w-full overflow-hidden border-border/40 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-md shadow-sm">
+    <Card className="relative flex flex-col h-full w-full max-w-full overflow-hidden border-border/40 bg-card shadow-sm">
       <div className="absolute left-0 top-0 h-full w-2 bg-primary/40" />
 
       <CardHeader className="pb-4 px-8 pt-10 relative z-10">

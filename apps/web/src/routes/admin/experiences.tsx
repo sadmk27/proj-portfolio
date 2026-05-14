@@ -1,4 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  type ErrorComponentProps,
+} from "@tanstack/react-router";
 import { getExperiences } from "@/server/experience";
 import { getSkills } from "@/server/skill";
 import { useState } from "react";
@@ -30,7 +33,7 @@ export const Route = createFileRoute("/admin/experiences")({
     }
   },
   component: ExperiencesPage,
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <div className="space-y-6">
       <AdminPageHeader
         title="Experiences"

@@ -145,7 +145,7 @@ export function SkillsTable<TData, TValue>({
   }, [columnVisibility, expanded, pageIndex, pageSize]);
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 bg-card p-4 rounded-xl border shadow-sm">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <Input
           placeholder={t("table.filterSkills")}

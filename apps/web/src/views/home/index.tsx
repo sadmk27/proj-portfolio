@@ -17,6 +17,7 @@ import { useSuspenseQueries } from "@tanstack/react-query";
 import { aboutQueryOptions } from "@/queries/about/aboutQueries";
 import { AboutSection } from "@/views/components/about/about-section";
 import { lenisProvider } from "@/lenis-provider";
+import { SectionTitle } from "../components/headers/section-title";
 
 export function HomeView() {
   const { t } = useTranslation();
@@ -89,11 +90,9 @@ export function HomeView() {
 
       <section
         id="about"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("about.header")}
-        </h2>
+        <SectionTitle title={t("about.header")} />
         <AboutSection
           name={about.name}
           role={about.role}
@@ -106,12 +105,10 @@ export function HomeView() {
       {/* Projects Section */}
       <section
         id="projects"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("project.header")}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <SectionTitle title={t("project.header")} />
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
           {displayedProjects.map((project) => (
             <div key={project.id} className="animate-in fade-in duration-500">
               <ProjectCard
@@ -147,11 +144,9 @@ export function HomeView() {
       {/* Skills Section */}
       <section
         id="skills"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("skills.header")}
-        </h2>
+        <SectionTitle title={t("skills.header")} />
         <div className="w-full overflow-hidden">
           <SkillsTable columns={columns} data={skills} />
         </div>
@@ -160,11 +155,9 @@ export function HomeView() {
       {/* Experience Section */}
       <section
         id="experience"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("experience.header")}
-        </h2>
+        <SectionTitle title={t("experience.header")} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
           {displayedExperiences.map((experience) => (
             <div
@@ -205,11 +198,9 @@ export function HomeView() {
       {/* Education Section */}
       <section
         id="education"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("education.header")}
-        </h2>
+        <SectionTitle title={t("education.header")} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-12">
           {displayedEducations.map((education) => (
             <div key={education.id} className="animate-in fade-in duration-500">
@@ -248,12 +239,10 @@ export function HomeView() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="w-full max-w-6xl min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center py-12 px-4"
+        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
-        <h2 className="text-4xl font-extrabold tracking-tight lg:text-4xl mb-12 text-primary">
-          {t("contact.header")}
-        </h2>
-        <div className="w-full max-w-2xl transition-all flex items-center justify-center">
+        <SectionTitle title={t("contact.header")} />
+        <div className="w-full max-w-full transition-all flex items-center justify-center">
           <ContactForm />
         </div>
       </section>

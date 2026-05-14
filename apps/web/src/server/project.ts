@@ -54,14 +54,21 @@ export const updateProject = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     return withErrorHandling(async () => {
       const { id, ...updateData } = data;
+      const setData = {
+        ...updateData,
+        ...(updateData.description !== undefined
+          ? { description: updateData.description || null }
+          : {}),
+        ...(updateData.url !== undefined
+          ? { url: updateData.url || null }
+          : {}),
+        ...(updateData.imageUrl !== undefined
+          ? { imageUrl: updateData.imageUrl || null }
+          : {}),
+      };
       const updated = await db
         .update(projects)
-        .set({
-          ...updateData,
-          description: updateData.description || null,
-          url: updateData.url || null,
-          imageUrl: updateData.imageUrl || null,
-        })
+        .set(setData)
         .where(eq(projects.id, id))
         .returning();
       return updated[0];

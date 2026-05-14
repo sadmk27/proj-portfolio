@@ -1,4 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  type ErrorComponentProps,
+} from "@tanstack/react-router";
 import { getAbout } from "@/server/about";
 import { AboutForm } from "@/components/admin/about-form";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
@@ -10,7 +13,7 @@ export const Route = createFileRoute("/admin/profile")({
     return { about: res.data || null };
   },
   component: ProfilePage,
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <div className="space-y-6">
       <AdminPageHeader
         title="Profile"

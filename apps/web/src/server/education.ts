@@ -46,14 +46,21 @@ export const updateEducation = createServerFn({ method: "POST" })
   .handler(({ data }) => {
     return withErrorHandling(async () => {
       const { id, ...updateData } = data;
+      const setData = {
+        ...updateData,
+        ...(updateData.gpa !== undefined
+          ? { gpa: updateData.gpa || null }
+          : {}),
+        ...(updateData.thesis !== undefined
+          ? { thesis: updateData.thesis || null }
+          : {}),
+        ...(updateData.projectId !== undefined
+          ? { projectId: updateData.projectId }
+          : {}),
+      };
       const updated = await db
         .update(educations)
-        .set({
-          ...updateData,
-          gpa: updateData.gpa || null,
-          thesis: updateData.thesis || null,
-          projectId: updateData.projectId || null,
-        })
+        .set(setData)
         .where(eq(educations.id, id))
         .returning();
       return updated[0];

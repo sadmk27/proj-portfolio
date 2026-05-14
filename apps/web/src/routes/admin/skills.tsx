@@ -1,4 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  type ErrorComponentProps,
+} from "@tanstack/react-router";
 import { getSkills } from "@/server/skill";
 import { useState } from "react";
 import {
@@ -16,7 +19,7 @@ export const Route = createFileRoute("/admin/skills")({
     return { skills: (res.data || []) as Skill[] };
   },
   component: SkillsPage,
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <div className="space-y-6">
       <AdminPageHeader
         title="Skills"

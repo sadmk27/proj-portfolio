@@ -4,7 +4,8 @@ const imageModules =
   typeof window !== "undefined" || import.meta.env.SSR === false
     ? import.meta.glob("./images/*.{svg,png,jpg,jpeg,webp}", {
         eager: true,
-        as: "url",
+        query: "?url",
+        import: "default",
       })
     : {};
 
