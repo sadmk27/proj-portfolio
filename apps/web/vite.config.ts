@@ -10,6 +10,9 @@ export default defineConfig({
       overlay: false,
     },
   },
+  preview: {
+    allowedHosts: ["www.portfolio-sa-web.com"],
+  },
   resolve: {
     dedupe: ["react", "react-dom", "react-i18next", "i18next"],
   },
