@@ -37,7 +37,7 @@ export function NavLinks({
 
   if (orientation === "vertical") {
     return (
-      <nav className={cn("flex flex-col gap-4", className)}>
+      <nav className={cn("flex flex-col gap-2", className)}>
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -54,7 +54,7 @@ export function NavLinks({
 
   return (
     <NavigationMenu className={className}>
-      <NavigationMenuList>
+      <NavigationMenuList className="gap-1">
         {navLinks.map((link) => (
           <NavigationMenuItem key={link.href}>
             <NavigationMenuLink

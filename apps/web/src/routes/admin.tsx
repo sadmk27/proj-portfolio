@@ -1,4 +1,9 @@
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
+import {
+  Outlet,
+  createFileRoute,
+  redirect,
+  type ErrorComponentProps,
+} from "@tanstack/react-router";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import type { UserRole } from "@/server/lib/auth.types";
 import { getSession } from "@/server/lib/auth.functions";
@@ -31,7 +36,7 @@ export const Route = createFileRoute("/admin")({
       </main>
     </div>
   ),
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto p-8">

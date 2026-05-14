@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export { z };
+
 // ── Contact Form ──
 export const contactFormSchema = z.object({
   name: z.string().min(2, "Name is too short").max(50),

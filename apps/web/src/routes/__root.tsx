@@ -4,6 +4,7 @@ import {
   Outlet,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
@@ -33,7 +34,7 @@ export const Route = createRootRouteWithContext<{
 
   pendingComponent: HomeSkeleton,
 
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <div className="p-10 border-4 border-red-500 bg-red-50 text-red-900">
       <h1 className="text-2xl font-bold">{t("root.error")}</h1>
       <pre className="mt-4 p-2 bg-white rounded border text-xs overflow-auto">
