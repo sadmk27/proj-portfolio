@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run typecheck",
-    "start": "node dist/server/server.js",
+    "start": "PORT=$PORT node dist/server/server.js",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "npm run typecheck"
