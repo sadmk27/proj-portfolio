@@ -40,12 +40,14 @@ export const skillUpdateSchema = skillInputSchema.partial().extend({
 });
 
 // ── Experience Input Schemas ──
+const isoDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
 export const experienceInputSchema = z.object({
   company: z.string().min(1, "Company is required"),
   role: z.string().min(1, "Role is required"),
   description: z.string().min(1, "Description is required"),
-  start_date: z.string().min(1, "Start date is required"),
-  end_date: z.string().min(1, "End date is required"),
+  start_date: z.string().regex(isoDateRegex, "Start date must be YYYY-MM-DD"),
+  end_date: z.string().regex(isoDateRegex, "End date must be YYYY-MM-DD"),
   skills: z.array(z.string()).min(1, "At least one skill is required"),
 });
 
@@ -58,8 +60,8 @@ export const educationInputSchema = z.object({
   institution: z.string().min(1, "Institution is required"),
   degree: z.string().min(1, "Degree is required"),
   field_of_study: z.string().min(1, "Field of study is required"),
-  start_date: z.string().min(1, "Start date is required"),
-  end_date: z.string().min(1, "End date is required"),
+  start_date: z.string().regex(isoDateRegex, "Start date must be YYYY-MM-DD"),
+  end_date: z.string().regex(isoDateRegex, "End date must be YYYY-MM-DD"),
   description: z.string().min(1, "Description is required"),
   gpa: z.string().optional().or(z.literal("")),
   thesis: z.string().optional().or(z.literal("")),

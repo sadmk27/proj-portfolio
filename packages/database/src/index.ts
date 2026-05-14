@@ -1,13 +1,19 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import path from "node:path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import * as schema from "./schema";
 import * as dotenv from "dotenv";
 
-dotenv.config({ path: "../../.env" }); // Load shared env if not already loaded
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const connectionString =
   process.env.DATABASE_URL ||
-  "postgres://postgres:postgres@localhost:5432/portfolio";
+  "postgres://postgres:postgres@localhost:5433/portfolio";
 
 export const pool = new Pool({
   connectionString,

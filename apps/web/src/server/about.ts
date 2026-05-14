@@ -21,12 +21,15 @@ export const updateAbout = createServerFn({ method: "POST" })
   .handler(({ data }) =>
     withErrorHandling(async () => {
       const { id, ...updateData } = data;
+      const setData = {
+        ...updateData,
+        ...(updateData.imageUrl !== undefined
+          ? { imageUrl: updateData.imageUrl || null }
+          : {}),
+      };
       const updated = await db
         .update(about)
-        .set({
-          ...updateData,
-          imageUrl: updateData.imageUrl || null,
-        })
+        .set(setData)
         .where(eq(about.id, id))
         .returning();
       return updated[0];
