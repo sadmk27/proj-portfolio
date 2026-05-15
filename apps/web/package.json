@@ -7,7 +7,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "PORT=$PORT npx @tanstack/start preview",
-    "preview": "PORT=$PORT npx @tanstack/start preview",
+    "preview": "node dist/server/server.js",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "npm run typecheck"
