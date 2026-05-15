@@ -5,6 +5,8 @@ import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { admin } from "better-auth/plugins/admin";
 
 export const auth = betterAuth({
+  baseUrl: process.env.BETTER_AUTH_URL,
+  basePath: "/api/auth",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
