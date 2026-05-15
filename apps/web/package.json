@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && npm run typecheck",
-    "start": "PORT=$PORT node dist/server/server.js",
-    "preview": "vite preview --host 0.0.0.0 --port $PORT",
+    "build": "vite build",
+    "start": "PORT=$PORT npx @tanstack/start preview",
+    "preview": "PORT=$PORT npx @tanstack/start preview",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "npm run typecheck"
