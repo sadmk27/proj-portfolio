@@ -4,6 +4,6 @@ import { queryKeys } from "@/queries/queryKeys";
 import { createQueryFn } from "@/queries/lib/queryHelpers";
 
 export const socialLinkQueryOptions = queryOptions({
-  queryKey: queryKeys.portfolio.socialLink(),
+  queryKey: queryKeys.portfolio.socialLinks(),
   queryFn: createQueryFn(getSocialLinks),
 });

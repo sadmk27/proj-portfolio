@@ -17,6 +17,6 @@ export const queryKeys = {
     skills: () => QUERY_KEYS.skills,
     experiences: () => QUERY_KEYS.experiences,
     educations: () => QUERY_KEYS.educations,
-    socialLink: () => QUERY_KEYS.socialLinks,
+    socialLinks: () => QUERY_KEYS.socialLinks,
   },
 };

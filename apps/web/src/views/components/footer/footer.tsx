@@ -33,24 +33,23 @@ export function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          {socialLinks?.map((link) => (
-            <a
-              href={link.url}
-              key={link.id}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              {link.platform === "GitHub" && <GithubIcon className="h-6 w-6" />}
-              {link.platform === "LinkedIn" && (
-                <LinkedinIcon className="h-6 w-6" />
-              )}
-              {link.platform === "Facebook" && (
-                <FacebookIcon className="h-6 w-6" />
-              )}
-              {link.platform === "Instagram" && (
-                <InstagramIcon className="h-6 w-6" />
-              )}
-            </a>
-          ))}
+          {socialLinks?.map((link) => {
+            const Icon = {
+              github: GithubIcon,
+              linkedin: LinkedinIcon,
+              facebook: FacebookIcon,
+              instagram: InstagramIcon,
+            }[link.platform.toLowerCase()];
+            return Icon ? (
+              <a
+                href={link.url}
+                key={link.id}
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Icon className="h-6 w-6" />
+              </a>
+            ) : null;
+          })}
         </div>
       </div>
     </footer>
