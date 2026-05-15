@@ -146,6 +146,6 @@
     "avatar": "https://github.com/shadcn.png"
   },
   "footer": {
-    "description": "Made with ❤️ for better web."
+    "description": "Copyright ©{{year}} Szymon Adamkiewicz. All rights reserved."
   }
 }

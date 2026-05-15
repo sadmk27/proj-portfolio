@@ -4,6 +4,7 @@ const QUERY_KEYS = {
   skills: ["skills"] as const,
   experiences: ["experiences"] as const,
   educations: ["educations"] as const,
+  socialLinks: ["social-links"] as const,
 };
 
 export const queryKeys = {
@@ -16,5 +17,6 @@ export const queryKeys = {
     skills: () => QUERY_KEYS.skills,
     experiences: () => QUERY_KEYS.experiences,
     educations: () => QUERY_KEYS.educations,
+    socialLinks: () => QUERY_KEYS.socialLinks,
   },
 };

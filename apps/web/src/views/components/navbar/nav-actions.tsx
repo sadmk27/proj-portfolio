@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { aboutQueryOptions } from "@/queries/about/aboutQueries";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/theme-toggle";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
 
 interface NavActionsProps {
   className?: string;
@@ -16,7 +18,7 @@ export function NavActions({
   forceShowProfile = false,
 }: NavActionsProps) {
   const { t } = useTranslation();
-
+  const { data: about } = useQuery(aboutQueryOptions);
   return (
     <div className={cn("flex flex-wrap items-center gap-3", className)}>
       {showProfile && (
@@ -38,10 +40,10 @@ export function NavActions({
             )}
           >
             <span className="text-sm font-semibold truncate max-w-[150px]">
-              {t("personal.name")}
+              {about?.name ?? t("personal.name")}
             </span>
             <span className="text-xs text-muted-foreground whitespace-nowrap">
-              {t("personal.role")}
+              {about?.role ?? t("personal.role")}
             </span>
           </div>
         </div>

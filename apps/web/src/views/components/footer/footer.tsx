@@ -1,4 +1,6 @@
 import { Separator } from "@/components/ui/separator";
+import { socialLinkQueryOptions } from "@/queries/social-links/socialLinkQueries";
+import { useQuery } from "@tanstack/react-query";
 import {
   FacebookIcon,
   GithubIcon,
@@ -10,6 +12,9 @@ import { useTranslation } from "react-i18next";
 
 export function Footer() {
   const { t } = useTranslation();
+  const { data: socialLinks } = useQuery({
+    ...socialLinkQueryOptions,
+  });
   return (
     <footer className="w-full border-t bg-background">
       <Separator />
@@ -24,26 +29,27 @@ export function Footer() {
         </a>
         <div className="flex justify-center">
           <p className="text-sm text-muted-foreground">
-            {`©${new Date().getFullYear()}`}{" "}
-            <a href="#" className="hover:underline">
-              shadcn/studio
-            </a>
-            {t("footer.description")}
+            {t("footer.description", { year: new Date().getFullYear() })}
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#">
-            <GithubIcon className="h-6 w-6 text-primary" />
-          </a>
-          <a href="#">
-            <LinkedinIcon className="h-6 w-6 text-primary" />
-          </a>
-          <a href="#">
-            <FacebookIcon className="h-6 w-6 text-primary" />
-          </a>
-          <a href="#">
-            <InstagramIcon className="h-6 w-6 text-primary" />
-          </a>
+          {socialLinks?.map((link) => {
+            const Icon = {
+              github: GithubIcon,
+              linkedin: LinkedinIcon,
+              facebook: FacebookIcon,
+              instagram: InstagramIcon,
+            }[link.platform.toLowerCase()];
+            return Icon ? (
+              <a
+                href={link.url}
+                key={link.id}
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Icon className="h-6 w-6" />
+              </a>
+            ) : null;
+          })}
         </div>
       </div>
     </footer>

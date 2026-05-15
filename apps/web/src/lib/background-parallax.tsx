@@ -2,7 +2,7 @@ import { getBackgroundUrl } from "@portfolio/assets";
 import React from "react";
 
 const PARALLAX_MULTIPLIER = 0.05;
-const PARALLAX_OVERFLOW = "30%";
+const PARALLAX_OVERFLOW = "50%";
 
 const BackgroundParallax: React.FC = () => {
   const backgroundRef = React.useRef<HTMLDivElement>(null);
