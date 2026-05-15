@@ -68,7 +68,7 @@ export function Navbar() {
                     />
                   </div>
 
-                  <div className="mt-auto px-2 pt-6 border-t border-border/20 space-y-6">
+                  <div className="mt-auto px-2 border-t border-border/20 space-y-6">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground/80 mb-4 px-2 uppercase tracking-[0.25em]">
                         {t("common.settings")}

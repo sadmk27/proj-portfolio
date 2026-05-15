@@ -1,7 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getProjects, getProjectById } from "../../server/project";
-import { queryKeys } from "../queryKeys";
-import { createQueryFn } from "../lib/queryHelpers";
+import { getProjects, getProjectById } from "@/server/project";
+import { queryKeys } from "@/queries/queryKeys";
+import { createQueryFn } from "@/queries/lib/queryHelpers";
 
 export const projectsQueryOptions = queryOptions({
   queryKey: queryKeys.projects.list(),
