@@ -78,17 +78,20 @@ function SkillsPage() {
         onDelete={handleDelete}
         emptyMessage="No skills found."
       />
-
-      <SkillFormDialog
-        open={formOpen}
-        onOpenChange={setFormOpen}
-        skill={selectedSkill}
-      />
-      <SkillDeleteDialog
-        open={deleteOpen}
-        onOpenChange={setDeleteOpen}
-        skill={selectedSkill}
-      />
+      {formOpen && (
+        <SkillFormDialog
+          open={formOpen}
+          onOpenChange={setFormOpen}
+          skill={selectedSkill}
+        />
+      )}
+      {deleteOpen && (
+        <SkillDeleteDialog
+          open={deleteOpen}
+          onOpenChange={setDeleteOpen}
+          skill={selectedSkill}
+        />
+      )}
     </div>
   );
 }

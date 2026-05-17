@@ -82,6 +82,11 @@ const LENIS_OPTIONS: LenisOptions = {
   smoothWheel: true,
 };
 
+function SmoothScroll() {
+  useSmoothScroll(LENIS_OPTIONS);
+  return null;
+}
+
 function RootInner({
   theme,
   queryClient,
@@ -92,11 +97,6 @@ function RootInner({
   const { i18n } = useTranslation();
   const router = useRouter();
   const isAdminRoute = router.state.location.pathname.startsWith("/admin");
-
-  function SmoothScroll() {
-    useSmoothScroll(LENIS_OPTIONS);
-    return null;
-  }
 
   return (
     <html

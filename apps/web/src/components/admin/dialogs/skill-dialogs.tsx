@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-  DialogPortal,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -101,96 +100,94 @@ export function SkillFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogPortal container={document.body}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{isEdit ? "Edit Skill" : "Add Skill"}</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="skill-name">Name *</Label>
-              <Input
-                id="skill-name"
-                value={formData.name}
-                onChange={(e) => set("name", e.target.value)}
-                placeholder="e.g. React, TypeScript"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="skill-category">Category *</Label>
-              <Select
-                value={formData.category}
-                onValueChange={(value: string) => set("category", value)}
-              >
-                <SelectTrigger id="skill-category" className="w-full">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CATEGORIES.map((cat) => (
-                    <SelectItem key={cat} value={cat}>
-                      {cat}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="skill-icon">Icon Name *</Label>
-              <Input
-                id="skill-icon"
-                value={formData.icon_name}
-                onChange={(e) => set("icon_name", e.target.value)}
-                placeholder="e.g. SiReact, SiTypescript"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="skill-proficiency">Proficiency *</Label>
-              <Select
-                value={formData.proficiency}
-                onValueChange={(value: string) => set("proficiency", value)}
-              >
-                <SelectTrigger id="skill-proficiency" className="w-full">
-                  <SelectValue placeholder="Select proficiency" />
-                </SelectTrigger>
-                <SelectContent>
-                  {PROFICIENCY_LEVELS.map((level) => (
-                    <SelectItem key={level} value={level}>
-                      {level}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="skill-expanded-description">
-                Expanded Description *
-              </Label>
-              <Textarea
-                id="skill-expanded-description"
-                value={formData.expanded_description}
-                onChange={(e) => set("expanded_description", e.target.value)}
-                placeholder="Describe where this skill is used and what proficiency means."
-                rows={5}
-                required
-              />
-            </div>
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => onOpenChange(false)}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={loading}>
-                {loading ? "Saving..." : "Save"}
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </DialogPortal>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{isEdit ? "Edit Skill" : "Add Skill"}</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="skill-name">Name *</Label>
+            <Input
+              id="skill-name"
+              value={formData.name}
+              onChange={(e) => set("name", e.target.value)}
+              placeholder="e.g. React, TypeScript"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="skill-category">Category *</Label>
+            <Select
+              value={formData.category}
+              onValueChange={(value: string) => set("category", value)}
+            >
+              <SelectTrigger id="skill-category" className="w-full">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {CATEGORIES.map((cat) => (
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="skill-icon">Icon Name *</Label>
+            <Input
+              id="skill-icon"
+              value={formData.icon_name}
+              onChange={(e) => set("icon_name", e.target.value)}
+              placeholder="e.g. SiReact, SiTypescript"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="skill-proficiency">Proficiency *</Label>
+            <Select
+              value={formData.proficiency}
+              onValueChange={(value: string) => set("proficiency", value)}
+            >
+              <SelectTrigger id="skill-proficiency" className="w-full">
+                <SelectValue placeholder="Select proficiency" />
+              </SelectTrigger>
+              <SelectContent>
+                {PROFICIENCY_LEVELS.map((level) => (
+                  <SelectItem key={level} value={level}>
+                    {level}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="skill-expanded-description">
+              Expanded Description *
+            </Label>
+            <Textarea
+              id="skill-expanded-description"
+              value={formData.expanded_description}
+              onChange={(e) => set("expanded_description", e.target.value)}
+              placeholder="Describe where this skill is used and what proficiency means."
+              rows={5}
+              required
+            />
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
