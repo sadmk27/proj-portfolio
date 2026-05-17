@@ -7,6 +7,18 @@ import {
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import type { UserRole } from "@/server/lib/auth.types";
 import { getSession } from "@/server/lib/auth.functions";
+import type { ReactNode } from "react";
+
+function AdminLayout({ children }: { children?: ReactNode }) {
+  return (
+    <div className="flex h-screen overflow-hidden">
+      <AdminSidebar />
+      <main className="flex-1 overflow-y-auto p-8">
+        {children ?? <Outlet />}
+      </main>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: async ({ location }) => {
@@ -28,32 +40,20 @@ export const Route = createFileRoute("/admin")({
     }
     return { session };
   },
-  component: () => (
-    <div className="flex h-screen overflow-hidden">
-      <AdminSidebar />
-      <main className="flex-1 overflow-y-auto p-8">
-        <Outlet />
-      </main>
-    </div>
-  ),
+  component: () => <AdminLayout />,
   errorComponent: ({ error }: ErrorComponentProps) => (
-    <div className="flex h-screen overflow-hidden">
-      <AdminSidebar />
-      <main className="flex-1 overflow-y-auto p-8">
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-3xl font-bold">Error</h1>
-            <p className="text-muted-foreground">
-              Something went wrong while loading this page.
-            </p>
-          </div>
-          <div className="border rounded-xl bg-card p-6 text-red-600">
-            <p>
-              {error instanceof Error ? error.message : "An error occurred"}
-            </p>
-          </div>
+    <AdminLayout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Error</h1>
+          <p className="text-muted-foreground">
+            Something went wrong while loading this page.
+          </p>
         </div>
-      </main>
-    </div>
+        <div className="border rounded-xl bg-card p-6 text-red-600">
+          <p>{error instanceof Error ? error.message : "An error occurred"}</p>
+        </div>
+      </div>
+    </AdminLayout>
   ),
 });

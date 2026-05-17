@@ -1,4 +1,4 @@
-import { useRouter } from "@tanstack/react-router";
+import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -59,7 +59,8 @@ function normalizePath(path: string) {
 export function AdminSidebar() {
   const { t } = useTranslation();
   const router = useRouter();
-  const currentPath = normalizePath(router.state.location.pathname);
+  const { pathname } = useLocation();
+  const currentPath = normalizePath(pathname);
 
   async function handleSignOut() {
     await authClient.signOut();
@@ -69,7 +70,9 @@ export function AdminSidebar() {
   return (
     <div className="w-64 bg-card border-r flex flex-col">
       <div className="p-6 border-b">
-        <h2 className="text-xl font-bold">{t("admin.header")}</h2>
+        <h2 className="text-xl font-bold" suppressHydrationWarning>
+          {t("admin.header")}
+        </h2>
       </div>
       <nav className="flex-1 p-4 space-y-1">
         {adminNavRoutes.map(({ path, label, icon: Icon }) => {
@@ -77,17 +80,16 @@ export function AdminSidebar() {
           const isActive = routePath === currentPath;
 
           return (
-            <button
+            <Link
               key={path}
-              type="button"
-              onClick={() => router.navigate({ to: path })}
+              to={path}
               className={`flex w-full items-center gap-3 px-4 py-2 rounded-lg text-left transition-colors text-sm ${
                 isActive ? "bg-accent font-medium" : "hover:bg-accent"
               }`}
             >
               <Icon size={18} />
               {t(label)}
-            </button>
+            </Link>
           );
         })}
       </nav>

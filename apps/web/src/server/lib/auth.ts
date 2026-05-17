@@ -5,9 +5,18 @@ import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { admin } from "better-auth/plugins/admin";
 import { dash } from "@better-auth/infra";
 
+const baseURL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : process.env.BETTER_AUTH_URL;
+
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL,
   basePath: "/api/auth",
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+    "http://localhost:3000",
+  ],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
@@ -23,5 +32,20 @@ export const auth = betterAuth({
     enabled: true,
   },
 
-  plugins: [admin(), tanstackStartCookies(), dash()],
+  advanced: {
+    crossSubdomainCookies: process.env.NODE_ENV === "production",
+
+    defaultCookieAttributes:
+      process.env.NODE_ENV === "production"
+        ? {
+            sameSite: "none",
+            secure: true,
+          }
+        : {
+            sameSite: "lax",
+            secure: false,
+          },
+  },
+
+  plugins: [admin(), dash(), tanstackStartCookies()],
 });

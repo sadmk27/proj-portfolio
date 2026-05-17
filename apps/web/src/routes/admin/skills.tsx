@@ -72,6 +72,7 @@ function SkillsPage() {
           { header: "Category", accessor: "category" },
           { header: "Icon", accessor: "icon_name" },
           { header: "Proficiency", accessor: "proficiency" },
+          { header: "Expanded", accessor: "expanded_description" },
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}

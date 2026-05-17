@@ -15,6 +15,13 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+type SignInResult = {
+  url?: string;
+  data?: {
+    url?: string;
+  };
+};
+
 export function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -27,24 +34,39 @@ export function LoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsPending(true);
-    await authClient.signIn.email(
-      {
-        email,
-        password,
-        callbackURL,
-      },
-      {
-        onSuccess: async () => {
-          toast.success(t("login.success"));
-          await router.invalidate();
-          router.navigate({ to: callbackURL });
+    try {
+      const result = await authClient.signIn.email(
+        {
+          email,
+          password,
+          callbackURL,
         },
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-          setIsPending(false);
+        {
+          onSuccess: async () => {
+            toast.success(t("login.success"));
+            await router.invalidate();
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message);
+            setIsPending(false);
+          },
         },
-      },
-    );
+      );
+
+      // better-auth may return the redirect URL in different shapes
+      const typedResult = result as SignInResult | null | undefined;
+      const url = (typedResult?.url ?? typedResult?.data?.url) || callbackURL;
+
+      if (url) {
+        // full navigation to ensure auth cookies are applied and server redirects work
+        window.location.href = url;
+      } else {
+        setIsPending(false);
+      }
+    } catch (err) {
+      setIsPending(false);
+      toast.error(typeof err === "string" ? err : "Login failed");
+    }
   };
 
   return (

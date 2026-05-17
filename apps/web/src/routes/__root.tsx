@@ -5,6 +5,7 @@ import {
   HeadContent,
   Scripts,
   type ErrorComponentProps,
+  useRouter,
 } from "@tanstack/react-router";
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useTranslation, I18nextProvider } from "react-i18next";
@@ -81,6 +82,11 @@ const LENIS_OPTIONS: LenisOptions = {
   smoothWheel: true,
 };
 
+function SmoothScroll() {
+  useSmoothScroll(LENIS_OPTIONS);
+  return null;
+}
+
 function RootInner({
   theme,
   queryClient,
@@ -89,8 +95,8 @@ function RootInner({
   queryClient: QueryClient;
 }) {
   const { i18n } = useTranslation();
-
-  useSmoothScroll(LENIS_OPTIONS);
+  const router = useRouter();
+  const isAdminRoute = router.state.location.pathname.startsWith("/admin");
 
   return (
     <html
@@ -110,14 +116,19 @@ function RootInner({
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class" defaultTheme={theme}>
             <TooltipProvider>
-              <div className="relative min-h-screen">
-                <BackgroundParallax />
-                <div className="relative z-10 flex min-h-screen flex-col">
-                  <div className="flex-1">
-                    <Outlet />
+              {isAdminRoute ? (
+                <Outlet />
+              ) : (
+                <div className="relative min-h-screen w-full">
+                  <BackgroundParallax />
+                  <SmoothScroll />
+                  <div className="relative z-10 flex min-h-screen flex-col">
+                    <div className="flex-1">
+                      <Outlet />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </TooltipProvider>
           </ThemeProvider>
         </QueryClientProvider>
