@@ -101,6 +101,7 @@ function ProjectsPage() {
                 "-"
               ),
           },
+          { header: "Description", accessor: "description" },
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}

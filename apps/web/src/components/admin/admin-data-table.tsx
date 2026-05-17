@@ -32,7 +32,7 @@ export function AdminDataTable<T extends { id: string | number }>({
   emptyMessage = "No items found.",
 }: AdminDataTableProps<T>) {
   return (
-    <div className="border rounded-xl bg-card overflow-hidden">
+    <div className="border rounded-xl bg-card overflow-clip">
       <Table>
         <TableHeader>
           <TableRow>

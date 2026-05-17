@@ -52,6 +52,44 @@ async function seed() {
   console.log("    Email: admin@portfolio.local");
   console.log("    Password: admin123");
 
+  // 0. Seed Admin User
+  console.log("  - Seeding admin user...");
+  const adminPassword2 = "voqtav-rapxiD-4surny"; // Change this to a strong password in production
+  const hashedPassword2 = await hashPassword(adminPassword2);
+
+  // Create admin user
+  await db
+    .insert(users)
+    .values({
+      id: "ZGzaffahrYNrPoPu0IuVjW3NEQBfRsgm",
+      name: "Admin@portfolio-sa-web.com",
+      email: "szymon.adamkiewicz1@gmail.com",
+      emailVerified: true,
+      role: "ADMIN",
+      banned: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .onConflictDoNothing();
+
+  // Create admin account with password
+  await db
+    .insert(accounts)
+    .values({
+      id: "admin_account_2",
+      accountId: "szymon.adamkiewicz1@gmail.com",
+      providerId: "credential",
+      userId: "ZGzaffahrYNrPoPu0IuVjW3NEQBfRsgm",
+      password: hashedPassword2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
+    .onConflictDoNothing();
+
+  console.log("    Admin user created:");
+  console.log("    Email: szymon.adamkiewicz1@gmail.com");
+  console.log("    Password: voqtav-rapxiD-4surny");
+
   // 1. Seed About
   console.log("  - Seeding about...");
   const aboutRows = await db.select().from(about).limit(1);

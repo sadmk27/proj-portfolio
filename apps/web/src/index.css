@@ -126,10 +126,14 @@
 
   body {
     @apply bg-background text-foreground;
+    width: 100%;
+    min-height: 100vh;
   }
 
   html {
     @apply font-sans;
+    width: 100%;
+    min-height: 100vh;
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
   }

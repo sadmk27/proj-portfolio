@@ -72,25 +72,23 @@ function SkillsPage() {
           { header: "Category", accessor: "category" },
           { header: "Icon", accessor: "icon_name" },
           { header: "Proficiency", accessor: "proficiency" },
+          { header: "Expanded", accessor: "expanded_description" },
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}
         emptyMessage="No skills found."
       />
-      {formOpen && (
-        <SkillFormDialog
-          open={formOpen}
-          onOpenChange={setFormOpen}
-          skill={selectedSkill}
-        />
-      )}
-      {deleteOpen && (
-        <SkillDeleteDialog
-          open={deleteOpen}
-          onOpenChange={setDeleteOpen}
-          skill={selectedSkill}
-        />
-      )}
+
+      <SkillFormDialog
+        open={formOpen}
+        onOpenChange={setFormOpen}
+        skill={selectedSkill}
+      />
+      <SkillDeleteDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        skill={selectedSkill}
+      />
     </div>
   );
 }

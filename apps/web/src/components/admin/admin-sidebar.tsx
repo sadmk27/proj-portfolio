@@ -69,7 +69,9 @@ export function AdminSidebar() {
   return (
     <div className="w-64 bg-card border-r flex flex-col">
       <div className="p-6 border-b">
-        <h2 className="text-xl font-bold">{t("admin.header")}</h2>
+        <h2 className="text-xl font-bold" suppressHydrationWarning>
+          {t("admin.header")}
+        </h2>
       </div>
       <nav className="flex-1 p-4 space-y-1">
         {adminNavRoutes.map(({ path, label, icon: Icon }) => {

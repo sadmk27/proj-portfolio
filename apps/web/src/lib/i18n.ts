@@ -29,7 +29,21 @@ i18n.use(initReactI18next);
 
 if (!i18n.isInitialized) {
   if (typeof window !== "undefined") {
-    i18n.use(LanguageDetector).init(i18nConfig);
+    // Read cookie synchronously instead of using async LanguageDetector
+    const getCookieLang = (): string => {
+      try {
+        const match = document.cookie.match(/i18next=([^;]+)/);
+        const lang = match?.[1] ?? "en";
+        return ["en", "pl"].includes(lang) ? lang : "en";
+      } catch {
+        return "en";
+      }
+    };
+
+    i18n.use(LanguageDetector).init({
+      ...i18nConfig,
+      lng: getCookieLang(), // ← force sync initial language from cookie
+    });
   } else {
     i18n.init({
       ...i18nConfig,
