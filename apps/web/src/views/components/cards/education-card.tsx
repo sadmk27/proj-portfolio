@@ -56,7 +56,7 @@ export function EducationCard({
   });
   const { t } = useTranslation();
   return (
-    <Card className="w-full max-w-sm h-full overflow-hidden relative flex flex-col">
+    <Card className="w-full max-w-full h-full overflow-hidden relative flex flex-col">
       <CardHeader>
         <CardTitle>
           <div className="flex items-center gap-2">
@@ -97,11 +97,13 @@ export function EducationCard({
             </Badge>
           )}
         </div>
-        <div className="flex items-center gap-2">
-          <p className="text-sm text-muted-foreground leading-relaxed italic">
-            "{thesis}"
-          </p>
-        </div>
+        {thesis && (
+          <div className="flex items-center gap-2">
+            <p className="text-sm text-muted-foreground leading-relaxed italic">
+              "{thesis}"
+            </p>
+          </div>
+        )}
         {hasProject && (
           <Dialog>
             <DialogTrigger asChild>

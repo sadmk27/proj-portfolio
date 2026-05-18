@@ -126,7 +126,8 @@
   },
   "experience": {
     "header": "Doświadczenie",
-    "description": "Brak konkretnych osiągnięć."
+    "description": "Brak konkretnych osiągnięć.",
+    "present": "Obecnie"
   },
   "education": {
     "header": "Edukacja",

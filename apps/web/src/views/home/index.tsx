@@ -57,7 +57,7 @@ export function HomeView() {
     : experiences.slice(0, 2);
   const displayedEducations = expanded.education
     ? educations
-    : educations.slice(0, 3);
+    : educations.slice(0, 2);
 
   return (
     <div className="flex-1 w-full flex flex-col items-center select-none pb-20">
@@ -201,7 +201,7 @@ export function HomeView() {
         className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
       >
         <SectionTitle title={t("education.header")} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
           {displayedEducations.map((education) => (
             <div key={education.id} className="animate-in fade-in duration-500">
               <EducationCard
@@ -218,7 +218,7 @@ export function HomeView() {
             </div>
           ))}
         </div>
-        {educations.length > 3 && (
+        {educations.length > 2 && (
           <div className="flex justify-center">
             <Button
               variant="outline"

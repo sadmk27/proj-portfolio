@@ -111,6 +111,11 @@ function RootInner({
             __html: `window.process = { env: { TSS_SERVER_FN_BASE: "/_server/" } };`,
           }}
         />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"
+        />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <QueryClientProvider client={queryClient}>

@@ -76,6 +76,9 @@ function EducationsPage() {
             accessor: (e) => `${e.start_date} – ${e.end_date}`,
           },
           { header: "GPA", accessor: (e) => e.gpa || "-" },
+          { header: "Thesis", accessor: (e) => e.thesis || "-" },
+          { header: "Project ID", accessor: (e) => e.projectId || "-" },
+          { header: "Description", accessor: "description" },
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}
