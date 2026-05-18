@@ -114,7 +114,7 @@ function RootInner({
         <link
           rel="stylesheet"
           type="text/css"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
