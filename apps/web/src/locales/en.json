@@ -126,7 +126,8 @@
   },
   "experience": {
     "header": "Experience",
-    "description": "No specific achievements listed yet."
+    "description": "No specific achievements listed yet.",
+    "present": "Present"
   },
   "education": {
     "header": "Education",

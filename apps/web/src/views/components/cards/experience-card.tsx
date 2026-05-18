@@ -21,6 +21,7 @@ export function ExperienceCard({
   skills = [],
 }: ExperienceCardProps) {
   const { t } = useTranslation();
+  const presentDate = "0000-00-00";
   const descriptionPoints = description
     .split("\n")
     .filter((point) => point.trim() !== "");
@@ -42,7 +43,8 @@ export function ExperienceCard({
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/50 rounded-full border border-border/50 text-[11px] font-bold text-muted-foreground shadow-sm">
             <Calendar className="w-3.5 h-3.5 opacity-70" />
             <span className="tracking-tighter uppercase">
-              {startDate} — {endDate}
+              {startDate} —{" "}
+              {endDate === presentDate ? t("experience.present") : endDate}
             </span>
           </div>
         </div>

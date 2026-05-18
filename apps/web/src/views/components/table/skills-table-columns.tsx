@@ -1,19 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import type { ColumnDef, Column } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  ChevronDown,
-  ChevronRight,
-  EllipsisVerticalIcon,
-} from "lucide-react";
+import { ArrowUpDown, ChevronDown, ChevronRight } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 
@@ -79,39 +67,6 @@ const ProficiencyCellTranslation = ({
         value={proficiencyToNumber(proficiency)}
         className="h-1.5 transition-all"
       />
-    </div>
-  );
-};
-
-const ActionsCellTranslation = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex justify-end pr-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className="flex size-8 text-muted-foreground data-[state=open]:bg-muted hover:text-primary transition-colors"
-            size="icon"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <EllipsisVerticalIcon className="h-4 w-4" />
-            <span className="sr-only">{t("skills.actions.openMenu")}</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-40">
-          <DropdownMenuItem className="cursor-pointer">
-            {t("skills.actions.showUsage")}
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
-            {t("skills.actions.copyName")}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
-            {t("skills.actions.delete")}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
     </div>
   );
 };
@@ -183,9 +138,5 @@ export const columns: ColumnDef<Skills>[] = [
     cell: ({ row }) => (
       <ProficiencyCellTranslation proficiency={row.getValue("proficiency")} />
     ),
-  },
-  {
-    id: "actions",
-    cell: () => <ActionsCellTranslation />,
   },
 ];

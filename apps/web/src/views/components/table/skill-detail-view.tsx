@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { TableCell, TableRow } from "@/components/ui/table";
 import {
   proficiencyToNumber,
@@ -31,25 +31,17 @@ export function SkillDetailView<TData>({ row }: { row: Row<TData> }) {
               <div className="space-y-4 min-w-0">
                 <CardHeader className="p-0 border-none">
                   <CardTitle className="flex items-center gap-2 break-words text-lg sm:text-xl">
-                    <span className="text-primary font-mono opacity-50">#</span>
+                    <span className="text-primary font-mono opacity-50">
+                      <i
+                        className={`devicon-${skill.icon_name}-plain colored text-xl`}
+                      ></i>
+                    </span>
                     {skill.name}
                   </CardTitle>
                   <CardDescription className="max-w-md leading-relaxed break-words">
                     {skill.expanded_description}
                   </CardDescription>
                 </CardHeader>
-
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <Badge variant="secondary" className="px-3 py-1">
-                    {skill.category}
-                  </Badge>
-                  <Badge
-                    variant="outline"
-                    className="px-3 py-1 bg-background/20"
-                  >
-                    {skill.proficiency}
-                  </Badge>
-                </div>
               </div>
 
               <Field className="justify-center gap-4 min-w-0">
@@ -65,9 +57,17 @@ export function SkillDetailView<TData>({ row }: { row: Row<TData> }) {
                   value={proficiencyToNumber(skill.proficiency)}
                   className="h-2 w-full"
                 />
-                <FieldDescription className="text-xs italic">
-                  {skill.expanded_description}
-                </FieldDescription>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <Badge variant="secondary" className="px-3 py-1">
+                    {skill.category}
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="px-3 py-1 bg-background/20"
+                  >
+                    {skill.name}
+                  </Badge>
+                </div>
               </Field>
             </div>
           </CardContent>

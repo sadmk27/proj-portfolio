@@ -26,7 +26,9 @@ export function ProfileCard({ name, role, imageUrl }: ProfileCardProps) {
           )}
         </div>
         <div className="md:w-1/2 flex flex-col justify-center">
-          <h3 className="text-2xl font-bold mb-2">{name}</h3>
+          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-2 break-words hyphens-auto leading-tight">
+            {name}
+          </h3>
           <p className="text-muted-foreground font-medium italic">{role}</p>
         </div>
       </CardContent>
