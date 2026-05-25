@@ -45,7 +45,7 @@ export function SkillCardList({ data }: { data: Skills[] }) {
                   </Badge>
                 </div>
 
-                <div className="flex flex-col items-end gap-1.5 shrik-0 px-2">
+                <div className="flex flex-col items-end gap-1.5 shrink-0 px-2">
                   <div className="w-24 space-y-1">
                     <div className="flex justify-between text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
                       <span>{skill.proficiency}</span>

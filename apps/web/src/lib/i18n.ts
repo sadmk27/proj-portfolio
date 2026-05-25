@@ -15,8 +15,8 @@ export const resources = {
   pl: { translation: pl },
 } as const;
 
-const SUPPORTED_LANGS = ["en", "pl"];
-const FALLBACK_LANG = "en";
+export const SUPPORTED_LANGS = ["en", "pl"];
+export const FALLBACK_LANG = "en";
 
 const i18nConfig = {
   resources,

@@ -1,4 +1,4 @@
-import { resources } from "@/lib/i18n";
+import { resources, FALLBACK_LANG } from "@/lib/i18n";
 
 export async function initI18nServer(lang: string) {
   const { createInstance } = await import("i18next");
@@ -8,7 +8,7 @@ export async function initI18nServer(lang: string) {
 
   await instance.use(initReactI18next).init({
     resources,
-    fallbackLng: "en",
+    fallbackLng: FALLBACK_LANG,
     lng: lang,
     interpolation: {
       escapeValue: false,

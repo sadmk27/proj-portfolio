@@ -109,7 +109,9 @@ function RootInner({
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.__INITIAL_LANG__ = "${i18nInstance.language}";`,
+            __html: `window.__INITIAL_LANG__ = ${JSON.stringify(
+              i18nInstance.language,
+            )};`,
           }}
         />
         <script
