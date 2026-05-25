@@ -8,7 +8,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
-import { useTranslation, I18nextProvider } from "react-i18next";
+import { I18nextProvider } from "react-i18next";
 import { type Theme, ThemeProvider } from "../theme-provider";
 import "../index.css";
 import { t, type i18n } from "i18next";
@@ -22,6 +22,7 @@ import { Toaster } from "sonner";
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   i18n: i18n;
+  lang: string;
   theme: Theme;
 }>()({
   head: () => ({
@@ -94,18 +95,23 @@ function RootInner({
   theme: Theme;
   queryClient: QueryClient;
 }) {
-  const { i18n } = useTranslation();
+  const { i18n: i18nInstance } = Route.useRouteContext();
   const router = useRouter();
   const isAdminRoute = router.state.location.pathname.startsWith("/admin");
 
   return (
     <html
-      lang={i18n.language}
+      lang={i18nInstance.language}
       suppressHydrationWarning
       className={theme === "dark" ? "dark" : ""}
     >
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__INITIAL_LANG__ = "${i18nInstance.language}";`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.process = { env: { TSS_SERVER_FN_BASE: "/_server/" } };`,

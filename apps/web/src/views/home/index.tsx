@@ -17,10 +17,14 @@ import { useSuspenseQueries } from "@tanstack/react-query";
 import { aboutQueryOptions } from "@/queries/about/aboutQueries";
 import { AboutSection } from "@/views/components/about/about-section";
 import { lenisProvider } from "@/lenis-provider";
-import { SectionTitle } from "../components/headers/section-title";
+import { Wrapper } from "./layout/wrapper";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { SkillCardList } from "../components/cards/skill-card-list";
 
 export function HomeView() {
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
+
   const [
     { data: about },
     { data: projects },
@@ -88,11 +92,7 @@ export function HomeView() {
         </div>
       </section>
 
-      <section
-        id="about"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("about.header")} />
+      <Wrapper id="about" title={t("about.header")}>
         <AboutSection
           name={about.name}
           role={about.role}
@@ -100,14 +100,10 @@ export function HomeView() {
           imageUrl={about.imageUrl}
           interests={about.interests}
         />
-      </section>
+      </Wrapper>
 
       {/* Projects Section */}
-      <section
-        id="projects"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("project.header")} />
+      <Wrapper id="projects" title={t("project.header")}>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
           {displayedProjects.map((project) => (
             <div key={project.id} className="animate-in fade-in duration-500">
@@ -139,25 +135,23 @@ export function HomeView() {
             </Button>
           </div>
         )}
-      </section>
+      </Wrapper>
 
       {/* Skills Section */}
-      <section
-        id="skills"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("skills.header")} />
+      <Wrapper id="skills" title={t("skills.header")}>
         <div className="w-full overflow-hidden">
-          <SkillsTable columns={columns} data={skills} />
+          {isMobile === undefined ? (
+            <div className="h-48 rounded-xl bg-muted/30 animate-pulse" />
+          ) : isMobile ? (
+            <SkillCardList data={skills} />
+          ) : (
+            <SkillsTable columns={columns} data={skills} />
+          )}
         </div>
-      </section>
+      </Wrapper>
 
       {/* Experience Section */}
-      <section
-        id="experience"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("experience.header")} />
+      <Wrapper id="experience" title={t("experience.header")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
           {displayedExperiences.map((experience) => (
             <div
@@ -175,6 +169,7 @@ export function HomeView() {
             </div>
           ))}
         </div>
+
         {experiences.length > 2 && (
           <div className="flex justify-center">
             <Button
@@ -193,14 +188,10 @@ export function HomeView() {
             </Button>
           </div>
         )}
-      </section>
+      </Wrapper>
 
       {/* Education Section */}
-      <section
-        id="education"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("education.header")} />
+      <Wrapper id="education" title={t("education.header")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
           {displayedEducations.map((education) => (
             <div key={education.id} className="animate-in fade-in duration-500">
@@ -234,18 +225,14 @@ export function HomeView() {
             </Button>
           </div>
         )}
-      </section>
+      </Wrapper>
 
       {/* Contact Section */}
-      <section
-        id="contact"
-        className="w-full max-w-7xl mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center gap-2"
-      >
-        <SectionTitle title={t("contact.header")} />
+      <Wrapper id="contact" title={t("contact.header")}>
         <div className="w-full max-w-full transition-all flex items-center justify-center">
           <ContactForm />
         </div>
-      </section>
+      </Wrapper>
 
       <ScrollToTop />
     </div>

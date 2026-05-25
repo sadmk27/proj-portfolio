@@ -5,15 +5,22 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import en from "../locales/en.json";
 import pl from "../locales/pl.json";
 
+interface WindowWithInitialLang extends Window {
+  __INITIAL_LANG__?: string;
+}
+
 export const defaultNS = "translation";
 export const resources = {
   en: { translation: en },
   pl: { translation: pl },
 } as const;
 
+const SUPPORTED_LANGS = ["en", "pl"];
+const FALLBACK_LANG = "en";
+
 const i18nConfig = {
   resources,
-  fallbackLng: "en",
+  fallbackLng: FALLBACK_LANG,
   interpolation: {
     escapeValue: false,
   },
@@ -27,40 +34,35 @@ const i18nConfig = {
 
 i18n.use(initReactI18next);
 
+const getInitialLang = (): string => {
+  try {
+    if (
+      typeof window !== "undefined" &&
+      (window as WindowWithInitialLang).__INITIAL_LANG__
+    ) {
+      return (window as WindowWithInitialLang).__INITIAL_LANG__!;
+    }
+    const match = document.cookie.match(/i18next=([^;]+)/);
+    const lang = match?.[1] ?? "en";
+    return SUPPORTED_LANGS.includes(lang) ? lang : FALLBACK_LANG;
+  } catch {
+    return FALLBACK_LANG;
+  }
+};
+
 if (!i18n.isInitialized) {
   if (typeof window !== "undefined") {
-    // Read cookie synchronously instead of using async LanguageDetector
-    const getCookieLang = (): string => {
-      try {
-        const match = document.cookie.match(/i18next=([^;]+)/);
-        const lang = match?.[1] ?? "en";
-        return ["en", "pl"].includes(lang) ? lang : "en";
-      } catch {
-        return "en";
-      }
-    };
-
     i18n.use(LanguageDetector).init({
       ...i18nConfig,
-      lng: getCookieLang(), // ← force sync initial language from cookie
+      lng: getInitialLang(),
     });
   } else {
     i18n.init({
       ...i18nConfig,
-      lng: "en",
+      lng: FALLBACK_LANG,
       detection: undefined,
     });
   }
-}
-
-export async function initI18nServer(lang: string) {
-  const i18nInstance = i18n.createInstance();
-  await i18nInstance.use(initReactI18next).init({
-    ...i18nConfig,
-    lng: lang,
-    detection: undefined,
-  });
-  return i18nInstance;
 }
 
 export default i18n;

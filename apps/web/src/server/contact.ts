@@ -20,8 +20,8 @@ export const sendContactEmail = createServerFn({ method: "POST" })
     }
 
     const { error } = await resend.emails.send({
-      from: toEmail,
-      to: fromEmail,
+      from: fromEmail,
+      to: toEmail,
       replyTo: email,
       subject: `New contact form submission from ${name}`,
       text: message,
