@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NavProfileSkeleton } from "@/views/components/navbar/nav-profile-skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useIsMounted } from "@/hooks/use-mounted";
 
 interface NavProfileProps {
   showText?: boolean;
@@ -11,8 +12,9 @@ interface NavProfileProps {
 export function NavProfile({ showText = true }: NavProfileProps) {
   const { t } = useTranslation();
   const { data: about, isLoading } = useQuery(aboutQueryOptions);
+  const isMounted = useIsMounted();
 
-  if (isLoading) {
+  if (!isMounted || isLoading) {
     return <NavProfileSkeleton showText={showText} />;
   }
 

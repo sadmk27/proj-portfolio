@@ -15,6 +15,7 @@ export function getRouter(context?: { i18n?: i18n; theme?: Theme }) {
     context: {
       queryClient,
       i18n: i18nInstance,
+      lang: i18nInstance.language,
       theme: context?.theme ?? "system",
     },
     defaultPreload: "intent",

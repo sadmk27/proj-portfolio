@@ -28,7 +28,7 @@ export function Footer() {
           </div>
         </a>
         <div className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground text-center">
             {t("footer.description", { year: new Date().getFullYear() })}
           </p>
         </div>
