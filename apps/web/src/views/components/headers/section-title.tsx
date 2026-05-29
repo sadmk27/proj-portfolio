@@ -1,6 +1,6 @@
 export const SectionTitle = ({ title }: { title: string }) => {
   return (
-    <h2 className="mb-12 text-center text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+    <h2 className="shrink-0 text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
       {title}
     </h2>
   );

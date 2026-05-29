@@ -18,7 +18,7 @@ export function AboutSection({
   interests,
 }: AboutSectionProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+    <div className="grid flex-1 grid-cols-1 gap-4 md:min-h-full md:grid-cols-3 md:gap-5 md:auto-rows-fr">
       <div className="md:col-span-1 row-span-1">
         <ProfileCard name={name} role={role} imageUrl={imageUrl} />
       </div>

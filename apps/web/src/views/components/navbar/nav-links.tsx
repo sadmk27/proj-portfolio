@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { type MouseEvent, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import {
@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link } from "@tanstack/react-router";
+import { lenisProvider } from "@/lenis-provider";
 
 interface NavLinksProps {
   className?: string;
@@ -35,18 +35,42 @@ export function NavLinks({
     [t],
   );
 
+  const handleAnchorClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const target = document.querySelector<HTMLElement>(href);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    onItemClick?.();
+    window.history.pushState(null, "", href);
+
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - 64;
+
+    if (lenisProvider.getInstance()) {
+      lenisProvider.scrollTo(targetTop);
+      return;
+    }
+
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
+  };
+
   if (orientation === "vertical") {
     return (
       <nav className={cn("flex flex-col gap-2", className)}>
         {navLinks.map((link) => (
-          <Link
+          <a
             key={link.href}
-            to={link.href}
-            onClick={onItemClick}
+            href={link.href}
+            onClick={(event) => handleAnchorClick(event, link.href)}
             className="text-lg font-medium transition-colors hover:text-primary px-4 py-2 rounded-md hover:bg-accent"
           >
             {link.label}
-          </Link>
+          </a>
         ))}
       </nav>
     );
@@ -59,6 +83,9 @@ export function NavLinks({
           <NavigationMenuItem key={link.href}>
             <NavigationMenuLink
               href={link.href}
+              onClick={(event: MouseEvent<HTMLAnchorElement>) =>
+                handleAnchorClick(event, link.href)
+              }
               className={cn(
                 navigationMenuTriggerStyle(),
                 "bg-transparent cursor-pointer hover:text-primary transition-colors",

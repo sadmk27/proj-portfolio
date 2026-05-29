@@ -19,36 +19,41 @@ export function SkillCardList({ data }: { data: Skills[] }) {
   );
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       {Object.entries(groupedByCategory).map(([category, skills]) => (
         <div key={category}>
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2 px-1">
             {category}
           </p>
-          <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {skills.map((skill) => (
               <div
                 key={skill.name}
-                className="flex items-center justify-between rounded-xl bg-card border border-border px-4 py-3"
+                className="grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-3 rounded-lg bg-card border border-border px-3 py-3 shadow-sm"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted/50">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted/50">
                     <i
                       className={`devicon-${skill.icon_name}-plain colored text-xl`}
                     />
                   </div>
-                  <span className="font-medium text-sm truncate">
-                    {skill.name}
-                  </span>
-                  <Badge variant="secondary" className="text-xs">
-                    {skill.category}
-                  </Badge>
+                  <div className="min-w-0">
+                    <span className="block truncate text-sm font-semibold">
+                      {skill.name}
+                    </span>
+                    <Badge
+                      variant="secondary"
+                      className="mt-1 max-w-full text-[10px]"
+                    >
+                      <span className="truncate">{skill.category}</span>
+                    </Badge>
+                  </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-1.5 shrink-0 px-2">
-                  <div className="w-24 space-y-1">
-                    <div className="flex justify-between text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
-                      <span>{skill.proficiency}</span>
+                <div className="flex min-w-0 flex-col items-end gap-1.5">
+                  <div className="w-full space-y-1">
+                    <div className="text-right text-[10px] uppercase tracking-wider font-bold text-muted-foreground/70">
+                      <span className="truncate">{skill.proficiency}</span>
                     </div>
                     <Progress
                       value={proficiencyToNumber(skill.proficiency)}

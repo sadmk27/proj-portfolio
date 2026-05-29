@@ -77,12 +77,12 @@ export function ContactForm() {
   const isSubmitting = form.state.isSubmitting;
 
   return (
-    <Card className="w-full sm:max-w-md">
-      <CardHeader>
-        <CardTitle>{t("contact.title")}</CardTitle>
+    <Card className="w-full sm:max-w-md shadow-sm">
+      <CardHeader className="px-4 pt-5 pb-3 md:px-6 md:pt-6">
+        <CardTitle className="text-xl">{t("contact.title")}</CardTitle>
         <CardDescription>{t("contact.description")}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-4 md:px-6">
         {serverError && (
           <p role="alert" className="mb-4 text-sm text-destructive">
             {serverError}
@@ -173,7 +173,7 @@ export function ContactForm() {
                         autoComplete="off"
                         aria-invalid={isInvalid}
                         rows={6}
-                        className="min-h-32 resize-none"
+                        className="min-h-28 resize-none md:min-h-32"
                       />
                       <InputGroupAddon align="block-end">
                         <InputGroupText className="tabular-nums">
@@ -192,7 +192,7 @@ export function ContactForm() {
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="px-4 pb-5 md:px-6 md:pb-6">
         <Field
           orientation="horizontal"
           className="flex items-center justify-center w-full"
@@ -200,7 +200,7 @@ export function ContactForm() {
           <Button
             type="submit"
             form="contact-form"
-            className="w-1/2"
+            className="w-full sm:w-1/2"
             disabled={isSubmitting}
           >
             {t("contact.send")}

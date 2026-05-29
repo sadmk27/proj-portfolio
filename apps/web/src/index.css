@@ -135,6 +135,7 @@
     width: 100%;
     min-height: 100vh;
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
   }
 
   section,

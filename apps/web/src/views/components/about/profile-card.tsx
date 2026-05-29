@@ -11,8 +11,8 @@ export function ProfileCard({ name, role, imageUrl }: ProfileCardProps) {
   const { t } = useTranslation();
   return (
     <Card className="h-full overflow-hidden border-2 group hover:border-primary/50 transition-colors">
-      <CardContent className="p-6 h-full flex flex-col md:flex-row gap-6">
-        <div className="w-full md:w-1/2 h-64 md:h-auto bg-muted relative overflow-hidden flex items-center justify-center rounded-xl">
+      <CardContent className="p-4 h-full flex flex-col gap-4 sm:flex-row sm:items-center md:p-5 md:flex-row md:gap-5">
+        <div className="h-44 w-full bg-muted relative overflow-hidden flex items-center justify-center rounded-lg sm:h-36 sm:w-36 sm:shrink-0 md:h-full md:w-1/2">
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -25,11 +25,13 @@ export function ProfileCard({ name, role, imageUrl }: ProfileCardProps) {
             </div>
           )}
         </div>
-        <div className="md:w-1/2 flex flex-col justify-center">
-          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-2 break-words hyphens-auto leading-tight">
+        <div className="min-w-0 flex flex-col justify-center md:w-1/2">
+          <h3 className="text-lg md:text-xl font-bold mb-2 break-words hyphens-auto leading-tight">
             {name}
           </h3>
-          <p className="text-muted-foreground font-medium italic">{role}</p>
+          <p className="text-sm text-muted-foreground font-medium italic md:text-base">
+            {role}
+          </p>
         </div>
       </CardContent>
     </Card>

@@ -48,11 +48,13 @@ export function StatsCard() {
   if (!mounted) {
     return (
       <Card className="h-full overflow-hidden border-2 transition-colors">
-        <CardHeader>
-          <CardTitle>{t("about.statsTitle")}</CardTitle>
+        <CardHeader className="px-4 pt-4 pb-2 md:px-6 md:pt-6">
+          <CardTitle className="text-base md:text-lg">
+            {t("about.statsTitle")}
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-6 pt-0 animate-pulse">
-          <div className="h-[120px] w-full bg-muted rounded-md" />
+        <CardContent className="px-4 pb-4 pt-0 animate-pulse md:px-6 md:pb-6">
+          <div className="h-[96px] w-full bg-muted rounded-md md:h-[120px]" />
         </CardContent>
       </Card>
     );
@@ -60,24 +62,26 @@ export function StatsCard() {
 
   return (
     <Card className="h-full overflow-hidden border-2 group hover:border-primary/50 transition-colors">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+      <CardHeader className="px-4 pt-4 pb-2 md:px-6 md:pt-6">
+        <CardTitle className="flex items-center gap-2 text-base md:text-lg">
           <GithubIcon className="h-5 w-5 text-primary" />
           {t("about.statsTitle")}
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-6 pb-6 pt-0 flex flex-col items-center justify-center h-[calc(100%-40px)]">
-        <GitHubCalendar
-          username={githubUsername}
-          transformData={(data: Activity[]) => selectLastMonths(data, 7)}
-          theme={calendarTheme}
-          colorScheme={resolvedTheme as "light" | "dark"}
-          fontSize={11}
-          blockSize={16}
-          blockMargin={3}
-          blockRadius={2}
-          showWeekdayLabels={false}
-        />
+      <CardContent className="px-4 pb-4 pt-0 flex min-w-0 flex-col items-center justify-center overflow-x-auto md:px-6 md:pb-6">
+        <div className="max-w-full">
+          <GitHubCalendar
+            username={githubUsername}
+            transformData={(data: Activity[]) => selectLastMonths(data, 7)}
+            theme={calendarTheme}
+            colorScheme={resolvedTheme as "light" | "dark"}
+            fontSize={11}
+            blockSize={14}
+            blockMargin={3}
+            blockRadius={2}
+            showWeekdayLabels={false}
+          />
+        </div>
       </CardContent>
     </Card>
   );

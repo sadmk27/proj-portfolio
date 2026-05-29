@@ -68,24 +68,24 @@ export function HomeView() {
       {/* Hero section */}
       <section
         id="home"
-        className="w-full min-h-screen flex flex-col items-center justify-center p-8 pt-24"
+        className="w-full min-h-[calc(100svh-4rem)] flex flex-col items-center justify-center px-5 py-10 md:p-8"
       >
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-8xl mb-6 text-primary text-center">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-8xl mb-5 text-primary text-center">
           {t("home.welcome")}
         </h1>
-        <p className="text-xl text-muted-foreground mb-12 text-center max-w-[700px] leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 md:mb-12 text-center max-w-[700px] leading-relaxed">
           {t("home.description")}
         </p>
-        <div className="flex gap-4">
+        <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:gap-4">
           <a
             href="#projects"
-            className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all shadow-lg"
+            className="px-6 py-3 md:px-8 md:py-4 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all shadow-lg text-center"
           >
             {t("common.projects")}
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 border border-primary text-primary rounded-full font-bold hover:bg-primary/5 transition-all"
+            className="px-6 py-3 md:px-8 md:py-4 border border-primary text-primary rounded-full font-bold hover:bg-primary/5 transition-all text-center"
           >
             {t("contact.header")}
           </a>
@@ -104,7 +104,7 @@ export function HomeView() {
 
       {/* Projects Section */}
       <Wrapper id="projects" title={t("project.header")}>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
           {displayedProjects.map((project) => (
             <div key={project.id} className="animate-in fade-in duration-500">
               <ProjectCard
@@ -124,7 +124,7 @@ export function HomeView() {
             <Button
               variant="outline"
               onClick={() => toggleExpanded("projects")}
-              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold hover:bg-primary hover:text-white transition-colors border-2"
+              className="gap-2 rounded-full px-6 py-5 text-base font-semibold hover:bg-primary hover:text-white transition-colors border-2 md:px-8 md:py-6 md:text-lg"
             >
               {expanded.projects ? t("common.showLess") : t("common.showMore")}
               {expanded.projects ? (
@@ -152,7 +152,7 @@ export function HomeView() {
 
       {/* Experience Section */}
       <Wrapper id="experience" title={t("experience.header")}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:gap-10">
           {displayedExperiences.map((experience) => (
             <div
               key={experience.id}
@@ -175,7 +175,7 @@ export function HomeView() {
             <Button
               variant="outline"
               onClick={() => toggleExpanded("experience")}
-              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
+              className="gap-2 rounded-full px-6 py-5 text-base font-semibold border-2 md:px-8 md:py-6 md:text-lg"
             >
               {expanded.experience
                 ? t("common.showLess")
@@ -192,7 +192,7 @@ export function HomeView() {
 
       {/* Education Section */}
       <Wrapper id="education" title={t("education.header")}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:gap-10">
           {displayedEducations.map((education) => (
             <div key={education.id} className="animate-in fade-in duration-500">
               <EducationCard
@@ -214,7 +214,7 @@ export function HomeView() {
             <Button
               variant="outline"
               onClick={() => toggleExpanded("education")}
-              className="gap-2 rounded-full px-8 py-6 text-lg font-semibold border-2"
+              className="gap-2 rounded-full px-6 py-5 text-base font-semibold border-2 md:px-8 md:py-6 md:text-lg"
             >
               {expanded.education ? t("common.showLess") : t("common.showMore")}
               {expanded.education ? (

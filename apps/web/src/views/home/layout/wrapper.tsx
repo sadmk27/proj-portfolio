@@ -14,12 +14,14 @@ export function Wrapper({ id, title, children, className }: WrapperProps) {
     <section
       id={id}
       className={cn(
-        "w-full max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 flex flex-col gap-2",
+        "mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl scroll-mt-16 flex-col gap-5 px-4 py-6 md:gap-6 md:px-8 md:py-8",
         className,
       )}
     >
       <SectionTitle title={title} />
-      <div className="mt-8 md:mt-12 flex flex-col gap-6">{children}</div>
+      <div className="flex flex-1 flex-col justify-start gap-5 md:gap-6">
+        {children}
+      </div>
     </section>
   );
 }

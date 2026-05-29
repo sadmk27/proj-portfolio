@@ -66,9 +66,9 @@ export function ProjectCard({
         )}
       </div>
 
-      <CardHeader className="pb-3 gap-1.5 px-6 pt-5">
+      <CardHeader className="pb-3 gap-1.5 px-4 pt-4 md:px-6 md:pt-5">
         <div className="flex items-start justify-between">
-          <CardTitle className="text-xl font-bold tracking-tight line-clamp-1 transition-colors duration-300 group-hover:text-primary">
+          <CardTitle className="text-lg font-bold tracking-tight line-clamp-2 transition-colors duration-300 group-hover:text-primary md:text-xl md:line-clamp-1">
             {title}
           </CardTitle>
           {url && (
@@ -91,13 +91,13 @@ export function ProjectCard({
         )}
       </CardHeader>
 
-      <CardContent className="flex-grow pb-6 px-6">
+      <CardContent className="flex-grow pb-4 px-4 md:px-6 md:pb-6">
         <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
           {description || t("project.noDescription")}
         </p>
       </CardContent>
 
-      <CardFooter className="mt-auto px-6 pb-6 pt-0 border-t-0 bg-transparent flex flex-col gap-3">
+      <CardFooter className="mt-auto px-4 pb-4 pt-0 border-t-0 bg-transparent flex flex-col gap-3 md:px-6 md:pb-6">
         {url ? (
           <Button
             asChild

@@ -10,14 +10,16 @@ export function DescriptionCard({ description }: DescriptionCardProps) {
   const { t } = useTranslation();
   return (
     <Card className="h-full overflow-hidden border-2 group hover:border-primary/50 transition-colors">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+      <CardHeader className="px-4 pt-4 pb-2 md:px-6 md:pt-6">
+        <CardTitle className="flex items-center gap-2 text-base md:text-lg">
           <Quote className="h-5 w-5 text-primary" />
           {t("about.descTitle")}
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-6 pt-0">
-        <p className="text-muted-foreground leading-relaxed">{description}</p>
+      <CardContent className="px-4 pb-4 pt-0 md:px-6 md:pb-6">
+        <p className="text-sm text-muted-foreground leading-relaxed md:text-base">
+          {description}
+        </p>
       </CardContent>
     </Card>
   );
