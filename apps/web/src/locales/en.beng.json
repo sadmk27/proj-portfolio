@@ -1,0 +1,58 @@
+{
+  "beng": {
+    "breadcrumb": "Engineering Thesis",
+    "tag": "BEng thesis · 2024",
+    "title": "Your Project Title Here",
+    "description": "A brief one or two sentence description of what the project does and the core problem it solves. Treat this like an elevator pitch — clear, specific, no jargon.",
+    "meta": {
+      "type": "Bachelor's thesis",
+      "year": "2024",
+      "role": "Solo developer",
+      "status": "Completed",
+      "typeLabel": "Type",
+      "yearLabel": "Year",
+      "roleLabel": "Role",
+      "statusLabel": "Status"
+    },
+    "cta": {
+      "github": "View on GitHub",
+      "pdf": "Download thesis paper"
+    },
+    "sections": {
+      "screenshots": "Screenshots",
+      "demo": "Demo walkthrough",
+      "thesis": "Thesis paper",
+      "stack": "Tech stack",
+      "challenges": "Key challenges"
+    },
+    "video": {
+      "label": "Full UX walkthrough · ~2 min",
+      "unsupported": "Your browser does not support the video tag."
+    },
+    "pdf": {
+      "filename": "Bachelor's thesis — Szymon Adamkiewicz, 2024.pdf",
+      "size": "PDF · ~4 MB",
+      "download": "Download"
+    },
+    "deploymentNote": "Live deployment requires Google Maps API billing, so a recorded demo is provided above instead of a hosted version.",
+    "challenges": {
+      "geospatial": {
+        "title": "Geospatial data rendering",
+        "description": "Describe a specific technical problem you solved — what made it hard and how you approached it."
+      },
+      "dataModeling": {
+        "title": "Data modeling",
+        "description": "Another challenge worth highlighting — keep it concrete and technical."
+      },
+      "performance": {
+        "title": "Performance on mobile",
+        "description": "What tradeoffs did you make and why? This is what interviewers actually care about."
+      }
+    },
+    "screenshots": {
+      "mapView": "Main map interface",
+      "detailPanel": "Location detail view",
+      "dataLayer": "Data overlay controls"
+    }
+  }
+}
