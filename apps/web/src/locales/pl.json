@@ -95,7 +95,8 @@
     "navigation": "Nawigacja",
     "settings": "Ustawienia",
     "openMenu": "Otwórz menu",
-    "avatar": "SA"
+    "avatar": "SA",
+    "backToProjects": "Wróć do projektów"
   },
   "contact": {
     "header": "Kontakt",
@@ -148,5 +149,94 @@
   },
   "footer": {
     "description": "Copyright ©{{year}} Szymon Adamkiewicz. Wszelkie prawa zastrzeżone."
+  },
+  "beng": {
+    "breadcrumb": "Praca inżynierska",
+    "tag": "Praca inżynierska · 2024",
+    "title": "Aplikacja mobilna przedstawiająca miejsca popularnych scen z filmów na terenie Krakowa i okolic",
+    "description": "Projekt aplikacji mobilnej w formie lokalizacji i reprezentujących ich zdjęć przedstawiających różne możliwości, krórych może dokonać użytkownik podczas korzystania z aplikacji zawierającej różne miejsca kręcenia scen filmowych w Krakowie i okolicach.",
+    "meta": {
+      "type": "Praca inżynierska",
+      "year": "2024",
+      "role": "Samodzielny developer",
+      "status": "Ukończony",
+      "supervisor": "dr. inż. Damian Grela",
+      "typeLabel": "Typ",
+      "yearLabel": "Rok",
+      "roleLabel": "Rola",
+      "statusLabel": "Status",
+      "supervisorLabel": "Promotor"
+    },
+    "github": "Zobacz na GitHubie",
+    "pdf": "Pobierz pracę",
+    "sections": {
+      "screenshots": "Zrzuty ekranu",
+      "demo": "Demonstracja działania",
+      "thesis": "Praca inżynierska",
+      "techStack": "Stack technologiczny",
+      "challenges": "Kluczowe wyzwania"
+    },
+    "video": {
+      "label": "Pełny walkthrough UX · ~3 min",
+      "unsupported": "Twoja przeglądarka nie obsługuje tagu video."
+    },
+    "pdfInfo": {
+      "filename": "Praca inżynierska — Szymon Adamkiewicz, 2024.pdf",
+      "size": "PDF · ~4 MB",
+      "download": "Pobierz"
+    },
+    "deploymentNote": "Wdrożenie produkcyjne wymaga aktywnego rozliczenia Google Maps API, dlatego zamiast hostowanej wersji udostępniam nagranie demonstracyjne.",
+    "challenges": {
+      "geospatial": {
+        "title": "Renderowanie danych geoprzestrzennych",
+        "description": "Opisz konkretny problem techniczny, który rozwiązałeś — co sprawiało trudność i jak do tego podszedłeś."
+      },
+      "dataModeling": {
+        "title": "Modelowanie danych",
+        "description": "Kolejne wyzwanie warte opisania — konkretnie i technicznie."
+      },
+      "performance": {
+        "title": "Wydajność na urządzeniach mobilnych",
+        "description": "Jakie kompromisy podjąłeś i dlaczego? To właśnie interesuje rekruterów."
+      }
+    },
+    "screenshots": {
+      "loginPage": {
+        "title": "Panel logowania",
+        "desc": "Ekran logowania oferuje trzy opcje: za pomocą formularza logowania (e-mail i hasło), konta Google lub konta Facebook. Użytkownik może łatwo przełączać się między ekranem logowania a rejestracji za pomocą przycisku poniżej."
+      },
+      "movieMarker": {
+        "title": "Mapa z znacznikami filmowymi",
+        "desc": "Mapa to dodatkowa funkcja, która pozwala użytkownikom przeglądać wszystkie lokalizacje, w których kręcono sceny filmowe. Użytkownik może widzieć swoją lokalizację i śledzić ją w czasie rzeczywistym. Istnieje również możliwość odbierania lokalizacji filmowych – warunkiem jest znalezienie się w odległości mniejszej niż 20 metrów od celu, kliknięcie wybranego znacznika i wybranie opcji „Dodaj do kolekcji”."
+      },
+      "moviePage": {
+        "title": "Ekran informacji o filmie",
+        "desc": "Głównym elementem strony jest zdjęcie przedstawiające lokalizację, w której kręcono daną scenę filmową. Zdjęcie zawiera dodatkowe informacje o średniej ocenie krytyków, gatunku filmu i roku produkcji. Dolna sekcja zawiera szczegółowe dane, takie jak tytuł, pełne imię i nazwisko reżysera, scenarzystów oraz obsadę."
+      },
+      "profilePage": {
+        "title": "Profil użytkownika",
+        "desc": "Profil użytkownika zawiera informacje takie jak adres e-mail, liczba odwiedzonych miejsc, pozycja w rankingu oraz liczba wygranych gier. Poniżej znajduje się kolekcja filmów zebranych przez użytkownika, gdzie każdy link prowadzi do szczegółowych informacji o danym filmie."
+      },
+      "gamePage": {
+        "title": "Stwórz lub dołącz do gry",
+        "desc": "Główny ekran służy do tworzenia lub dołączania do gry terenowej. Zawiera dwa przyciski funkcyjne, które pozwalają użytkownikowi rozpocząć grę jako gospodarz (poprzez natychmiastowe utworzenie pokoju gier) lub dołączyć do istniejącej rozgrywki. Aby znaleźć aktualną sesję gry, do której inny użytkownik chce dołączyć, należy wprowadzić kod pokoju."
+      },
+      "gameSet": {
+        "title": "Start gry",
+        "desc": "Po rozpoczęciu gry na górze ekranu obu użytkowników pojawia się licznik czasu odmierzający czas przeznaczony na wykonanie zadania. Czas jest ustawiany dla każdego zestawu gry, dzięki czemu użytkownicy są w stanie dotrzeć do każdego znacznika na mapie. Każdy użytkownik ma swój własny znacznik lokalizacji, który śledzi jego położenie."
+      },
+      "quizPage": {
+        "title": "Quiz po grze",
+        "desc": "Jeśli użytkownik dotrze do wszystkich lokalizacji widocznych na mapie, odblokowuje się ostatni etap – quiz. Gra toczy się do momentu, gdy jeden z graczy ukończy quiz, odpowiadając poprawnie na wszystkie pytania, lub gdy skończy się czas. Na podstawie uzyskanego wyniku każdy użytkownik otrzymuje punkty, które są dodawane do jego ogólnego wyniku w tabeli liderów."
+      },
+      "leaderboardPage": {
+        "title": "Tabela liderów",
+        "desc": "Ranking wyświetla pełną listę zarejestrowanych użytkowników oraz ich pozycje. Zawiera również te same informacje, co główna sekcja profilu użytkownika, takie jak adres e-mail i zsumowany wynik gry."
+      },
+      "settings": {
+        "title": "Ustawienia",
+        "desc": "Ekran ustawień to część aplikacji, która pozwala użytkownikom zmienić hasło, usunąć konto lub wysłać formularz kontaktowy. Ekran wyświetla listę dostępnych opcji, a przycisk w prawym górnym rogu umożliwia wylogowanie się z systemu."
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { type MouseEvent, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -22,6 +23,12 @@ export function NavLinks({
   onItemClick,
 }: NavLinksProps) {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const currentPath = router.state.location.pathname;
+  const isProjectDetailPage =
+    currentPath.startsWith("/_public/projects/") ||
+    currentPath.startsWith("/projects/");
 
   const navLinks = useMemo(
     () => [
@@ -58,6 +65,11 @@ export function NavLinks({
 
     window.scrollTo({ top: targetTop, behavior: "smooth" });
   };
+
+  // Don't show navigation links on project detail pages
+  if (isProjectDetailPage) {
+    return null;
+  }
 
   if (orientation === "vertical") {
     return (
