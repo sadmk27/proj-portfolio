@@ -19,7 +19,9 @@ import {
   VIDEO_PATH,
   VIDEO_POSTER,
   TECH_STACK,
+  PDF_NAME,
 } from "./data/beng-data";
+import { ChevronLeft, ChevronRight, FileDown, GithubIcon } from "lucide-react";
 
 export function BEngProjectPage() {
   const { t } = useTranslation();
@@ -27,8 +29,10 @@ export function BEngProjectPage() {
   const screenshots: ScreenshotCardItem[] = Object.entries(SCREENSHOT_SRCS).map(
     ([key, src]) => ({
       src,
-      alt: t(`beng.screenshots.${key}`),
-      caption: t(`beng.challenges.${key}.description`),
+      alt: t(`beng.screenshots.${key}.title`),
+      caption: t(`beng.screenshots.${key}.title`),
+      drawerTitle: t(`beng.screenshots.${key}.title`),
+      drawerDescription: t(`beng.screenshots.${key}.desc`),
     }),
   );
 
@@ -40,12 +44,12 @@ export function BEngProjectPage() {
     }),
   );
 
-  const metaItems = (["type", "year", "role", "status"] as const).map(
-    (key) => ({
-      label: t(`beng.meta.${key}Label`),
-      value: t(`beng.meta.${key}`),
-    }),
-  );
+  const metaItems = (
+    ["type", "year", "role", "status", "supervisor"] as const
+  ).map((key) => ({
+    label: t(`beng.meta.${key}Label`),
+    value: t(`beng.meta.${key}`),
+  }));
 
   return (
     <div className="flex-1 w-full flex flex-col items-center select-none pb-20">
@@ -58,16 +62,16 @@ export function BEngProjectPage() {
           <Link to="/" className="hover:text-foreground transition-colors">
             {t("common.home")}
           </Link>
-          <i className="ti ti-chevron-right text-xs" aria-hidden="true" />
+          <ChevronRight />
           <a
             href="/#projects"
             className="hover:text-foreground transition-colors"
           >
             {t("common.projects")}
           </a>
-          <i className="ti ti-chevron-right text-xs" aria-hidden="true" />
+          <ChevronRight />
           <span className="text-foreground font-medium">
-            {t("beng.breadcumb")}
+            {t("beng.breadcrumb")}
           </span>
         </nav>
       </section>
@@ -85,7 +89,7 @@ export function BEngProjectPage() {
             {t("beng.title")}
           </h1>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mb-8">
-            {t("beng.desription")}
+            {t("beng.description")}
           </p>
         </div>
 
@@ -107,13 +111,13 @@ export function BEngProjectPage() {
         <div className="flex flex-wrap gap-3">
           <Button asChild size="lg">
             <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-              <i className="ti ti-brand-github mr-2" aria-hidden="true" />
+              <GithubIcon />
               {t("beng.github")}
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
             <a href={PDF_PATH} target="_blank" rel="noopener noreferrer">
-              <i className="ti ti-file-type-pdf mr-2" aria-hidden="true" />
+              <FileDown />
               {t("beng.pdf")}
             </a>
           </Button>
@@ -149,6 +153,7 @@ export function BEngProjectPage() {
             size={t("beng.pdfInfo.size")}
             downloadLabel={t("beng.pdfInfo.download")}
             href={PDF_PATH}
+            downloadName={PDF_NAME}
           />
           <TagList label={t("beng.sections.techStack")} items={TECH_STACK} />
         </div>
@@ -168,7 +173,7 @@ export function BEngProjectPage() {
       <section className="mx-auto flex w-full max-w-7xl scroll-mt-16 flex-col gap-5 px-4 py-6 md:gap-6 md:px-8 md:py-8">
         <Button variant="outline" asChild className="w-fit">
           <a href="/#projects">
-            <i className="ti ti-arrow-left mr-2" aria-hidden="true" />
+            <ChevronLeft />
             {t("common.backToProjects")}
           </a>
         </Button>

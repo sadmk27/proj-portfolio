@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionLabel } from "./section-label";
 import { Button } from "@/components/ui/button";
+import { Download, File } from "lucide-react";
 
 interface FileDownloadRowProps {
   label: string;
@@ -8,7 +9,7 @@ interface FileDownloadRowProps {
   size: string;
   downloadLabel: string;
   href: string;
-  icon?: string;
+  downloadName?: string;
 }
 
 export function FileDownloadRow({
@@ -17,19 +18,16 @@ export function FileDownloadRow({
   size,
   downloadLabel,
   href,
-  icon,
+  downloadName,
 }: FileDownloadRowProps) {
   return (
     <section className="mb-10">
       <SectionLabel>{label}</SectionLabel>
       <Card>
-        <CardContent className="flext items-center justify-between p-4">
+        <CardContent className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-md bg-muted flex items-center justify-center flex-shrink-0">
-              <i
-                className={`ti ${icon} text-lg text-muted-foreground`}
-                aria-hidden="true"
-              />
+              <File />
             </div>
             <div>
               <p className="text-sm font-medium">{fileName}</p>
@@ -37,7 +35,8 @@ export function FileDownloadRow({
             </div>
           </div>
           <Button variant="outline" size="sm" asChild>
-            <a href={href} download>
+            <a href={href} download={downloadName ?? ""}>
+              <Download />
               {downloadLabel}
             </a>
           </Button>

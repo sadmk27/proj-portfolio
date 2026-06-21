@@ -25,7 +25,7 @@ export function VideoPlayer({
             <video
               controls
               poster={poster}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             >
               <source src={src} type="video/mp4" />
               {unsupportedText}

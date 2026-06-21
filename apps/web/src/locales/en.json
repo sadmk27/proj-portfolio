@@ -159,19 +159,21 @@
     "descriptionPerform": ""
   },
   "beng": {
-    "breadcumb": "Engineering Thesis",
+    "breadcrumb": "Engineering Thesis",
     "tag": "BEng thesis · 2024",
-    "title": "Your Project Title Here",
-    "desription": "A brief one or two sentence description of what the project does and the core problem it solves. Treat this like an elevator pitch — clear, specific, no jargon.",
+    "title": "Mobile application showing locations of popular movie scenes in Cracow and nerbay areas",
+    "description": "A mobile application design in the form of locations and their representing photos showing various possibilities that a user can exploit while using an application containing various filming locations of movie scenes in Cracow and nerby areas",
     "meta": {
       "type": "Bachelor's thesis",
       "year": "2024",
       "role": "Solo developer",
       "status": "Completed",
+      "supervisor": "Dr Eng. Damian Grela",
       "typeLabel": "Type",
       "yearLabel": "Year",
       "roleLabel": "Role",
-      "statusLabel": "Status"
+      "statusLabel": "Status",
+      "supervisorLabel": "Supervisor"
     },
     "github": "View on GitHub",
     "pdf": "Download thesis",
@@ -183,7 +185,7 @@
       "challenges": "Key challenges"
     },
     "video": {
-      "label": "Full UX walkthrough · ~2 min",
+      "label": "Full UX walkthrough · ~3 min",
       "unsupported": "Your browser does not support the video tag."
     },
     "pdfInfo": {
@@ -207,9 +209,42 @@
       }
     },
     "screenshots": {
-      "mapView": "Main map interface",
-      "detailPanel": "Location detail view",
-      "dataLayer": "Data overlay controls"
+      "loginPage": {
+        "title": "Login panel",
+        "desc": "The login screen offers three options: by login form via email and password, Google account or via Facebook account. User can easily switch between login and registration screens by clicking button below."
+      },
+      "movieMarker": {
+        "title": "Map with movie markers",
+        "desc": "The map is additional feature for users that allows them to view all locations where movie scenes were filmed. The user can see their location and track it in real time. It is also possible to collect movie locations based on a distance treshold of 20 meters from the target by clicking on selected market and click collect."
+      },
+      "moviePage": {
+        "title": "Movie info screen",
+        "desc": "The main element of the page is a photo showing the location where a movie scene was filmed. The photo includes additional information about average critics rating, the movie genre and the year of production. The lower section contains detailed information, such as title, director's full name, the screenwriters and the cast."
+      },
+      "profilePage": {
+        "title": "User profile",
+        "desc": "The user profile contains information such as the user email address, the number of places visited, the user's ranking score and the number of games won. Below is a collection of movies collected by the user, where each link provides to information about the movie."
+      },
+      "gamePage": {
+        "title": "Create or join game",
+        "desc": "The main screen is used to create or join a field game. It contains two function buttons that allow user to start game as host by immediately creating a game room or to join a game. To find the current game session other user wish to join, must enter the room code."
+      },
+      "gameSet": {
+        "title": "Game start",
+        "desc": "Once the games begins, a timer appears at the top of the screen for both users, showing the time alloted to complete the task. The time is set for each game set, so users are able to reach every marker on the map. Each user has their own location marker, which tracks their own location."
+      },
+      "quizPage": {
+        "title": "Post game quiz",
+        "desc": "If user has reached all locations visible on the map, the last quiz stage is available. Game continues until one of players completes the quiz by answering all questions correcly or until the time runs out. Based on result each user achive a game score that is added to overall score in leaderboard."
+      },
+      "leaderboardPage": {
+        "title": "Leaderboard",
+        "desc": "The ranking displays a full list of registered users and their positions. It also includes the same information as the main section of the user profile, such as user email and summary game score."
+      },
+      "settings": {
+        "title": "Settings",
+        "desc": "The settings screen is part of the application that allow users to change their password, delete their account or submit contact forms. The screen shown lists of the available options for the user and button in the upper-right corner allows them to log out of the system."
+      }
     }
   }
 }

@@ -16,6 +16,7 @@ export default defineConfig({
   resolve: {
     dedupe: ["react", "react-dom", "react-i18next", "i18next"],
   },
+  publicDir: "public",
   plugins: [
     tsConfigPaths({
       projects: ["./tsconfig.json"],
