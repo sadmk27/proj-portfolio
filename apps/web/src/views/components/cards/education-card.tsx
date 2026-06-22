@@ -143,7 +143,7 @@ export function EducationCard({
                 </span>
                 <span className="text-xs font-black tabular-nums tracking-tighter text-primary">
                   {project?.path
-                    ? t("education.viewPage") // internal route
+                    ? t("education.viewProject") // internal route
                     : project?.url
                       ? t("education.link") // external url
                       : t("education.noLink")}

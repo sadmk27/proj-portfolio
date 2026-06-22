@@ -110,12 +110,21 @@ export function ProjectCard({
             <Link to={path}>
               <ProjectButtonContent text={t("project.viewProject")} />
             </Link>
+          </Button>
+        ) : url ? (
+          <Button
+            asChild
+            variant="default"
+            className="w-full group/btn relative overflow-hidden"
+          >
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
-            ></a>
+            >
+              <ProjectButtonContent text={t("project.viewProject")} />
+            </a>
           </Button>
         ) : (
           <Button variant="secondary" className="w-full opacity-70" disabled>
