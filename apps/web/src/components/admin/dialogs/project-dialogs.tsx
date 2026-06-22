@@ -32,6 +32,7 @@ export function ProjectFormDialog({
     title: project?.title || "",
     description: project?.description || "",
     url: project?.url || "",
+    path: project?.path || "",
     imageUrl: project?.imageUrl || "",
   });
 
@@ -107,6 +108,14 @@ export function ProjectFormDialog({
               type="url"
               value={formData.url}
               onChange={(e) => set("url", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="url">Project URL</Label>
+            <Input
+              id="path"
+              value={formData.path}
+              onChange={(e) => set("path", e.target.value)}
             />
           </div>
           <div className="space-y-2">
