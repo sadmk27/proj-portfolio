@@ -102,6 +102,7 @@ export const projects = pgTable("projects", {
   title: varchar("title", { length: 256 }).notNull().unique(),
   description: text("description"),
   url: varchar("url", { length: 512 }),
+  path: varchar("path", { length: 256 }),
   imageUrl: varchar("image_url", { length: 512 }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),

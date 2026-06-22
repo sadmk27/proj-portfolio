@@ -19,6 +19,7 @@ export const projectInputSchema = z.object({
   title: z.string().min(1, "Title is required").max(256),
   description: z.string().optional(),
   url: z.string().url().max(512).optional().or(z.literal("")),
+  path: z.string().max(256).optional(),
   imageUrl: z.string().url().max(512).optional().or(z.literal("")),
 });
 

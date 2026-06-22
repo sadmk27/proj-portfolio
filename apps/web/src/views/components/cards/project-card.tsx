@@ -15,11 +15,13 @@ import {
   ImageIcon,
   ArrowRight,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export interface ProjectCardProps {
   title: string;
   description: string;
   url?: string;
+  path?: string;
   imageUrl?: string;
   createdAt?: Date;
 }
@@ -28,6 +30,7 @@ export function ProjectCard({
   title,
   description,
   url,
+  path,
   imageUrl,
   createdAt,
 }: ProjectCardProps) {
@@ -98,25 +101,21 @@ export function ProjectCard({
       </CardContent>
 
       <CardFooter className="mt-auto px-4 pb-4 pt-0 border-t-0 bg-transparent flex flex-col gap-3 md:px-6 md:pb-6">
-        {url ? (
+        {path ? (
           <Button
             asChild
             variant="default"
             className="w-full group/btn relative overflow-hidden"
           >
+            <Link to={path}>
+              <ProjectButtonContent text={t("project.viewProject")} />
+            </Link>
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
-            >
-              <Globe className="w-4 h-4 mr-2" />
-              <span className="font-semibold tracking-wide">
-                {t("project.viewProject")}
-              </span>
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" />
-              <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
-            </a>
+            ></a>
           </Button>
         ) : (
           <Button variant="secondary" className="w-full opacity-70" disabled>
@@ -125,5 +124,16 @@ export function ProjectCard({
         )}
       </CardFooter>
     </Card>
+  );
+}
+
+function ProjectButtonContent({ text }: { text: string }) {
+  return (
+    <div>
+      <Globe className="w-4 h-4 mr-2" />
+      <span className="font-semibold tracking-wide">{text}</span>
+      <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" />
+      <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
+    </div>
   );
 }
