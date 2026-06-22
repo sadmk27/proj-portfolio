@@ -6,10 +6,11 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Calendar, GraduationCap, University, Link } from "lucide-react";
+import { Calendar, GraduationCap, University } from "lucide-react";
 import { projectByIdQueryOptions } from "@/queries/projects/projectQueries";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import type { SelectProject } from "@portfolio/database";
 
