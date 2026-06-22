@@ -137,6 +137,7 @@ async function seed() {
           description:
             "A high-performance monorepo portfolio built with Vite, Hono, and Drizzle.",
           url: "https://github.com/yourhandle/portfolio",
+          path: "/projects/beng",
           imageUrl:
             "https://placehold.co/600x400/242424/ffffff?text=Portfolio+Project",
           createdAt: new Date(),

@@ -42,6 +42,7 @@ export const createProject = createServerFn({ method: "POST" })
           title: data.title,
           description: data.description || null,
           url: data.url || null,
+          path: data.path || null,
           imageUrl: data.imageUrl || null,
         })
         .returning();
@@ -61,6 +62,9 @@ export const updateProject = createServerFn({ method: "POST" })
           : {}),
         ...(updateData.url !== undefined
           ? { url: updateData.url || null }
+          : {}),
+        ...(updateData.path !== undefined
+          ? { path: updateData.path || null }
           : {}),
         ...(updateData.imageUrl !== undefined
           ? { imageUrl: updateData.imageUrl || null }
