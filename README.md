@@ -26,15 +26,21 @@ This is a monorepo setup for a modern Portfolio Web App, built with:
 
 2. **Environment Variables**
    Ensure `.env` exists in root (see `.env.example`).
+   For local development you can also copy `.env.development.example` to
+   `.env.development` and use the `*:local` scripts below.
 
 3. **Database**
    - Start DB: `docker-compose up -d`
    - Push Schema: `npm run db:push`
+   - Push Local Schema: `npm run db:push:local`
    - View Data: `npm run db:studio`
+   - View Local Data: `npm run db:studio:local`
+   - Seed Local Data: `npm run db:seed:local`
 
 4. **Run Development Server**
+
    ```bash
-   npm run dev
+   npm run dev:local
    ```
 
    - Web: http://localhost:5173

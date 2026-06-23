@@ -161,8 +161,8 @@
   "beng": {
     "breadcrumb": "Engineering Thesis",
     "tag": "BEng thesis · 2024",
-    "title": "Mobile application showing locations of popular movie scenes in Cracow and nerbay areas",
-    "description": "A mobile application design in the form of locations and their representing photos showing various possibilities that a user can exploit while using an application containing various filming locations of movie scenes in Cracow and nerby areas",
+    "title": "Mobile application showing locations of popular movie scenes in Cracow and nearby areas",
+    "description": "A mobile application presenting movie scene locations in Cracow and nearby areas. The app combines an interactive map, visited-place collections, user profiles and a location-based game mode.",
     "meta": {
       "type": "Bachelor's thesis",
       "year": "2024",
@@ -197,15 +197,15 @@
     "challenges": {
       "geospatial": {
         "title": "Geospatial data rendering",
-        "description": "Describe a specific technical problem you solved — what made it hard and how you approached it."
+        "description": "The app needed to present movie markers, the user's live position and a 20-meter collection radius clearly on mobile screens without making the map difficult to read."
       },
       "dataModeling": {
         "title": "Data modeling",
-        "description": "Another challenge worth highlighting — keep it concrete and technical."
+        "description": "The data model connects movies, locations, user collections, game scores and leaderboard entries, so keeping relationships consistent and queries simple was a core part of the implementation."
       },
       "performance": {
         "title": "Performance on mobile",
-        "description": "What tradeoffs did you make and why? This is what interviewers actually care about."
+        "description": "Map, profile and gameplay screens had to stay responsive while working with location updates, media and game state, so the UI was kept lightweight and unnecessary updates were minimized."
       }
     },
     "screenshots": {
@@ -215,7 +215,7 @@
       },
       "movieMarker": {
         "title": "Map with movie markers",
-        "desc": "The map is additional feature for users that allows them to view all locations where movie scenes were filmed. The user can see their location and track it in real time. It is also possible to collect movie locations based on a distance treshold of 20 meters from the target by clicking on selected market and click collect."
+        "desc": "The map lets users browse locations where movie scenes were filmed. Users can see their position and track it in real time. They can also add movie locations to their collection after moving within 20 meters of a target, selecting the marker and choosing the collection action."
       },
       "moviePage": {
         "title": "Movie info screen",
@@ -223,19 +223,19 @@
       },
       "profilePage": {
         "title": "User profile",
-        "desc": "The user profile contains information such as the user email address, the number of places visited, the user's ranking score and the number of games won. Below is a collection of movies collected by the user, where each link provides to information about the movie."
+        "desc": "The user profile contains information such as email address, number of visited places, ranking score and games won. Below it, the user can browse collected movies, with each link opening detailed information about the selected title."
       },
       "gamePage": {
         "title": "Create or join game",
-        "desc": "The main screen is used to create or join a field game. It contains two function buttons that allow user to start game as host by immediately creating a game room or to join a game. To find the current game session other user wish to join, must enter the room code."
+        "desc": "The main screen is used to create or join a field game. It contains two actions: starting a game as the host by creating a room, or joining an existing session by entering a room code."
       },
       "gameSet": {
         "title": "Game start",
-        "desc": "Once the games begins, a timer appears at the top of the screen for both users, showing the time alloted to complete the task. The time is set for each game set, so users are able to reach every marker on the map. Each user has their own location marker, which tracks their own location."
+        "desc": "Once the game begins, a timer appears at the top of the screen for both users and shows how much time is left to complete the task. Each player has a dedicated location marker, which tracks their current position on the map."
       },
       "quizPage": {
         "title": "Post game quiz",
-        "desc": "If user has reached all locations visible on the map, the last quiz stage is available. Game continues until one of players completes the quiz by answering all questions correcly or until the time runs out. Based on result each user achive a game score that is added to overall score in leaderboard."
+        "desc": "After a user reaches all locations visible on the map, the final quiz stage becomes available. The game continues until one player answers all questions correctly or the time runs out. The result is converted into a game score and added to the leaderboard."
       },
       "leaderboardPage": {
         "title": "Leaderboard",
@@ -243,7 +243,7 @@
       },
       "settings": {
         "title": "Settings",
-        "desc": "The settings screen is part of the application that allow users to change their password, delete their account or submit contact forms. The screen shown lists of the available options for the user and button in the upper-right corner allows them to log out of the system."
+        "desc": "The settings screen lets users change their password, delete their account or submit a contact form. The available options are listed in one view, while the button in the upper-right corner signs the user out."
       }
     }
   }
