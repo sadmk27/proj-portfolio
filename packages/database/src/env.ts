@@ -12,14 +12,18 @@ function findWorkspaceRoot(startDir: string) {
     const packageJsonPath = path.join(dir, "package.json");
 
     if (fs.existsSync(packageJsonPath)) {
-      const packageJson = JSON.parse(
-        fs.readFileSync(packageJsonPath, "utf8"),
-      ) as {
-        workspaces?: unknown;
-      };
+      try {
+        const packageJson = JSON.parse(
+          fs.readFileSync(packageJsonPath, "utf8"),
+        ) as {
+          workspaces?: unknown;
+        };
 
-      if (packageJson.workspaces) {
-        return dir;
+        if (packageJson.workspaces) {
+          return dir;
+        }
+      } catch (err) {
+        console.error("Failed to parse package.json", err);
       }
     }
 

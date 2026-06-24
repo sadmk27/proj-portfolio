@@ -147,6 +147,12 @@ function ScreenshotImage({
   priority?: boolean;
 }) {
   const [hasError, setHasError] = useState(false);
+  const [prevSrc, setPrevSrc] = useState(src);
+
+  if (src !== prevSrc) {
+    setPrevSrc(src);
+    setHasError(false);
+  }
 
   if (!src || hasError) {
     return (

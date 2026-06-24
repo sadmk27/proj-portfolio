@@ -1,69 +1,91 @@
 import { getBackgroundUrl } from "@portfolio/assets";
+import { useTheme } from "next-themes";
 import React from "react";
+import type { Theme } from "../theme-provider";
 
 const PARALLAX_MULTIPLIER = 0.05;
-const PARALLAX_OVERFLOW = "50%";
+
+function getBackgroundUrlForTheme(theme: Theme) {
+  return getBackgroundUrl(
+    theme === "light" ? "background-light.png" : "background.jpg",
+  );
+}
 
 const BackgroundParallax: React.FC = () => {
   const backgroundRef = React.useRef<HTMLDivElement>(null);
-  const [backgroundUrl, setBackgroundUrl] = React.useState<string | undefined>(
-    undefined,
+  const { resolvedTheme } = useTheme();
+  const theme = resolvedTheme === "dark" ? "dark" : "light";
+
+  const backgroundUrl = React.useMemo(
+    () => getBackgroundUrlForTheme(theme),
+    [theme],
   );
 
-  React.useEffect(() => {
-    const deepSpaceUrl = getBackgroundUrl("background.jpg");
-    setBackgroundUrl(deepSpaceUrl);
+  const getOverflow = React.useCallback(() => {
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+    return Math.ceil(maxScroll * PARALLAX_MULTIPLIER);
   }, []);
 
   React.useEffect(() => {
-    if (!backgroundUrl) {
+    const el = backgroundRef.current;
+    if (!el) {
       return;
     }
 
-    const handleScroll = () => {
-      if (!backgroundRef.current) {
-        return;
-      }
+    if (backgroundUrl) {
+      el.style.backgroundImage = `url(${backgroundUrl})`;
+      el.style.backgroundSize = "cover";
+      el.style.backgroundPosition = "center center";
+      el.style.backgroundRepeat = "no-repeat";
+    } else {
+      el.style.backgroundImage = "";
+      el.style.backgroundColor = "var(--background)";
+    }
 
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const maxOffset = maxScroll * PARALLAX_MULTIPLIER;
-
-      backgroundRef.current.parentElement!.style.setProperty(
-        "--parallax-offset",
-        `${maxOffset}px`,
-      );
-
-      const scrollY = window.scrollY;
-
-      backgroundRef.current.style.transform = `translate3d(0, ${-scrollY * PARALLAX_MULTIPLIER}px, 0)`;
+    const applyOverflow = () => {
+      const overflow = getOverflow();
+      el.style.top = `-${overflow}px`;
+      el.style.bottom = `-${overflow}px`;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [backgroundUrl]);
+    const handleScroll = () => {
+      const offset = window.scrollY * PARALLAX_MULTIPLIER;
+      el.style.transform = `translate3d(0, -${offset}px, 0)`;
+    };
 
-  if (!backgroundUrl) {
-    return null;
-  }
+    applyOverflow();
+    handleScroll();
+
+    const resizeObserver = new ResizeObserver(applyOverflow);
+    resizeObserver.observe(document.documentElement);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      resizeObserver.disconnect();
+    };
+  }, [backgroundUrl, getOverflow]);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div
         ref={backgroundRef}
-        className="absolute inset-0"
-        style={{
-          position: "absolute",
-          top: `-${PARALLAX_OVERFLOW}`,
-          left: 0,
-          right: 0,
-          bottom: `-${PARALLAX_OVERFLOW}`,
-          backgroundImage: `url(${backgroundUrl})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          willChange: "transform",
-          transform: "translate3d(0, 0, 0)",
-        }}
+        style={
+          backgroundUrl
+            ? {
+                position: "absolute",
+                inset: 0,
+                willChange: "transform",
+                transform: "translate3d(0, 0, 0)",
+              }
+            : {
+                position: "absolute",
+                inset: 0,
+                backgroundColor: "var(--background)",
+              }
+        }
       />
     </div>
   );

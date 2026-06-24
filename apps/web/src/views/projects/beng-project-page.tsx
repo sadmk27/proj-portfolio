@@ -116,7 +116,12 @@ export function BEngProjectPage() {
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href={PDF_PATH} download={PDF_NAME}>
+            <a
+              href={PDF_PATH}
+              download={PDF_NAME}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FileDown />
               {t("beng.pdf")}
             </a>
