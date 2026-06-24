@@ -154,7 +154,7 @@
     "breadcrumb": "Praca inżynierska",
     "tag": "Praca inżynierska · 2024",
     "title": "Aplikacja mobilna przedstawiająca miejsca popularnych scen z filmów na terenie Krakowa i okolic",
-    "description": "Projekt aplikacji mobilnej w formie lokalizacji i reprezentujących ich zdjęć przedstawiających różne możliwości, krórych może dokonać użytkownik podczas korzystania z aplikacji zawierającej różne miejsca kręcenia scen filmowych w Krakowie i okolicach.",
+    "description": "Projekt aplikacji mobilnej prezentującej lokalizacje scen filmowych w Krakowie i okolicach. Aplikacja łączy mapę, kolekcjonowanie odwiedzonych miejsc, profile użytkowników oraz elementy gry terenowej.",
     "meta": {
       "type": "Praca inżynierska",
       "year": "2024",
@@ -189,15 +189,15 @@
     "challenges": {
       "geospatial": {
         "title": "Renderowanie danych geoprzestrzennych",
-        "description": "Opisz konkretny problem techniczny, który rozwiązałeś — co sprawiało trudność i jak do tego podszedłeś."
+        "description": "Aplikacja musiała stabilnie prezentować znaczniki filmowe, aktualną pozycję użytkownika i próg odbioru lokalizacji w promieniu 20 metrów, bez gubienia czytelności mapy na ekranach mobilnych."
       },
       "dataModeling": {
         "title": "Modelowanie danych",
-        "description": "Kolejne wyzwanie warte opisania — konkretnie i technicznie."
+        "description": "Model danych łączy filmy, lokalizacje, kolekcje użytkowników, wyniki gier i ranking, dlatego ważne było utrzymanie spójnych relacji oraz prostych zapytań dla widoków mobilnych."
       },
       "performance": {
         "title": "Wydajność na urządzeniach mobilnych",
-        "description": "Jakie kompromisy podjąłeś i dlaczego? To właśnie interesuje rekruterów."
+        "description": "Widoki mapy, profilu i rozgrywki musiały pozostać płynne przy pracy z lokalizacją, multimediami i stanem gry, więc nacisk położono na lekkie ekrany oraz ograniczanie zbędnych aktualizacji UI."
       }
     },
     "screenshots": {
@@ -207,7 +207,7 @@
       },
       "movieMarker": {
         "title": "Mapa z znacznikami filmowymi",
-        "desc": "Mapa to dodatkowa funkcja, która pozwala użytkownikom przeglądać wszystkie lokalizacje, w których kręcono sceny filmowe. Użytkownik może widzieć swoją lokalizację i śledzić ją w czasie rzeczywistym. Istnieje również możliwość odbierania lokalizacji filmowych – warunkiem jest znalezienie się w odległości mniejszej niż 20 metrów od celu, kliknięcie wybranego znacznika i wybranie opcji „Dodaj do kolekcji”."
+        "desc": "Mapa pozwala użytkownikom przeglądać lokalizacje, w których kręcono sceny filmowe. Użytkownik może widzieć swoją pozycję i śledzić ją w czasie rzeczywistym. Istnieje również możliwość dodawania lokalizacji filmowych do kolekcji – warunkiem jest znalezienie się w odległości mniejszej niż 20 metrów od celu, kliknięcie wybranego znacznika i wybranie opcji „Dodaj do kolekcji”."
       },
       "moviePage": {
         "title": "Ekran informacji o filmie",

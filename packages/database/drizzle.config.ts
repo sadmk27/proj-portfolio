@@ -1,8 +1,7 @@
 import { defineConfig } from "drizzle-kit";
-import path from "node:path";
-import * as dotenv from "dotenv";
+import { loadDatabaseEnv } from "./src/env";
 
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+loadDatabaseEnv();
 
 export default defineConfig({
   out: "./drizzle",

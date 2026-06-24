@@ -52,7 +52,7 @@ export function BEngProjectPage() {
   }));
 
   return (
-    <div className="flex-1 w-full flex flex-col items-center select-none pb-20">
+    <div className="flex-1 w-full flex flex-col items-center pb-20">
       {/* Header section with breadcrumb */}
       <section className="mx-auto flex w-full max-w-7xl scroll-mt-16 flex-col gap-5 px-4 py-6 md:gap-6 md:px-8 md:py-8">
         <nav
@@ -116,7 +116,12 @@ export function BEngProjectPage() {
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href={PDF_PATH} target="_blank" rel="noopener noreferrer">
+            <a
+              href={PDF_PATH}
+              download={PDF_NAME}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FileDown />
               {t("beng.pdf")}
             </a>

@@ -25,6 +25,7 @@ export function VideoPlayer({
             <video
               controls
               poster={poster}
+              preload="metadata"
               className="w-full h-full object-contain"
             >
               <source src={src} type="video/mp4" />

@@ -29,8 +29,8 @@ export function FileDownloadRow({
             <div className="w-9 h-9 rounded-md bg-muted flex items-center justify-center flex-shrink-0">
               <File />
             </div>
-            <div>
-              <p className="text-sm font-medium">{fileName}</p>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium">{fileName}</p>
               <p className="text-xs text-muted-foreground/60 mt-0.5">{size}</p>
             </div>
           </div>

@@ -138,7 +138,7 @@ export function ProjectCard({
 
 function ProjectButtonContent({ text }: { text: string }) {
   return (
-    <div>
+    <div className="flex items-center">
       <Globe className="w-4 h-4 mr-2" />
       <span className="font-semibold tracking-wide">{text}</span>
       <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" />

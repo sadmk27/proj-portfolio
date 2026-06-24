@@ -1,18 +1,8 @@
-import { BottomSheet } from "./bottom-sheet";
-
 interface PhoneFrameProps {
   children: React.ReactNode;
-  drawerTitle?: string;
-  drawerDescription?: string;
 }
 
-export function PhoneFrame({
-  children,
-  drawerTitle,
-  drawerDescription,
-}: PhoneFrameProps) {
-  const hasDrawer = Boolean(drawerTitle);
-
+export function PhoneFrame({ children }: PhoneFrameProps) {
   return (
     <div className="relative w-full">
       {/* Phone shell */}
@@ -22,10 +12,7 @@ export function PhoneFrame({
           <div className="w-14 h-2 rounded-full bg-muted-foreground/20" />
         </div>
         {/* Screen */}
-        <div className="aspect-[9/19] overflow-hidden">{children}</div>
-        {hasDrawer && (
-          <BottomSheet title={drawerTitle!} description={drawerDescription} />
-        )}
+        <div className="relative aspect-[9/19] overflow-hidden">{children}</div>
         {/* Home indicator */}
         <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2">
           <div className="w-10 h-1 rounded-full bg-muted-foreground/20" />

@@ -9,7 +9,7 @@ export const GITHUB_URL = "https://github.com/sadmk27/filmapp";
 export const PDF_NAME = "Praca_dyplomowa_Adamkiewicz_Szymon.pdf";
 export const PDF_PATH = `/files/${PDF_NAME}`;
 export const VIDEO_PATH = "/videos/project.mp4";
-export const VIDEO_POSTER = "/screenshots/beng-video-poster.png";
+export const VIDEO_POSTER = "/screenshots/movie-marker.png";
 
 export const TECH_STACK = [
   "React",

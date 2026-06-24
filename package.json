@@ -11,9 +11,13 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:local": "APP_ENV=development turbo run dev --parallel",
     "db:push": "npm run db:push -w @portfolio/database",
+    "db:push:local": "APP_ENV=development npm run db:push -w @portfolio/database",
     "db:studio": "npm run db:studio -w @portfolio/database",
+    "db:studio:local": "APP_ENV=development npm run db:studio -w @portfolio/database",
     "db:seed": "npm run db:seed -w @portfolio/database",
+    "db:seed:local": "APP_ENV=development npm run db:seed -w @portfolio/database",
     "prepare": "husky"
   },
   "devDependencies": {
