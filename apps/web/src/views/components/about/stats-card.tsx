@@ -38,7 +38,10 @@ export function StatsCard() {
   const { t } = useTranslation();
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const githubUsername = process.env.GITHUB_USERNAME as string;
+  const githubUsername =
+    process.env.GITHUB_USERNAME ||
+    import.meta.env.VITE_GITHUB_USERNAME ||
+    "sadmk27";
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 0);

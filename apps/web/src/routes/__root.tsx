@@ -29,7 +29,17 @@ export const Route = createRootRouteWithContext<{
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Portfolio Site" },
+      { title: "Szymon Adamkiewicz | Portfolio" },
+      {
+        name: "description",
+        content:
+          "Portfolio website of Szymon Adamkiewicz - Junior Full-Stack Developer & QA Engineer.",
+      },
+    ],
+    links: [
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "alternate icon", type: "image/x-icon", href: "/favicon.svg" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon.svg" },
     ],
   }),
   component: RootComponent,
@@ -123,6 +133,7 @@ function RootInner({
           rel="stylesheet"
           type="text/css"
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"
+          crossOrigin="anonymous"
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
