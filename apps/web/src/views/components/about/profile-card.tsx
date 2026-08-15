@@ -17,7 +17,7 @@ export function ProfileCard({ name, role, imageUrl }: ProfileCardProps) {
             <img
               src={imageUrl}
               alt={t("about.imageAlt")}
-              className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100"
+              className="object-cover w-full h-full transition-all duration-500 scale-105 group-hover:scale-100"
             />
           ) : (
             <div className="text-muted-foreground text-sm">
